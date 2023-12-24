@@ -418,7 +418,7 @@ namespace LenMod
                     card_DefaultArt,
                     CobaltLenDeck);
                 registry.RegisterCard(LenCardParadichlorobenzene);
-                LenCardParadichlorobenzene.AddLocalisation("Paradichlorobenzene", desc: "If you have any bananas, the enemy loses all <c=status>shield</c>. <c=healing>Gain</c> a banana.");
+                LenCardParadichlorobenzene.AddLocalisation("Paradichlorobenzene", desc: "If you have bananas, the enemy loses all <c=status>shield</c>. <c=healing>Gain</c> a banana.");
             }
             {
                 LenCardToluthinAntenna = new ExternalCard("CobaltLen.LenCardToluthinAntenna",
@@ -494,7 +494,7 @@ namespace LenMod
             LenStatusNotesLogic(harmony);
             {
                 LenStatusNotes = new ExternalStatus("CobaltLen.Status.NotesStatus", true, CobaltLen_Primary_Color, null, LenStatusNotesSprite ?? throw new Exception("MissingSprite"), true);
-                LenStatusNotes.AddLocalisation("Music Note", "At start of turn, <c=status>consume</c> {0} bananas for free. Whenever you play a card, <c=healing>gain</c> a banana. <c=hurt>Banana Stash passive is disabled</c>.");
+                LenStatusNotes.AddLocalisation("Music Note", "At start of turn, <c=status>consume</c> {0} bananas for free. <c=hurt>Banana Stash passive is disabled</c>.");
                 statusRegistry.RegisterStatus(LenStatusNotes);
             }
         }
@@ -504,29 +504,9 @@ namespace LenMod
         private void LenStatusNotesLogic(Harmony harmony)
         {
             {
-                MethodInfo method1 = typeof(Combat).GetMethod("TryPlayCard") ?? throw new Exception("Couldn't find Combat.TryPlayCard method");
-                MethodInfo method2 = typeof(Manifest).GetMethod("LenStatusPlayCard", BindingFlags.Public | BindingFlags.Static) ?? throw new Exception("Couldn't find Manifest.LenStatusPlayCard method");
-                harmony.Patch(method1, prefix: new HarmonyMethod(method2));
-            }
-            {
                 MethodInfo method1 = typeof(Ship).GetMethod("OnBeginTurn") ?? throw new Exception("Couldn't find Combat.OnBeginTurn method");
                 MethodInfo method2 = typeof(Manifest).GetMethod("LenStatusTurnBegin", BindingFlags.Public | BindingFlags.Static) ?? throw new Exception("Couldn't find Manifest.LenStatusTurnBegin method");
                 harmony.Patch(method1, prefix: new HarmonyMethod(method2));
-            }
-        }
-        public static void LenStatusPlayCard(Combat __instance, ref bool __result, State s, Card card, bool playNoMatterWhatForFree, bool exhaustNoMatterWhat)
-        {
-            if (!__result)
-                return;
-            if (LenStatusNotes?.Id == null)
-                return;
-            var status = (Status)LenStatusNotes.Id;
-            var amount = s.ship.Get(status);
-            var artifactBananaStash = s.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
-            if (amount != 0)
-            {
-                if (artifactBananaStash != null)
-                    artifactBananaStash.counter += 1;
             }
         }
 
