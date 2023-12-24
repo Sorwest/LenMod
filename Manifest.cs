@@ -509,7 +509,6 @@ namespace LenMod
                 harmony.Patch(method1, prefix: new HarmonyMethod(method2));
             }
         }
-
         public static bool LenStatusTurnBegin(Ship __instance, State s, Combat c)
         {
             if (LenStatusNotes?.Id != null)
