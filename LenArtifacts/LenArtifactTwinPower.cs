@@ -23,5 +23,9 @@
                 combat.QueueImmediate(aStatus1);
             }
         }
+        public override List<Tooltip>? GetExtraTooltips() => new List<Tooltip>()
+        {
+            (Tooltip) new TTGlossary("status.overdrive", 2),
+        };
     }
 }

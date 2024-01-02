@@ -1,4 +1,5 @@
-﻿using LenMod.LenArtifacts;
+﻿using LenMod.LenActions;
+using LenMod.LenArtifacts;
 
 namespace LenMod.LenCards
 {
@@ -30,22 +31,34 @@ namespace LenMod.LenCards
             }
             return result;
         }
-        public override void AfterWasPlayed(State state, Combat combat)
+        public override List<CardAction> GetActions(State s, Combat c)
         {
-            var artifactBananaStash = state.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
-            if (artifactBananaStash != null)
-                switch (upgrade)
-                {
-                    case Upgrade.None:
-                        artifactBananaStash.counter += 5;
-                        break;
-                    case Upgrade.A:
-                        artifactBananaStash.counter += 8;
-                        break;
-                    case Upgrade.B:
-                        artifactBananaStash.counter += 4;
-                        break;
-                }
+            var result = new List<CardAction>();
+            switch (upgrade)
+            {
+                case Upgrade.None:
+                    List<CardAction> cardActionList1 = new List<CardAction>();
+                    AGainBanana aGainBanana1 = new AGainBanana();
+                    aGainBanana1.amount = 5;
+                    cardActionList1.Add(aGainBanana1);
+                    result = cardActionList1;
+                    break;
+                case Upgrade.A:
+                    List<CardAction> cardActionList2 = new List<CardAction>();
+                    AGainBanana aGainBanana2 = new AGainBanana();
+                    aGainBanana2.amount = 8;
+                    cardActionList2.Add(aGainBanana2);
+                    result = cardActionList2;
+                    break;
+                case Upgrade.B:
+                    List<CardAction> cardActionList3 = new List<CardAction>();
+                    AGainBanana aGainBanana3 = new AGainBanana();
+                    aGainBanana3.amount = 4;
+                    cardActionList3.Add(aGainBanana3);
+                    result = cardActionList3;
+                    break;
+            }
+            return result;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using LenMod.LenArtifacts;
+﻿using LenMod.LenActions;
+using LenMod.LenArtifacts;
 
 namespace LenMod.LenCards
 {
@@ -53,6 +54,10 @@ namespace LenMod.LenCards
                     aSpawn1.thing = missile1;
                     aSpawn1.disabled = flagNoBananas;
                     cardActionList1.Add(aSpawn1);
+                    AGainBanana aGainBanana1 = new AGainBanana();
+                    aGainBanana1.amount = -1;
+                    aGainBanana1.disabled = flagNoBananas;
+                    cardActionList1.Add(aGainBanana1);
                     result = cardActionList1;
                     break;
                 case Upgrade.A:
@@ -69,6 +74,10 @@ namespace LenMod.LenCards
                     aSpawn2.thing = missile2;
                     aSpawn2.disabled = flagNoBananas;
                     cardActionList2.Add(aSpawn2);
+                    AGainBanana aGainBanana2 = new AGainBanana();
+                    aGainBanana2.amount = -1;
+                    aGainBanana2.disabled = flagNoBananas;
+                    cardActionList2.Add(aGainBanana2);
                     result = cardActionList2;
                     break;
                 case Upgrade.B:
@@ -85,16 +94,14 @@ namespace LenMod.LenCards
                     aSpawn3.thing = missile3;
                     aSpawn3.disabled = flagNoBananas;
                     cardActionList3.Add(aSpawn3);
+                    AGainBanana aGainBanana3 = new AGainBanana();
+                    aGainBanana3.amount = -1;
+                    aGainBanana3.disabled = flagNoBananas;
+                    cardActionList3.Add(aGainBanana3);
                     result = cardActionList3;
                     break;
             }
             return result;
-        }
-        public override void AfterWasPlayed(State state, Combat combat)
-        {
-            var artifactBananaStash = state.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
-            if (artifactBananaStash != null && artifactBananaStash.counter > 0)
-                artifactBananaStash.counter -= 1;
         }
     }
 }

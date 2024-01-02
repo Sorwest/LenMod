@@ -1,4 +1,5 @@
-﻿using LenMod.LenArtifacts;
+﻿using LenMod.LenActions;
+using LenMod.LenArtifacts;
 
 namespace LenMod.LenCards
 {
@@ -49,6 +50,9 @@ namespace LenMod.LenCards
                     aStatus1.targetPlayer = false;
                     aStatus1.disabled = flagBananas;
                     cardActionList1.Add(aStatus1);
+                    AGainBanana aGainBanana1 = new AGainBanana();
+                    aGainBanana1.amount = 1;
+                    cardActionList1.Add(aGainBanana1);
                     result = cardActionList1;
                     break;
                 case Upgrade.A:
@@ -60,6 +64,9 @@ namespace LenMod.LenCards
                     aStatus2.targetPlayer = false;
                     aStatus2.disabled = flagBananas;
                     cardActionList2.Add(aStatus2);
+                    AGainBanana aGainBanana2 = new AGainBanana();
+                    aGainBanana2.amount = 1;
+                    cardActionList2.Add(aGainBanana2);
                     result = cardActionList2;
                     break;
                 case Upgrade.B:
@@ -71,16 +78,13 @@ namespace LenMod.LenCards
                     aStatus3.targetPlayer = false;
                     aStatus3.disabled = flagBananas;
                     cardActionList3.Add(aStatus3);
+                    AGainBanana aGainBanana3 = new AGainBanana();
+                    aGainBanana3.amount = 1;
+                    cardActionList3.Add(aGainBanana3);
                     result = cardActionList3;
                     break;
             }
             return result;
-        }
-        public override void AfterWasPlayed(State state, Combat combat)
-        {
-            var artifactBananaStash = state.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
-            if (artifactBananaStash != null)
-                artifactBananaStash.counter += 1;
         }
     }
 }

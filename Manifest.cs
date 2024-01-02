@@ -274,7 +274,7 @@ namespace LenMod
                     card_DefaultArt,
                     CobaltLenDeck);
                 registry.RegisterCard(LenCardBreaktime);
-                LenCardBreaktime.AddLocalisation("Breaktime", desc: "<c=card>Eat</c> {0} bananas for the price of one.");
+                LenCardBreaktime.AddLocalisation("Breaktime", desc: "<c=card>Throw</c> {0} bananas for the price of one.");
             }
             {
                 LenCardBananaWall = new ExternalCard("CobaltLen.LenCardBananaWall",
@@ -386,7 +386,7 @@ namespace LenMod
                     card_DefaultArt,
                     CobaltLenDeck);
                 registry.RegisterCard(LenCardNiccoriTeamSurvey);
-                LenCardNiccoriTeamSurvey.AddLocalisation("Niccori Team Survey", desc: "<c=card>Eat</c> all bananas.");
+                LenCardNiccoriTeamSurvey.AddLocalisation("Niccori Team Survey", desc: "<c=card>Throw</c> all bananas.");
             }
             {
                 LenCardButterflyOnShoulder = new ExternalCard("CobaltLen.LenCardButterflyOnShoulder",
@@ -402,7 +402,7 @@ namespace LenMod
                     card_DefaultArt,
                     CobaltLenDeck);
                 registry.RegisterCard(LenCardVampiresPathos);
-                LenCardVampiresPathos.AddLocalisation("Vampire's PathoS", desc: "<c=card>Eat</c> a banana. <c=healing>Heal 1</c>.", descB: "<c=card>Eat</c> 2 bananas. <c=healing>Heal 1</c>.");
+                LenCardVampiresPathos.AddLocalisation("Vampire's PathoS", desc: "<c=card>Throw</c> a banana. <c=healing>Heal 1</c>.", descB: "<c=card>Throw</c> 2 bananas. <c=healing>Heal 1</c>.");
             }
             {
                 LenCardServantOfEvil = new ExternalCard("CobaltLen.LenCardServantOfEvil",
@@ -438,7 +438,7 @@ namespace LenMod
                     ownerDeck: CobaltLenDeck ?? throw new Exception("missing deck."));
 
                 LenArtifactBananaStash.AddLocalisation("BANANA STASH",
-                    "Each turn, Len <c=status>consumes</c> a banana, making the enemy hungry. (Deal 1 piercing damage)\n<c=hurt>If there are no bananas, there will be no effect</c>.");
+                    "Each turn, Len <c=status>eats</c> a banana. (Enemy gets hungry and loses 1 hull)\n<c=hurt>If there are no bananas, there will be no effect</c>.");
 
                 registry.RegisterArtifact(LenArtifactBananaStash);
             }
@@ -449,7 +449,7 @@ namespace LenMod
                     ownerDeck: CobaltLenDeck ?? throw new Exception("missing deck."));
 
                 LenArtifactBrioche.AddLocalisation("BRIOCHE",
-                    "Banana damage is increased by 1.");
+                    "On pickup, Banana damage is increased by 1.");
 
                 registry.RegisterArtifact(LenArtifactBrioche);
             }
@@ -482,7 +482,7 @@ namespace LenMod
                     ownerDeck: CobaltLenDeck ?? throw new Exception("missing deck."));
 
                 LenArtifactTwinPower.AddLocalisation("TWIN POWER",
-                    "Rin is hiding in the other ship.\nGain 1 extra <c=energy>ENERGY</c> every turn. <c=hurt>On even turns, enemy ship gains 2</c> <c=status>overdrive</c>.");
+                    "<c=455c92>Rin is hiding in the other ship.</c>\nGain 1 extra <c=energy>ENERGY</c> every turn. <c=hurt>On even turns, enemy ship gains 2</c> <c=status>overdrive</c>.");
 
                 registry.RegisterArtifact(LenArtifactTwinPower);
             }
@@ -494,7 +494,7 @@ namespace LenMod
             LenStatusNotesLogic(harmony);
             {
                 LenStatusNotes = new ExternalStatus("CobaltLen.Status.NotesStatus", true, CobaltLen_Primary_Color, null, LenStatusNotesSprite ?? throw new Exception("MissingSprite"), true);
-                LenStatusNotes.AddLocalisation("Music Note", "At start of turn, <c=status>consume</c> {0} bananas for free. <c=hurt>Banana Stash passive is disabled</c>.");
+                LenStatusNotes.AddLocalisation("Music Note", "At start of turn, <c=status>eat</c> {0} bananas for free. <c=hurt>Banana Stash passive is disabled</c>.");
                 statusRegistry.RegisterStatus(LenStatusNotes);
             }
         }
