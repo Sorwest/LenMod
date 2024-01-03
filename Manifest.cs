@@ -18,8 +18,8 @@ namespace LenMod
         IArtifactManifest,
         ICardManifest,
         IDeckManifest,
-        IStatusManifest
-    //IGlossaryManifest
+        IStatusManifest,
+        IGlossaryManifest
     {
         public string Name => "Sorwest.CobaltLen";
 
@@ -54,6 +54,12 @@ namespace LenMod
         public static ExternalSprite? LenArtifactTwinPowerSprite { get; private set; }
         // status sprites
         public static ExternalSprite? LenStatusNotesSprite { get; private set; }
+        // icon sprites
+        public static ExternalSprite? LenActionGainBananaPositive { get; private set; }
+        public static ExternalSprite? LenActionGainBananaNegative { get; private set; }
+        public static ExternalSprite? LenActionEatBanana { get; private set; }
+        public static ExternalSprite? LenActionThrowBanana { get; private set; }
+        public static ExternalSprite? LenActionSmashBanana { get; private set; }
         // artifact
         public static ExternalArtifact? LenArtifactBananaStash { get; private set; }
         public static ExternalArtifact? LenArtifactBrioche { get; private set; }
@@ -62,6 +68,13 @@ namespace LenMod
         public static ExternalArtifact? LenArtifactTwinPower { get; private set; }
         // status
         public static ExternalStatus? LenStatusNotes { get; private set; }
+        // glossary
+        public static ExternalGlossary? LenGlossaryGainBananaPositive { get; private set; }
+        public static ExternalGlossary? LenGlossaryGainBananaNegative { get; private set; }
+        public static ExternalGlossary? LenGlossaryGainBananaLoseAll { get; private set; }
+        public static ExternalGlossary? LenGlossaryEatBanana { get; private set; }
+        public static ExternalGlossary? LenGlossaryThrowBanana { get; private set; }
+        public static ExternalGlossary? LenGlossarySmashBanana { get; private set; }
         // card
         public static ExternalCard? LenCardBanana { get; private set; }
         public static ExternalCard? LenCardBreaktime { get; private set; }
@@ -175,6 +188,42 @@ namespace LenMod
                     artRegistry.RegisterArt(LenStatusNotesSprite);
                 }
             }
+            //icons sprite
+            {
+                {
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenActionGainBananaPositive.png"));
+                    LenActionGainBananaPositive = new ExternalSprite("CobaltLen.sprites.LenActionGainBananaPositive", new FileInfo(path));
+                    artRegistry.RegisterArt(LenActionGainBananaPositive);
+                }
+            }
+            {
+                {
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenActionGainBananaNegative.png"));
+                    LenActionGainBananaNegative = new ExternalSprite("CobaltLen.sprites.LenActionGainBananaNegative", new FileInfo(path));
+                    artRegistry.RegisterArt(LenActionGainBananaNegative);
+                }
+            }
+            {
+                {
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenActionEatBanana.png"));
+                    LenActionEatBanana = new ExternalSprite("CobaltLen.sprites.LenActionEatBanana", new FileInfo(path));
+                    artRegistry.RegisterArt(LenActionEatBanana);
+                }
+            }
+            {
+                {
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenActionThrowBanana.png"));
+                    LenActionThrowBanana = new ExternalSprite("CobaltLen.sprites.LenActionThrowBanana", new FileInfo(path));
+                    artRegistry.RegisterArt(LenActionThrowBanana);
+                }
+            }
+            {
+                {
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenActionSmashBanana.png"));
+                    LenActionSmashBanana = new ExternalSprite("CobaltLen.sprites.LenActionSmashBanana", new FileInfo(path));
+                    artRegistry.RegisterArt(LenActionSmashBanana);
+                }
+            }
         }
         public void LoadManifest(IDeckRegistry registry)
         {
@@ -266,7 +315,7 @@ namespace LenMod
                     card_DefaultArt,
                     CobaltLenDeck);
                 registry.RegisterCard(LenCardBanana);
-                LenCardBanana.AddLocalisation("Banana", desc: "<c=healing>Gain</c> a banana and draw a card.", descA: "<c=healing>Gain</c> 2 bananas and draw a card.");
+                LenCardBanana.AddLocalisation("Banana");
             }
             {
                 LenCardBreaktime = new ExternalCard("CobaltLen.LenCardBreaktime",
@@ -438,7 +487,7 @@ namespace LenMod
                     ownerDeck: CobaltLenDeck ?? throw new Exception("missing deck."));
 
                 LenArtifactBananaStash.AddLocalisation("BANANA STASH",
-                    "Each turn, Len <c=status>eats</c> a banana. (Enemy gets hungry and loses 1 hull)\n<c=hurt>If there are no bananas, there will be no effect</c>.");
+                    "Each turn, Len <c=status>eats</c> a banana.\n<c=hurt>If there are no bananas, there will be no effect</c>.");
 
                 registry.RegisterArtifact(LenArtifactBananaStash);
             }
@@ -460,7 +509,7 @@ namespace LenMod
                     ownerDeck: CobaltLenDeck ?? throw new Exception("missing deck."));
 
                 LenArtifactMaidDress.AddLocalisation("MAID DRESS",
-                    "<c=healing>#Blessed.</c> Bananas now give you 2 <c=status>SHIELD</c> before attacking.");
+                    "<c=healing>#Blessed.</c> Bananas now give you 2 <c=status>SHIELD</c> before <c=status>eating</c> or <c=card>throwing</c> them.");
 
                 registry.RegisterArtifact(LenArtifactMaidDress);
             }
@@ -493,9 +542,71 @@ namespace LenMod
             var harmony = new Harmony("Sorwest.LenMod.harmonyStatus");
             LenStatusNotesLogic(harmony);
             {
-                LenStatusNotes = new ExternalStatus("CobaltLen.Status.NotesStatus", true, CobaltLen_Primary_Color, null, LenStatusNotesSprite ?? throw new Exception("MissingSprite"), true);
+                LenStatusNotes = new ExternalStatus("CobaltLen.Status.NotesStatus",
+                    true,
+                    CobaltLen_Primary_Color,
+                    null,
+                    LenStatusNotesSprite ?? throw new Exception("MissingSprite"),
+                    true);
                 LenStatusNotes.AddLocalisation("Music Note", "At start of turn, <c=status>eat</c> {0} bananas for free. <c=hurt>Banana Stash passive is disabled</c>.");
                 statusRegistry.RegisterStatus(LenStatusNotes);
+            }
+        }
+        public void LoadManifest(IGlossaryRegisty glossaryRegistry)
+        {
+            {
+                LenGlossaryGainBananaPositive = new ExternalGlossary("CobaltLen.Glossary.LenGlossaryGainBananaPositive",
+                    "LenGlossaryGainBananaPositive",
+                    false,
+                    ExternalGlossary.GlossayType.action,
+                    LenActionGainBananaPositive ?? throw new Exception("Missing LenActionGainBananaPositive Icon"));
+                LenGlossaryGainBananaPositive.AddLocalisation("en", "Gain Banana", "Add {0} bananas to your Banana Stash.");
+                glossaryRegistry.RegisterGlossary(LenGlossaryGainBananaPositive);
+            }
+            {
+                LenGlossaryGainBananaNegative = new ExternalGlossary("CobaltLen.Glossary.LenGlossaryGainBananaNegative",
+                    "LenGlossaryGainBananaNegative",
+                    false,
+                    ExternalGlossary.GlossayType.action,
+                    LenActionGainBananaNegative ?? throw new Exception("Missing LenActionGainBananaNegative Icon"));
+                LenGlossaryGainBananaNegative.AddLocalisation("en", "Lose Banana", "Remove {0} bananas from your Banana Stash.");
+                glossaryRegistry.RegisterGlossary(LenGlossaryGainBananaNegative);
+            }
+            {
+                LenGlossaryGainBananaLoseAll = new ExternalGlossary("CobaltLen.Glossary.LenGlossaryGainBananaLoseAll",
+                    "LenGlossaryGainBananaLoseAll",
+                    false,
+                    ExternalGlossary.GlossayType.action,
+                    LenActionGainBananaNegative ?? throw new Exception("Missing LenActionGainBananaNegative Icon"));
+                LenGlossaryGainBananaLoseAll.AddLocalisation("en", "Lose All Bananas", "Remove all bananas from your Banana Stash.");
+                glossaryRegistry.RegisterGlossary(LenGlossaryGainBananaLoseAll);
+            }
+            {
+                LenGlossaryEatBanana = new ExternalGlossary("CobaltLen.Glossary.LenGlossaryEatBanana",
+                    "LenGlossaryEatBanana",
+                    false,
+                    ExternalGlossary.GlossayType.action,
+                    LenActionEatBanana ?? throw new Exception("Missing LenActionEatBanana Icon"));
+                LenGlossaryEatBanana.AddLocalisation("en", "Eat Banana", "Len <c=status>eats</c> a banana, making the enemy so hungry they lose {0} hull.{1}");
+                glossaryRegistry.RegisterGlossary(LenGlossaryEatBanana);
+            }
+            {
+                LenGlossaryThrowBanana = new ExternalGlossary("CobaltLen.Glossary.LenGlossaryThrowBanana",
+                    "LenGlossaryThrowBanana",
+                    false,
+                    ExternalGlossary.GlossayType.action,
+                    LenActionThrowBanana ?? throw new Exception("Missing LenActionThrowBanana Icon"));
+                LenGlossaryThrowBanana.AddLocalisation("en", "Throw Banana", "Len <c=card>throws</c> a banana so fast and strongly it deals {0} piercing damage to the enemy.{1}");
+                glossaryRegistry.RegisterGlossary(LenGlossaryThrowBanana);
+            }
+            {
+                LenGlossarySmashBanana = new ExternalGlossary("CobaltLen.Glossary.LenGlossarySmashBanana",
+                    "LenGlossarySmashBanana",
+                    false,
+                    ExternalGlossary.GlossayType.action,
+                    LenActionSmashBanana ?? throw new Exception("Missing LenActionSmashBanana Icon"));
+                LenGlossarySmashBanana.AddLocalisation("en", "Smash Banana", "<c=455c92>Len is crying in the corner.</c>");
+                glossaryRegistry.RegisterGlossary(LenGlossarySmashBanana);
             }
         }
         /*
@@ -511,7 +622,7 @@ namespace LenMod
         }
         public static bool LenStatusTurnBegin(Ship __instance, State s, Combat c)
         {
-            if (LenStatusNotes?.Id != null)
+            if (LenStatusNotes?.Id != null && __instance.isPlayerShip)
             {
                 var status = (Status)LenStatusNotes.Id;
                 var amount = s.ship.Get(status);
@@ -547,9 +658,9 @@ namespace LenMod
                             c.QueueImmediate(aHurt1);
                         }
                         internalCounter -= 1;
+                        s.ship.PulseStatus(status);
                     }
                     while (internalCounter > 0);
-                    s.ship.PulseStatus(status);
                 }
             }
             return true;

@@ -7,8 +7,13 @@
         public override void OnReceiveArtifact(State state)
         {
             var artifactBananaStash = state.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
-            if (artifactBananaStash != null)
-                artifactBananaStash.shieldNumber += 2;
+            if (artifactBananaStash == null)
+            {
+                state.artifacts.Add(new LenArtifactBananaStash());
+                artifactBananaStash = state.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
+                //artifactBananaStash!.OnReceiveArtifact(state);
+            }
+            artifactBananaStash!.shieldNumber += 2;
         }
         public override void OnRemoveArtifact(State state)
         {

@@ -34,16 +34,19 @@ namespace LenMod.LenCards
             if (artifactBananaStash != null && artifactBananaStash.counter <= 0)
                 flagNoBananas = true;
             List<CardAction> cardActionList1 = new List<CardAction>();
+            ASmashBanana aSmashBanana1 = new ASmashBanana();
+            aSmashBanana1.disabled = flagNoBananas;
+            cardActionList1.Add(aSmashBanana1);
+            AGainBanana aGainBanana1 = new AGainBanana();
+            aGainBanana1.amount = -1;
+            aGainBanana1.disabled = flagNoBananas;
+            cardActionList1.Add(aGainBanana1);
             AStatus aStatus1 = new AStatus();
             aStatus1.status = Status.overdrive;
             aStatus1.statusAmount = 1;
             aStatus1.targetPlayer = true;
             aStatus1.disabled = flagNoBananas;
             cardActionList1.Add(aStatus1);
-            AGainBanana aGainBanana1 = new AGainBanana();
-            aGainBanana1.amount = -1;
-            aGainBanana1.disabled = flagNoBananas;
-            cardActionList1.Add(aGainBanana1);
             result = cardActionList1;
             return result;
         }

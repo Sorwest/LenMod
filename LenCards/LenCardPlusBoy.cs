@@ -16,17 +16,14 @@ namespace LenMod.LenCards
                 case Upgrade.None:
                     result.cost = 2;
                     result.singleUse = true;
-                    result.description = string.Format(Loc.GetLocString(Manifest.LenCardPlusBoy?.DescLocKey ?? throw new Exception("Missing card")), 5);
                     break;
                 case Upgrade.A:
                     result.cost = 2;
                     result.singleUse = true;
-                    result.description = string.Format(Loc.GetLocString(Manifest.LenCardPlusBoy?.DescLocKey ?? throw new Exception("Missing card")), 8);
                     break;
                 case Upgrade.B:
                     result.cost = 2;
                     result.singleUse = false;
-                    result.description = string.Format(Loc.GetLocString(Manifest.LenCardPlusBoy?.DescLocKey ?? throw new Exception("Missing card")), 4);
                     break;
             }
             return result;

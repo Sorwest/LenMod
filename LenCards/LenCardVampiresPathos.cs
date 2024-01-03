@@ -58,10 +58,17 @@ namespace LenMod.LenCards
                     flagNoBananas = true;
             }
             List<CardAction> cardActionList1 = new List<CardAction>();
+            AThrowBanana aThrowBanana1 = new AThrowBanana();
+            aThrowBanana1.disabled = flagNoBananas;
+            cardActionList1.Add(aThrowBanana1);
             do
             {
                 if (internalCounter <= 0)
                     break;
+                AGainBanana aGainBanana1 = new AGainBanana();
+                aGainBanana1.amount = -1;
+                aGainBanana1.disabled = flagNoBananas;
+                cardActionList1.Add(aGainBanana1);
                 if (shieldNumber > 0)
                 {
                     AStatus aStatus1 = new AStatus();
@@ -78,10 +85,6 @@ namespace LenMod.LenCards
                 aAttack1.fast = true;
                 aAttack1.disabled = flagNoBananas;
                 cardActionList1.Add(aAttack1);
-                AGainBanana aGainBanana1 = new AGainBanana();
-                aGainBanana1.amount = -1;
-                aGainBanana1.disabled = flagNoBananas;
-                cardActionList1.Add(aGainBanana1);
                 internalCounter -= 1;
             }
             while (internalCounter > 0);

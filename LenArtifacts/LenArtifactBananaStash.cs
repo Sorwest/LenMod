@@ -5,8 +5,8 @@
     {
         public override string Name() => "BANANA STASH";
         public int counter;
-        public int enemyDamage = 0;
-        public int shieldNumber = 0;
+        public int enemyDamage;
+        public int shieldNumber;
         public override int? GetDisplayNumber(State s)
         {
             return counter;
@@ -63,6 +63,18 @@
                 counter -= 1;
                 this.Pulse();
             }
+        }
+        public override List<Tooltip>? GetExtraTooltips()
+        {
+            List<Tooltip> tooltips = new List<Tooltip>();
+            var glossary = Manifest.LenGlossaryEatBanana?.Head ?? throw new Exception("missing LenGlossaryEatBanana glossary");
+            var str = "";
+            if (shieldNumber > 0)
+            {
+                str = string.Format("\n<c=text>Before</c> <c=status>eating</c><c=text>, gain</c> {0} <c=status>SHIELD</c><c=text>.</c>", shieldNumber);
+            }
+            tooltips.Add(new TTGlossary(glossary, enemyDamage > 0 ? enemyDamage : 1, str));
+            return tooltips;
         }
     }
 }

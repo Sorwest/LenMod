@@ -47,6 +47,13 @@ namespace LenMod.LenCards
                     aStatus1.statusAmount = 1;
                     aStatus1.targetPlayer = true;
                     cardActionList1.Add(aStatus1);
+                    ASmashBanana aSmashBanana1 = new ASmashBanana();
+                    aSmashBanana1.disabled = flagNoBananas;
+                    cardActionList1.Add(aSmashBanana1);
+                    AGainBanana aGainBanana1 = new AGainBanana();
+                    aGainBanana1.amount = -1;
+                    aGainBanana1.disabled = flagNoBananas;
+                    cardActionList1.Add(aGainBanana1);
                     ASpawn aSpawn1 = new ASpawn();
                     Missile missile1 = new Missile();
                     missile1.missileType = MissileType.heavy;
@@ -54,10 +61,6 @@ namespace LenMod.LenCards
                     aSpawn1.thing = missile1;
                     aSpawn1.disabled = flagNoBananas;
                     cardActionList1.Add(aSpawn1);
-                    AGainBanana aGainBanana1 = new AGainBanana();
-                    aGainBanana1.amount = -1;
-                    aGainBanana1.disabled = flagNoBananas;
-                    cardActionList1.Add(aGainBanana1);
                     result = cardActionList1;
                     break;
                 case Upgrade.A:
@@ -67,6 +70,13 @@ namespace LenMod.LenCards
                     aStatus2.statusAmount = 1;
                     aStatus2.targetPlayer = true;
                     cardActionList2.Add(aStatus2);
+                    ASmashBanana aSmashBanana2 = new ASmashBanana();
+                    aSmashBanana2.disabled = flagNoBananas;
+                    cardActionList2.Add(aSmashBanana2);
+                    AGainBanana aGainBanana2 = new AGainBanana();
+                    aGainBanana2.amount = -1;
+                    aGainBanana2.disabled = flagNoBananas;
+                    cardActionList2.Add(aGainBanana2);
                     ASpawn aSpawn2 = new ASpawn();
                     Missile missile2 = new Missile();
                     missile2.missileType = MissileType.heavy;
@@ -74,10 +84,6 @@ namespace LenMod.LenCards
                     aSpawn2.thing = missile2;
                     aSpawn2.disabled = flagNoBananas;
                     cardActionList2.Add(aSpawn2);
-                    AGainBanana aGainBanana2 = new AGainBanana();
-                    aGainBanana2.amount = -1;
-                    aGainBanana2.disabled = flagNoBananas;
-                    cardActionList2.Add(aGainBanana2);
                     result = cardActionList2;
                     break;
                 case Upgrade.B:
@@ -87,6 +93,13 @@ namespace LenMod.LenCards
                     aStatus3.statusAmount = 1;
                     aStatus3.targetPlayer = true;
                     cardActionList3.Add(aStatus3);
+                    ASmashBanana aSmashBanana3 = new ASmashBanana();
+                    aSmashBanana3.disabled = flagNoBananas;
+                    cardActionList3.Add(aSmashBanana3);
+                    AGainBanana aGainBanana3 = new AGainBanana();
+                    aGainBanana3.amount = -1;
+                    aGainBanana3.disabled = flagNoBananas;
+                    cardActionList3.Add(aGainBanana3);
                     ASpawn aSpawn3 = new ASpawn();
                     Missile missile3 = new Missile();
                     missile3.missileType = MissileType.heavy;
@@ -94,10 +107,6 @@ namespace LenMod.LenCards
                     aSpawn3.thing = missile3;
                     aSpawn3.disabled = flagNoBananas;
                     cardActionList3.Add(aSpawn3);
-                    AGainBanana aGainBanana3 = new AGainBanana();
-                    aGainBanana3.amount = -1;
-                    aGainBanana3.disabled = flagNoBananas;
-                    cardActionList3.Add(aGainBanana3);
                     result = cardActionList3;
                     break;
             }
