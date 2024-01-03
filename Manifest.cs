@@ -106,27 +106,27 @@ namespace LenMod
             //character sprites
             {
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLen.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Characters", Path.GetFileName("CobaltLen.png"));
                     CobaltLen_CharacterPortrait_Sprite = new ExternalSprite("CobaltLen.sprites.CobaltLen_CharacterPortrait_Sprite", new FileInfo(path));
                     artRegistry.RegisterArt(CobaltLen_CharacterPortrait_Sprite);
                 }
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenMini.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Characters", Path.GetFileName("CobaltLenMini.png"));
                     CobaltLen_CharacterMini_Sprite = new ExternalSprite("CobaltLen.sprites.CobaltLen_CharacterMini_Sprite", new FileInfo(path));
                     artRegistry.RegisterArt(CobaltLen_CharacterMini_Sprite);
                 }
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenFrame.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Characters", Path.GetFileName("CobaltLenFrame.png"));
                     CobaltLen_CharacterPanelFrame_Sprite = new ExternalSprite("CobaltLen.sprites.CobaltLen_CharacterPanelFrame_Sprite", new FileInfo(path));
                     artRegistry.RegisterArt(CobaltLen_CharacterPanelFrame_Sprite);
                 }
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLen.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Characters", Path.GetFileName("CobaltLenGameover.png"));
                     CobaltLen_CharacterGameover_Sprite = new ExternalSprite("CobaltLen.sprites.CobaltLen_CharacterGameover_Sprite", new FileInfo(path));
                     artRegistry.RegisterArt(CobaltLen_CharacterGameover_Sprite);
                 }
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLen.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Characters", Path.GetFileName("CobaltLen.png"));
                     CobaltLen_CharacterSquint_Sprite = new ExternalSprite("CobaltLen.sprites.CobaltLen_CharacterSquint_Sprite", new FileInfo(path));
                     artRegistry.RegisterArt(CobaltLen_CharacterSquint_Sprite);
                 }
@@ -134,7 +134,7 @@ namespace LenMod
             //card background
             {
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenCardBackground.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Card", Path.GetFileName("CobaltLenCardBackground.png"));
                     CobaltLen_CardBackgroud = new ExternalSprite("CobaltLen.sprites.CobaltLen_CardBackground", new FileInfo(path));
                     artRegistry.RegisterArt(CobaltLen_CardBackgroud);
                 }
@@ -142,7 +142,7 @@ namespace LenMod
             //card border
             {
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenCardBorder.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Card", Path.GetFileName("CobaltLenCardBorder.png"));
                     BorderCobaltLenBasic = new ExternalSprite("CobaltLen.sprites.CobaltLenCardBorder", new FileInfo(path));
                     artRegistry.RegisterArt(BorderCobaltLenBasic);
                 }
@@ -150,32 +150,32 @@ namespace LenMod
             //artifact sprite
             {
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenArtifactBananaStash.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Artifacts", Path.GetFileName("CobaltLenArtifactBananaStash.png"));
                     LenArtifactBananaStashSprite = new ExternalSprite("CobaltLen.sprites.LenArtifactBananaStashSprite", new FileInfo(path));
                     artRegistry.RegisterArt(LenArtifactBananaStashSprite);
                 }
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenArtifactBananaStash.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Artifacts", Path.GetFileName("CobaltLenArtifactBananaStash.png"));
                     LenArtifactBananaStashOffSprite = new ExternalSprite("CobaltLen.sprites.LenArtifactBananaStashOffSprite", new FileInfo(path));
                     artRegistry.RegisterArt(LenArtifactBananaStashOffSprite);
                 }
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenArtifactBrioche.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Artifacts", Path.GetFileName("CobaltLenArtifactBrioche.png"));
                     LenArtifactBriocheSprite = new ExternalSprite("CobaltLen.sprites.LenArtifactBriocheSprite", new FileInfo(path));
                     artRegistry.RegisterArt(LenArtifactBriocheSprite);
                 }
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenArtifactMaidDress.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Artifacts", Path.GetFileName("CobaltLenArtifactMaidDress.png"));
                     LenArtifactMaidDressSprite = new ExternalSprite("CobaltLen.sprites.LenArtifactMaidDressSprite", new FileInfo(path));
                     artRegistry.RegisterArt(LenArtifactMaidDressSprite);
                 }
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenArtifactGlassBottle.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Artifacts", Path.GetFileName("CobaltLenArtifactGlassBottle.png"));
                     LenArtifactGlassBottleSprite = new ExternalSprite("CobaltLen.sprites.LenArtifactGlassBottleSprite", new FileInfo(path));
                     artRegistry.RegisterArt(LenArtifactGlassBottleSprite);
                 }
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenArtifactTwinPower.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Artifacts", Path.GetFileName("CobaltLenArtifactTwinPower.png"));
                     LenArtifactTwinPowerSprite = new ExternalSprite("CobaltLen.sprites.LenArtifactTwinPowerSprite", new FileInfo(path));
                     artRegistry.RegisterArt(LenArtifactTwinPowerSprite);
                 }
@@ -183,7 +183,7 @@ namespace LenMod
             //status sprite
             {
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenStatusNotes.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Icons", Path.GetFileName("CobaltLenStatusNotes.png"));
                     LenStatusNotesSprite = new ExternalSprite("CobaltLen.sprites.LenStatusNotesSprite", new FileInfo(path));
                     artRegistry.RegisterArt(LenStatusNotesSprite);
                 }
@@ -191,35 +191,35 @@ namespace LenMod
             //icons sprite
             {
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenActionGainBananaPositive.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Icons", Path.GetFileName("CobaltLenActionGainBananaPositive.png"));
                     LenActionGainBananaPositive = new ExternalSprite("CobaltLen.sprites.LenActionGainBananaPositive", new FileInfo(path));
                     artRegistry.RegisterArt(LenActionGainBananaPositive);
                 }
             }
             {
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenActionGainBananaNegative.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Icons", Path.GetFileName("CobaltLenActionGainBananaNegative.png"));
                     LenActionGainBananaNegative = new ExternalSprite("CobaltLen.sprites.LenActionGainBananaNegative", new FileInfo(path));
                     artRegistry.RegisterArt(LenActionGainBananaNegative);
                 }
             }
             {
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenActionEatBanana.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Icons", Path.GetFileName("CobaltLenActionEatBanana.png"));
                     LenActionEatBanana = new ExternalSprite("CobaltLen.sprites.LenActionEatBanana", new FileInfo(path));
                     artRegistry.RegisterArt(LenActionEatBanana);
                 }
             }
             {
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenActionThrowBanana.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Icons", Path.GetFileName("CobaltLenActionThrowBanana.png"));
                     LenActionThrowBanana = new ExternalSprite("CobaltLen.sprites.LenActionThrowBanana", new FileInfo(path));
                     artRegistry.RegisterArt(LenActionThrowBanana);
                 }
             }
             {
                 {
-                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("CobaltLenActionSmashBanana.png"));
+                    var path = Path.Combine(ModRootFolder.FullName, "Sprites", "Icons", Path.GetFileName("CobaltLenActionSmashBanana.png"));
                     LenActionSmashBanana = new ExternalSprite("CobaltLen.sprites.LenActionSmashBanana", new FileInfo(path));
                     artRegistry.RegisterArt(LenActionSmashBanana);
                 }
@@ -287,21 +287,21 @@ namespace LenMod
             }
             {
                 CobaltLen_Character_GameoverAnimation = new ExternalAnimation("CobaltLen.Animation.CobaltLen_Character_GameoverAnimation",
-                CobaltLenDeck ?? throw new Exception("missing deck"),
-                "gameover",
-                false,
-                new ExternalSprite[] {
-                    CobaltLen_CharacterGameover_Sprite ?? throw new Exception("missing portrait") });
+                    CobaltLenDeck ?? throw new Exception("missing deck"),
+                    "gameover",
+                    false,
+                    new ExternalSprite[] {
+                        CobaltLen_CharacterGameover_Sprite ?? throw new Exception("missing portrait") });
 
                 registry.RegisterAnimation(CobaltLen_Character_GameoverAnimation);
             }
             {
                 CobaltLen_Character_SquintAnimation = new ExternalAnimation("CobaltLen.Animation.CobaltLen_Character_SquintAnimation",
-                CobaltLenDeck ?? throw new Exception("missing deck"),
-                "squint",
-                false,
-                new ExternalSprite[] {
-                    CobaltLen_CharacterSquint_Sprite ?? throw new Exception("missing portrait") });
+                    CobaltLenDeck ?? throw new Exception("missing deck"),
+                    "squint",
+                    false,
+                    new ExternalSprite[] {
+                        CobaltLen_CharacterSquint_Sprite ?? throw new Exception("missing portrait") });
 
                 registry.RegisterAnimation(CobaltLen_Character_SquintAnimation);
             }
@@ -531,7 +531,7 @@ namespace LenMod
                     ownerDeck: CobaltLenDeck ?? throw new Exception("missing deck."));
 
                 LenArtifactTwinPower.AddLocalisation("TWIN POWER",
-                    "<c=455c92>Rin is hiding in the other ship.</c>\nGain 1 extra <c=energy>ENERGY</c> every turn. <c=hurt>On even turns, enemy ship gains 2</c> <c=status>overdrive</c>.");
+                    "<c=405a7f>Rin is hiding in the other ship.</c>\nGain 1 extra <c=energy>ENERGY</c> every turn. <c=hurt>On even turns, enemy ship gains 2</c> <c=status>overdrive</c>.");
 
                 registry.RegisterArtifact(LenArtifactTwinPower);
             }
