@@ -10,8 +10,9 @@
         {
             List<Tooltip> tooltips = new List<Tooltip>
             {
-                new TTGlossary(Manifest.LenGlossarySmashBanana?.Head ?? throw new Exception("missing LenGlossarySmashBanana glossary"), null)
+                new TTText("<c=405a7f>Len is crying in the corner.</c>")
             };
+            tooltips.AddRange(base.GetTooltips(s));
             return tooltips;
         }
     }

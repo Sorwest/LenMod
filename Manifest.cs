@@ -558,7 +558,7 @@ namespace LenMod
                 LenGlossaryGainBananaPositive = new ExternalGlossary("CobaltLen.Glossary.LenGlossaryGainBananaPositive",
                     "LenGlossaryGainBananaPositive",
                     false,
-                    ExternalGlossary.GlossayType.action,
+                    ExternalGlossary.GlossayType.cardtrait,
                     LenActionGainBananaPositive ?? throw new Exception("Missing LenActionGainBananaPositive Icon"));
                 LenGlossaryGainBananaPositive.AddLocalisation("en", "Gain Banana", "Add {0} bananas to your Banana Stash.");
                 glossaryRegistry.RegisterGlossary(LenGlossaryGainBananaPositive);
@@ -567,7 +567,7 @@ namespace LenMod
                 LenGlossaryGainBananaNegative = new ExternalGlossary("CobaltLen.Glossary.LenGlossaryGainBananaNegative",
                     "LenGlossaryGainBananaNegative",
                     false,
-                    ExternalGlossary.GlossayType.action,
+                    ExternalGlossary.GlossayType.cardtrait,
                     LenActionGainBananaNegative ?? throw new Exception("Missing LenActionGainBananaNegative Icon"));
                 LenGlossaryGainBananaNegative.AddLocalisation("en", "Lose Banana", "Remove {0} bananas from your Banana Stash.");
                 glossaryRegistry.RegisterGlossary(LenGlossaryGainBananaNegative);
@@ -576,7 +576,7 @@ namespace LenMod
                 LenGlossaryGainBananaLoseAll = new ExternalGlossary("CobaltLen.Glossary.LenGlossaryGainBananaLoseAll",
                     "LenGlossaryGainBananaLoseAll",
                     false,
-                    ExternalGlossary.GlossayType.action,
+                    ExternalGlossary.GlossayType.cardtrait,
                     LenActionGainBananaNegative ?? throw new Exception("Missing LenActionGainBananaNegative Icon"));
                 LenGlossaryGainBananaLoseAll.AddLocalisation("en", "Lose All Bananas", "Remove all bananas from your Banana Stash.");
                 glossaryRegistry.RegisterGlossary(LenGlossaryGainBananaLoseAll);
@@ -585,7 +585,7 @@ namespace LenMod
                 LenGlossaryEatBanana = new ExternalGlossary("CobaltLen.Glossary.LenGlossaryEatBanana",
                     "LenGlossaryEatBanana",
                     false,
-                    ExternalGlossary.GlossayType.action,
+                    ExternalGlossary.GlossayType.cardtrait,
                     LenActionEatBanana ?? throw new Exception("Missing LenActionEatBanana Icon"));
                 LenGlossaryEatBanana.AddLocalisation("en", "Eat Banana", "Len <c=status>eats</c> a banana, making the enemy so hungry they lose {0} hull.{1}");
                 glossaryRegistry.RegisterGlossary(LenGlossaryEatBanana);
@@ -594,7 +594,7 @@ namespace LenMod
                 LenGlossaryThrowBanana = new ExternalGlossary("CobaltLen.Glossary.LenGlossaryThrowBanana",
                     "LenGlossaryThrowBanana",
                     false,
-                    ExternalGlossary.GlossayType.action,
+                    ExternalGlossary.GlossayType.cardtrait,
                     LenActionThrowBanana ?? throw new Exception("Missing LenActionThrowBanana Icon"));
                 LenGlossaryThrowBanana.AddLocalisation("en", "Throw Banana", "Len <c=card>throws</c> a banana so fast and strongly it deals {0} piercing damage to the enemy.{1}");
                 glossaryRegistry.RegisterGlossary(LenGlossaryThrowBanana);
@@ -603,9 +603,9 @@ namespace LenMod
                 LenGlossarySmashBanana = new ExternalGlossary("CobaltLen.Glossary.LenGlossarySmashBanana",
                     "LenGlossarySmashBanana",
                     false,
-                    ExternalGlossary.GlossayType.action,
+                    ExternalGlossary.GlossayType.cardtrait,
                     LenActionSmashBanana ?? throw new Exception("Missing LenActionSmashBanana Icon"));
-                LenGlossarySmashBanana.AddLocalisation("en", "Smash Banana", "<c=455c92>Len is crying in the corner.</c>");
+                LenGlossarySmashBanana.AddLocalisation("en", "Smash Banana", "<c=405a7f>Len is crying in the corner.</c>");
                 glossaryRegistry.RegisterGlossary(LenGlossarySmashBanana);
             }
         }
