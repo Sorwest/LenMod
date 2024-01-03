@@ -1,5 +1,4 @@
 ﻿using LenMod.LenActions;
-using LenMod.LenArtifacts;
 
 namespace LenMod.LenCards
 {

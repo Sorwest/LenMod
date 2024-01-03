@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LenMod.LenArtifacts;
-
-namespace LenMod.LenActions
+﻿namespace LenMod.LenActions
 {
     public class ASmashBanana : AGainBanana
     {

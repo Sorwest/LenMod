@@ -1,6 +1,4 @@
-﻿using LenMod.LenArtifacts;
-
-namespace LenMod.LenCards
+﻿namespace LenMod.LenCards
 {
     [CardMeta(rarity = Rarity.rare, upgradesTo = new Upgrade[] { Upgrade.A, Upgrade.B })]
     public class LenCardToluthinAntenna : Card
