@@ -42,12 +42,9 @@ namespace LenMod.LenCards
                 case Upgrade.None:
                     List<CardAction> cardActionList1 = new List<CardAction>();
                     ASmashBanana aSmashBanana1 = new ASmashBanana();
+                    aSmashBanana1.amount = -1;
                     aSmashBanana1.disabled = flagNoBananas;
                     cardActionList1.Add(aSmashBanana1);
-                    AGainBanana aGainBanana1 = new AGainBanana();
-                    aGainBanana1.amount = -1;
-                    aGainBanana1.disabled = flagNoBananas;
-                    cardActionList1.Add(aGainBanana1);
                     AStatus aStatus1 = new AStatus();
                     aStatus1.status = Status.shield;
                     aStatus1.statusAmount = 2;
@@ -59,12 +56,9 @@ namespace LenMod.LenCards
                 case Upgrade.A:
                     List<CardAction> cardActionList2 = new List<CardAction>();
                     ASmashBanana aSmashBanana2 = new ASmashBanana();
+                    aSmashBanana2.amount = -1;
                     aSmashBanana2.disabled = flagNoBananas;
                     cardActionList2.Add(aSmashBanana2);
-                    AGainBanana aGainBanana2 = new AGainBanana();
-                    aGainBanana2.amount = -1;
-                    aGainBanana2.disabled = flagNoBananas;
-                    cardActionList2.Add(aGainBanana2);
                     AStatus aStatus2 = new AStatus();
                     aStatus2.status = Status.shield;
                     aStatus2.statusAmount = 2;
@@ -76,12 +70,9 @@ namespace LenMod.LenCards
                 case Upgrade.B:
                     List<CardAction> cardActionList3 = new List<CardAction>();
                     ASmashBanana aSmashBanana3 = new ASmashBanana();
+                    aSmashBanana3.amount = -1;
                     aSmashBanana3.disabled = flagNoBananas;
                     cardActionList3.Add(aSmashBanana3);
-                    AGainBanana aGainBanana3 = new AGainBanana();
-                    aGainBanana3.amount = -1;
-                    aGainBanana3.disabled = flagNoBananas;
-                    cardActionList3.Add(aGainBanana3);
                     AStatus aStatus3 = new AStatus();
                     aStatus3.status = Status.shield;
                     aStatus3.statusAmount = 3;

@@ -35,12 +35,9 @@ namespace LenMod.LenCards
                 flagNoBananas = true;
             List<CardAction> cardActionList1 = new List<CardAction>();
             ASmashBanana aSmashBanana1 = new ASmashBanana();
+            aSmashBanana1.amount = -1;
             aSmashBanana1.disabled = flagNoBananas;
             cardActionList1.Add(aSmashBanana1);
-            AGainBanana aGainBanana1 = new AGainBanana();
-            aGainBanana1.amount = -1;
-            aGainBanana1.disabled = flagNoBananas;
-            cardActionList1.Add(aGainBanana1);
             AStatus aStatus1 = new AStatus();
             aStatus1.status = Status.overdrive;
             aStatus1.statusAmount = 1;

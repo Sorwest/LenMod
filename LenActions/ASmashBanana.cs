@@ -7,7 +7,7 @@ using LenMod.LenArtifacts;
 
 namespace LenMod.LenActions
 {
-    public class ASmashBanana : CardAction
+    public class ASmashBanana : AGainBanana
     {
         public override Icon? GetIcon(State s)
         {

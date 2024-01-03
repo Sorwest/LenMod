@@ -7,7 +7,7 @@ using LenMod.LenArtifacts;
 
 namespace LenMod.LenActions
 {
-    public class AThrowBanana : CardAction
+    public class AThrowBanana : AGainBanana
     {
         private int GetBananaDmg(State s)
         {
