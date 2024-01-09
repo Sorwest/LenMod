@@ -1,0 +1,13 @@
+{
+	"UniqueName": "Sorwest.CobaltLen",
+	"Version": "1.0.3",
+	"RequiredApiVersion": "0.1.0",
+	"ModType": "Nickel.Legacy",
+	"EntryPointAssembly": "LenMod.dll",
+	"Dependencies": [
+		{
+			"UniqueName": "Nickel.Legacy",
+			"Version": "0.1.0"
+		}
+	]
+}
