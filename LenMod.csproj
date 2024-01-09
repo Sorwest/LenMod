@@ -4,19 +4,17 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	  <RootNamespace>Sorwest.LenMod</RootNamespace>
-	  <Version>1.0.3</Version>
-	  <IncludedModProjectPaths>Sprites</IncludedModProjectPaths>
-	  <IncludedModProjectPaths>nickel.json</IncludedModProjectPaths>
+  	<RootNamespace>Sorwest.LenMod</RootNamespace>
+  	<Version>1.0.3</Version>
+    <IncludedModProjectPaths>Sprites</IncludedModProjectPaths>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Shockah.CobaltCoreModBuildConfig" Version="2.0.0" />
   </ItemGroup>
-
+  
   <ItemGroup>
-    <Reference Update="CobaltCore">
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
+    <None Update="nickel.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
