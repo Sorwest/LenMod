@@ -35,14 +35,14 @@ namespace LenMod.LenCards
                 case Upgrade.None:
                     List<CardAction> cardActionList1 = new List<CardAction>();
                     AGainBanana aGainBanana1 = new AGainBanana();
-                    aGainBanana1.amount = 5;
+                    aGainBanana1.amount = 6;
                     cardActionList1.Add(aGainBanana1);
                     result = cardActionList1;
                     break;
                 case Upgrade.A:
                     List<CardAction> cardActionList2 = new List<CardAction>();
                     AGainBanana aGainBanana2 = new AGainBanana();
-                    aGainBanana2.amount = 8;
+                    aGainBanana2.amount = 9;
                     cardActionList2.Add(aGainBanana2);
                     result = cardActionList2;
                     break;
