@@ -9,7 +9,7 @@ public class LenCardServantOfEvil : Card, IModdedCard
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
-        helper.Content.Cards.RegisterCard("Banana", new()
+        helper.Content.Cards.RegisterCard("ServantOfEvil", new()
         {
             CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
             Meta = new()
@@ -18,7 +18,7 @@ public class LenCardServantOfEvil : Card, IModdedCard
                 rarity = Rarity.rare,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Banana", "name"]).Localize
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ServantOfEvil", "name"]).Localize
         });
     }
     public override string Name() => "Servant of Evil";

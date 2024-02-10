@@ -1,6 +1,9 @@
 {
 	"UniqueName": "Sorwest.LenMod",
 	"Version": "2.0.0",
+	"DisplayName": "Kagamine Len",
+	"Description": "Why is there a Banana Boy in the timeloop?",
+	"Author": "Sorwest",
 	"RequiredApiVersion": "0.6.1",
 	"EntryPointAssembly": "LenMod.dll",
 	"LoadPhase": "AfterDbInit",

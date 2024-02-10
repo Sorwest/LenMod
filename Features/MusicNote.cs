@@ -1,4 +1,4 @@
-﻿using LenMod.LenArtifacts;
+﻿using Sorwest.LenMod.Artifacts;
 using System.Linq;
 
 namespace Sorwest.LenMod;
@@ -34,13 +34,12 @@ public class AMusicNoteAction : CardAction
         int amount = source.Get(status);
         if (amount > 0)
         {
-            var internalCounter = 0;
             var artifactBananaStash = s.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
             if (artifactBananaStash != null)
             {
                 int enemyDamage = artifactBananaStash.enemyDamage;
                 int shieldNumber = artifactBananaStash.shieldNumber;
-                internalCounter = amount;
+                int internalCounter = amount;
                 do
                 {
                     if (internalCounter <= 0)

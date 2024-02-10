@@ -40,7 +40,7 @@ public class ModEntry : SimpleMod
         typeof(LenCardNakakapagpabagabag),
         typeof(LenCardPlusBoy),
         typeof(LenCardFunkyNightTown),
-        typeof(LenCardTelecasterBoy),
+        typeof(LenCardTelecasterBBoy),
         typeof(LenCardLawEvadingRock),
         typeof(LenCardHolyLanceExplosion),
         typeof(LenCardFifthPierrot),
@@ -168,12 +168,12 @@ public class ModEntry : SimpleMod
         {
             Definition = new()
             {
-                icon = Sprites["EvolveStatusSprite"].Sprite,
+                icon = Sprites["MusicNote"].Sprite,
                 color = new Color("8cfffb"),
                 isGood = true
             },
-            Name = AnyLocalizations.Bind(["status", "EvolveStatus", "name"]).Localize,
-            Description = AnyLocalizations.Bind(["status", "EvolveStatus", "description"]).Localize
+            Name = AnyLocalizations.Bind(["status", "MusicNote", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["status", "MusicNote", "description"]).Localize
         });
 
         // DECK REGISTRATION BLOCK
@@ -240,7 +240,7 @@ public class ModEntry : SimpleMod
             {
                 cards = new()
                 {
-                    new LenCardTelecasterBoy(),
+                    new LenCardTelecasterBBoy(),
                     new LenCardHolyLanceExplosion(),
                     new LenCardPlusBoy()
                 }
