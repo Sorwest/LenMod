@@ -1,0 +1,147 @@
+﻿{
+  "character": {
+    "len": {
+      "name": "Len",
+      "description": "What is a VTuber doing in this game?"
+    }
+  },
+  "status": {
+    "MusicNote": {
+      "name": "Music Note",
+      "description": "At start of turn, <c=status>eat</c> {0} bananas for free. <c=hurt>Banana Stash passive is disabled</c>."
+    }
+  },
+  "action": {
+    "EatBanana": {
+      "name": "Eat Banana",
+      "description": "Len <c=status>eats</c> a banana, making the enemy so hungry they lose {{Damamge}} hull.{{MaidDress}}",
+      "maidDress": "\n<c=text>Before</c> <c=card>throwing</c><c=text>, gain</c> {{Amount}} <c=status>SHIELD</c><c=text>.</c>"
+    },
+    "GainBanana": {
+      "name": {
+        "gain": "Gain Banana",
+        "lose": "Lose Banana"
+      },
+      "description": {
+        "gain": "Add {0} bananas to your Banana Stash.",
+        "lose": "Remove {0} bananas from your Banana Stash.",
+        "loseAll": "Remove all bananas from your Banana Stash."
+      }
+    },
+    "SmashBanana": {
+      "name": "Smash Banana",
+      "description": "Get rid of {0} bananas. Doesn't trigger Banana Stash.",
+      "flavor": "<c=405a7f>Len is crying in the corner.</c>"
+    },
+    "ThrowBanana": {
+      "name": "Throw Banana",
+      "description": "Len <c=card>throws</c> a banana so fast and strongly it deals {{Damage}} piercing damage to the enemy.{{MaidDress}}",
+      "maidDress": "\n<c=text>Before</c> <c=card>throwing</c><c=text>, gain</c> {{Amount}} <c=status>SHIELD</c><c=text>.</c>"
+    }
+  },
+  "artifact": {
+    "BananaStash": {
+      "name": "Banana Stash",
+      "description": "Each turn, Len <c=status>eats</c> a banana.\n<c=hurt>If there are no bananas, there will be no effect</c>."
+    },
+    "Brioche": {
+      "name": "Brioche",
+      "description": "On pickup, Banana damage is increased by 1."
+    },
+    "GlassBottle": {
+      "name": "Glass Bottle",
+      "description": "At start of combat, <c=healing>gain</c> 3 bananas."
+    },
+    "MaidDress": {
+      "name": "Maid Dress",
+      "description": "<c=healing>#Blessed.</c> Bananas now give you 2 <c=status>SHIELD</c> before <c=status>eating</c> or <c=card>throwing</c> them."
+    },
+    "TwinPower": {
+      "name": "Twin Power",
+      "description": "<c=405a7f>Rin is hiding in the other ship.</c>\nGain 1 extra <c=energy>ENERGY</c> every turn. <c=hurt>On even turns, enemy ship gains 2</c> <c=status>overdrive</c>."
+    }
+  },
+  "card": {
+    "Banana": {
+      "name": "Banana"
+    },
+    "BananaWall": {
+      "name": "Banana Wall",
+      "description": "<c=hurt>Smash</c> a banana to gain {{Amount}} <c=status>shield</c>."
+    },
+    "BarisolsChild": {
+      "name": "Barisol's Child"
+    },
+    "Breaktime": {
+      "name": "Breaktime",
+      "description": "<c=card>Throw</c> {{Amount}} bananas for the price of one."
+    },
+    "BringItOn": {
+      "name": "Bring It On"
+    },
+    "ButterflyOnShoulder": {
+      "name": "Butterfly On Shoulder",
+      "description": {
+        "None": "<c=hurt>Smash</c> all bananas. Gain as many <c=status>notes</c>.",
+        "A": "<c=hurt>Smash</c> all bananas. Gain as many <c=status>notes</c>.",
+        "B": "<c=hurt>Smash</c> all bananas. Gain twice many <c=status>notes</c>."
+      }
+    },
+    "ChildishWar": {
+      "name": "Childish War"
+    },
+    "FifthPierrot": {
+      "name": "Fifth Pierrot"
+    },
+    "FunkyNightTown": {
+      "name": "Funky Night Town"
+    },
+    "HolyLanceExplosion": {
+      "name": "Holy Lance Explosion",
+      "description": "Gain 1 <c=status>droneshift</c>. <c=hurt>Smash</c> a banana to launch a <c=midrow>sword</c>."
+    },
+    "LawEvadingRock": {
+      "name": "LawEvading Rock"
+    },
+    "LikeDislike": {
+      "name": "Like Dislike"
+    },
+    "Nakakapagpabagabag": {
+      "name": "Nakakapagpabagabag",
+      "description": "<c=hurt>Smash</c> a banana to gain 1 <c=status>overdrive</c>."
+    },
+    "NiccoriTeamSurvey": {
+      "name": "Niccori Team Survey",
+      "description": "<c=card>Throw</c> all bananas."
+    },
+    "Paradichlorobenzene": {
+      "name": "Paradichlorobenzene",
+      "description": "If you have bananas, the enemy loses all <c=status>shield</c>. <c=healing>Gain</c> a banana."
+    },
+    "PlusBoy": {
+      "name": "Plus Boy",
+      "description": "<c=healing>Gain</c> {0} bananas."
+    },
+    "RemoteControl": {
+      "name": "Remote Control"
+    },
+    "Servant of Evil": {
+      "name": "Servant of Evil"
+    },
+    "TelecasterBBoy": {
+      "name": "Telecaster B-Boy"
+    },
+    "ToluthinAntenna": {
+      "name": "Toluthin Antenna",
+      "description": "Add 1 of {0} <c=cardtrait>discount, temp</c> <c=hacker>Max</c> & <c=peri>Peri</c> cards to your hand."
+    },
+    "VampiresPathoS": {
+      "name": "Vampire's PathoS",
+      "description": {
+        "None": "<c=card>Throw</c> a banana. <c=healing>Heal 1</c>.",
+        "A": "<c=card>Throw</c> a banana. <c=healing>Heal 1</c>.",
+        "B": "<c=card>Throw</c> 2 bananas. <c=healing>Heal 1</c>."
+      }
+    }
+  }
+}
