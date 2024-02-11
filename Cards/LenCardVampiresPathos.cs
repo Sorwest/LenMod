@@ -44,15 +44,15 @@ public class LenCardVampiresPathos : Card, IModdedCard
         if (s.ship.Get(ModEntry.Instance.BananaStatus.Status) > 0 || s.route is not Combat)
         {
             int internalCounter = s.ship.Get(ModEntry.Instance.BananaStatus.Status) == 1 ? 1 : 2;
-            result.Insert(0, new AThrowBanana()
-            {
-                amount = -1
-            });
             do
             {
                 if (internalCounter <= 0)
                     break;
-                result.Insert(result.Count - 2, new ABananaDamage()
+                result.Add(new AThrowBanana()
+                {
+                    amount = -1
+                });
+                result.Add(new ABananaDamage()
                 {
                     type = BananaType.AAttack,
                     dmg = GetDmg(s, 0),

@@ -27,7 +27,7 @@ public class LenCardParadichlorobenzene : Card, IModdedCard
     {
         return new()
         {
-            cost = upgrade == Upgrade.None ? 2 : (upgrade == Upgrade.A ? 1 : 3),
+            cost = upgrade == Upgrade.A ? 0 : 2,
             buoyant = upgrade == Upgrade.B ? true : false,
             exhaust = true,
             description = ModEntry.Instance.Localizations.Localize(["card", "Paradichlorobenzene", "description"])

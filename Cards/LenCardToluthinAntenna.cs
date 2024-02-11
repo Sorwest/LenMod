@@ -28,7 +28,7 @@ public class LenCardToluthinAntenna : Card, IModdedCard
         {
             exhaust = true,
             cost = upgrade == Upgrade.A ? 1 : 2,
-            description = ModEntry.Instance.Localizations.Localize(["card", "ToluthinAntenna", "description"], new { Amount = upgrade == Upgrade.B ? 5 : 2 })
+            description = ModEntry.Instance.Localizations.Localize(["card", "ToluthinAntenna", "description"], new { Amount = upgrade == Upgrade.B ? 4 : 2 })
         };
     }
     public override List<CardAction> GetActions(State s, Combat c)
@@ -37,7 +37,7 @@ public class LenCardToluthinAntenna : Card, IModdedCard
         {
             new ACardOffering()
             {
-                amount = upgrade == Upgrade.B ? 5 : 2,
+                amount = upgrade == Upgrade.B ? 4 : 2,
                 limitDeck = Deck.hacker,
                 makeAllCardsTemporary = true,
                 canSkip = false,
@@ -46,7 +46,7 @@ public class LenCardToluthinAntenna : Card, IModdedCard
             },
             new ACardOffering()
             {
-                amount = upgrade == Upgrade.B ? 5 : 2,
+                amount = upgrade == Upgrade.B ? 4 : 2,
                 limitDeck = Deck.peri,
                 makeAllCardsTemporary = true,
                 canSkip = false,

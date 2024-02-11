@@ -29,7 +29,7 @@ public class LenCardNiccoriTeamSurvey : Card, IModdedCard
         {
             cost = upgrade == Upgrade.A ? 2 : 3,
             exhaust = upgrade == Upgrade.B ? false : true,
-            description = ModEntry.Instance.Localizations.Localize(["card", "NiccoriTeamSurvey", "description"])
+            description = ModEntry.Instance.Localizations.Localize(["card", "NiccoriTeamSurvey", "description", upgrade.ToString()], new { Amount = upgrade == Upgrade.A ? 1 : 2 })
         };
     }
     public override List<CardAction> GetActions(State s, Combat c)
@@ -50,11 +50,19 @@ public class LenCardNiccoriTeamSurvey : Card, IModdedCard
                 {
                     type = BananaType.AAttack,
                     dmg = GetDmg(s, 0),
-                    targetPlayer = false
+                    targetPlayer = false,
+                    fast = true
                 });
                 internalCounter--;
             }
             while (internalCounter > 0);
+        }
+        if (upgrade != Upgrade.None)
+        {
+            result.Add(new AGainBanana()
+            {
+                amount = upgrade == Upgrade.A ? 1 : 2
+            });
         }
         return result;
     }
