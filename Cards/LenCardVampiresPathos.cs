@@ -1,10 +1,8 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
+using Sorwest.LenMod.Actions;
 using System.Collections.Generic;
 using System.Reflection;
-using Sorwest.LenMod.Actions;
-using Sorwest.LenMod.Artifacts;
-using System.Linq;
 
 namespace Sorwest.LenMod.Cards;
 
@@ -43,47 +41,27 @@ public class LenCardVampiresPathos : Card, IModdedCard
                 targetPlayer = true
             }
         };
-        var artifactBananaStash = s.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
-        int shieldNumber;
-        int enemyDamage;
-        int internalCounter = upgrade == Upgrade.B ? 2 : 1;
-        if (artifactBananaStash is null || artifactBananaStash.counter <= 0)
+        if (s.ship.Get(ModEntry.Instance.BananaStatus.Status) > 0 || s.route is not Combat)
         {
-            return result;
-        }
-        else
-        {
-            enemyDamage = artifactBananaStash.enemyDamage;
-            shieldNumber = artifactBananaStash.shieldNumber;
-            internalCounter = upgrade == Upgrade.B ? 2 : 1;
-            if (artifactBananaStash.counter < 2)
-                internalCounter = 1;
-        }
-        result.Insert(0, new AThrowBanana()
-        {
-            amount = -1
-        });
-        do
-        {
-            if (internalCounter <= 0)
-                break;
-            if (shieldNumber > 0)
+            int internalCounter = s.ship.Get(ModEntry.Instance.BananaStatus.Status) == 1 ? 1 : 2;
+            result.Insert(0, new AThrowBanana()
             {
-                result.Insert(result.Count - 2, new AStatus()
-                {
-                    status = Status.shield,
-                    statusAmount = shieldNumber,
-                    targetPlayer = true
-                });
-            }
-            result.Insert(result.Count - 2, new AAttack()
-            {
-                damage = GetDmg(s, enemyDamage),
-                piercing = true
+                amount = -1
             });
-            internalCounter -= 1;
+            do
+            {
+                if (internalCounter <= 0)
+                    break;
+                result.Insert(result.Count - 2, new ABananaDamage()
+                {
+                    type = BananaType.AAttack,
+                    dmg = GetDmg(s, 0),
+                    targetPlayer = false
+                });
+                internalCounter--;
+            }
+            while (internalCounter > 0);
         }
-        while (internalCounter > 0);
         return result;
     }
 }

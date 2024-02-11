@@ -1,10 +1,8 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
+using Sorwest.LenMod.Actions;
 using System.Collections.Generic;
 using System.Reflection;
-using Sorwest.LenMod.Actions;
-using Sorwest.LenMod.Artifacts;
-using System.Linq;
 
 namespace Sorwest.LenMod.Cards;
 public class LenCardButterflyOnShoulder : Card, IModdedCard
@@ -35,24 +33,24 @@ public class LenCardButterflyOnShoulder : Card, IModdedCard
     }
     public override List<CardAction> GetActions(State s, Combat c)
     {
-        var artifactBananaStash = s.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
-        if (artifactBananaStash is null || artifactBananaStash.counter <= 0)
+        List<CardAction> result = new();
+        if (s.ship.Get(ModEntry.Instance.BananaStatus.Status) > 0 || s.route is not Combat)
         {
-            return new();
+            int internalCounter = s.ship.Get(ModEntry.Instance.BananaStatus.Status);
+            result = new()
+            {
+                new ASmashBanana()
+                {
+                    loseAll = true
+                },
+                new AStatus()
+                {
+                    status = ModEntry.Instance.MusicNoteStatus.Status,
+                    statusAmount = internalCounter * (upgrade == Upgrade.B ? 2 : 1),
+                    targetPlayer = true
+                }
+            };
         }
-        int internalCounter = artifactBananaStash.counter;
-        return new()
-        {
-            new ASmashBanana()
-            {
-                loseAll = true
-            },
-            new AStatus()
-            {
-                status = ModEntry.Instance.MusicNoteStatus.Status,
-                statusAmount = internalCounter * (upgrade == Upgrade.B ? 2 : 1),
-                targetPlayer = true
-            }
-        };
+        return result;
     }
 }

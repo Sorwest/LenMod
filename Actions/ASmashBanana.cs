@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace Sorwest.LenMod.Actions;
 public class ASmashBanana : AGainBanana
@@ -12,7 +11,7 @@ public class ASmashBanana : AGainBanana
     {
         List<Tooltip> tooltips =
         [
-            new TTText(ModEntry.Instance.Localizations.Localize(["action", "SmashBanana", "flavor"])),
+            new TTText(ModEntry.Instance.Localizations.Localize(["action", "SmashBanana", "flavor"], new { Amount = -1 * amount })),
             .. base.GetTooltips(s)
         ];
         return tooltips;

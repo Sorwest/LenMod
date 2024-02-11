@@ -24,62 +24,55 @@ public class LenArtifactBananaStash : Artifact, IModdedArtifact
     }
     public override string Name() => "BANANA STASH";
     public int counter;
+    public bool stillHasBananas;
     public int enemyDamage;
     public int shieldNumber;
     public override int? GetDisplayNumber(State s)
     {
-        return counter;
+        return counter > 0 ? counter : null;
     }
     public override Spr GetSprite()
     {
-        Spr sprite = new Spr();
-        if (counter > 0)
-            sprite = ModEntry.Instance.Sprites["LenArtifactBananaStashSprite"].Sprite;
-        if (counter <= 0)
-            sprite = ModEntry.Instance.Sprites["LenArtifactBananaStashOffSprite"].Sprite;
-        if (counter < 0)
-            counter = 0;
-        return sprite;
+        if (counter > 0 || stillHasBananas == true)
+            return ModEntry.Instance.Sprites["BananaStash"].Sprite;
+        else
+        {
+            return ModEntry.Instance.Sprites["BananaStashOff"].Sprite;
+        }
     }
     public override void OnReceiveArtifact(State state)
     {
-        counter += 6;
-        enemyDamage += 1;
+        if (counter == 0)
+            counter += 6;
+        if (enemyDamage == 0)
+            enemyDamage += 1;
     }
     public override void OnRemoveArtifact(State state)
     {
         counter = 0;
         enemyDamage -= 1;
     }
-    public override void OnTurnStart(State state, Combat combat)
+    public override void OnCombatStart(State state, Combat combat)
     {
-        Status status = ModEntry.Instance.MusicNoteStatus.Status;
-        var amount = state.ship.Get(status);
-        if (amount > 0)
-            return;
-        if (!state.ship.isPlayerShip)
-            return;
-        if (counter <= 0)
-            return;
-        if (shieldNumber > 0)
+        if (counter > 0)
         {
-            combat.Queue(new AStatus()
+            combat.QueueImmediate(new AStatus()
             {
-                status = Status.shield,
-                statusAmount = shieldNumber,
-                targetPlayer = true
+                status = ModEntry.Instance.BananaStatus.Status,
+                statusAmount = counter,
+                targetPlayer = true,
+                timer = 0
             });
+            counter = 0;
+            stillHasBananas = true;
         }
-        if (enemyDamage > 0)
-        {
-            combat.Queue(new AHurt()
-            {
-                hurtAmount = enemyDamage,
-                targetPlayer = false
-            });
-            counter--;
-            Pulse();
-        }
+    }
+    public override void OnCombatEnd(State state)
+    {
+        if (state.ship.Get(ModEntry.Instance.BananaStatus.Status) > 0)
+            counter = state.ship.Get(ModEntry.Instance.BananaStatus.Status);
+        else
+            stillHasBananas = false;
     }
     public override List<Tooltip>? GetExtraTooltips()
     {
@@ -87,7 +80,7 @@ public class LenArtifactBananaStash : Artifact, IModdedArtifact
         var str = "";
         if (shieldNumber > 0)
         {
-            str = ModEntry.Instance.Localizations.Localize(["action", "EatBanana", "flavor"], new { Amount = shieldNumber });
+            str = ModEntry.Instance.Localizations.Localize(["action", "EatBanana", "maidDress"], new { Amount = shieldNumber });
         }
         tooltips.Add(new CustomTTGlossary(
             CustomTTGlossary.GlossaryType.action,

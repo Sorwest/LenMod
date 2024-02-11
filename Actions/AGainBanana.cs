@@ -1,6 +1,4 @@
-﻿using Sorwest.LenMod.Artifacts;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace Sorwest.LenMod.Actions;
 public class AGainBanana : CardAction
@@ -9,23 +7,13 @@ public class AGainBanana : CardAction
     public bool loseAll;
     public override void Begin(G g, State s, Combat c)
     {
-        var artifactBananaStash = s.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
-        if (artifactBananaStash != null)
+        timer = 0;
+        c.QueueImmediate(new AStatus()
         {
-            if (loseAll)
-                artifactBananaStash.counter = 0;
-            else if (!loseAll)
-                artifactBananaStash.counter += amount;
-            artifactBananaStash.Pulse();
-        }
-        else if (artifactBananaStash == null)
-        {
-            s.artifacts.Add(new LenArtifactBananaStash());
-            artifactBananaStash = s.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
-            if (!loseAll)
-                artifactBananaStash?.OnReceiveArtifact(s);
-            artifactBananaStash?.Pulse();
-        }
+            status = ModEntry.Instance.BananaStatus.Status,
+            statusAmount = amount,
+            targetPlayer = true
+        });
     }
     public override Icon? GetIcon(State s)
     {
@@ -46,7 +34,7 @@ public class AGainBanana : CardAction
                 CustomTTGlossary.GlossaryType.action,
                 () => ModEntry.Instance.Sprites["GainBananaLose"].Sprite,
                 () => ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "name", "lose"]),
-                () => ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "description", "lose"]),
+                () => ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "description", "lose"], new { Amount = -1 * amount }),
                 key: $"{ModEntry.Instance.Package.Manifest.UniqueName}::LoseBanana"
             ));
         else if (amount > 0)
@@ -54,14 +42,14 @@ public class AGainBanana : CardAction
                 CustomTTGlossary.GlossaryType.action,
                 () => ModEntry.Instance.Sprites["GainBananaGain"].Sprite,
                 () => ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "name", "gain"]),
-                () => ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "description", "gain"]),
+                () => ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "description", "gain"], new { Amount = amount }),
                 key: $"{ModEntry.Instance.Package.Manifest.UniqueName}::GainBanana"
             ));
         else if (loseAll)
             tooltips.Add(new CustomTTGlossary(
                 CustomTTGlossary.GlossaryType.action,
                 () => ModEntry.Instance.Sprites["GainBananaLoseAll"].Sprite,
-                () => ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "name", "lose"]),
+                () => ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "name", "loseAll"]),
                 () => ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "description", "loseAll"]),
                 key: $"{ModEntry.Instance.Package.Manifest.UniqueName}::LoseBananaAll"
             ));

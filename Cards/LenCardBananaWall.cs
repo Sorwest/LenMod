@@ -1,10 +1,8 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
+using Sorwest.LenMod.Actions;
 using System.Collections.Generic;
 using System.Reflection;
-using Sorwest.LenMod.Actions;
-using Sorwest.LenMod.Artifacts;
-using System.Linq;
 
 namespace Sorwest.LenMod.Cards;
 public class LenCardBananaWall : Card, IModdedCard
@@ -34,26 +32,23 @@ public class LenCardBananaWall : Card, IModdedCard
     }
     public override List<CardAction> GetActions(State s, Combat c)
     {
-        var flagNoBananas = false;
-        var artifactBananaStash = s.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
-        if (artifactBananaStash is null || artifactBananaStash.counter <= 0)
+        List<CardAction> result = new();
+        if (s.ship.Get(ModEntry.Instance.BananaStatus.Status) > 0 || s.route is not Combat)
         {
-                flagNoBananas = true;
+            result = new()
+            {
+                new ASmashBanana()
+                {
+                    amount = -1
+                },
+                new AStatus()
+                {
+                    status = Status.shield,
+                    statusAmount = upgrade == Upgrade.B ? 3 : 2,
+                    targetPlayer = true
+                }
+            };
         }
-        return new()
-        {
-            new ASmashBanana()
-            {
-                amount = -1,
-                disabled = flagNoBananas
-            },
-            new AStatus()
-            {
-                status = Status.shield,
-                statusAmount = upgrade == Upgrade.B ? 3 : 2,
-                targetPlayer = true,
-                disabled = flagNoBananas
-            }
-        };
+        return result;
     }
 }

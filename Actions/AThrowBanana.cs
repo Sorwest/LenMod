@@ -12,7 +12,7 @@ public class AThrowBanana : AGainBanana
         {
             return artifactBananaStash.enemyDamage;
         }
-        return 0;
+        return 1;
     }
     private int GetBananaShield(State s)
     {
@@ -35,7 +35,7 @@ public class AThrowBanana : AGainBanana
         var str = "";
         if (shieldAmount > 0)
         {
-            str = ModEntry.Instance.Localizations.Localize(["action", "ThrowBanana", "flavor"], new { Amount = shieldAmount });
+            str = ModEntry.Instance.Localizations.Localize(["action", "ThrowBanana", "maidDress"], new { Amount = shieldAmount });
         }
         tooltips.Add(new CustomTTGlossary(
             CustomTTGlossary.GlossaryType.action,

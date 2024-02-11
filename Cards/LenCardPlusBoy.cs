@@ -1,8 +1,8 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
+using Sorwest.LenMod.Actions;
 using System.Collections.Generic;
 using System.Reflection;
-using Sorwest.LenMod.Actions;
 
 namespace Sorwest.LenMod.Cards;
 

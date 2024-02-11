@@ -8,57 +8,62 @@
   "status": {
     "MusicNote": {
       "name": "Music Note",
-      "description": "At start of turn, <c=status>eat</c> {0} bananas for free. <c=hurt>Banana Stash passive is disabled</c>."
+      "description": "At start of turn, <c=action>eat</c> <=boldPink>{0}</c> <c=status>bananas</c> for free. <c=downside>Normal bananas are disabled</c>."
+    },
+    "Banana": {
+      "name": "Banana",
+      "description": "Amount of bananas Len has stored."
     }
   },
   "action": {
     "EatBanana": {
       "name": "Eat Banana",
-      "description": "Len <c=status>eats</c> a banana, making the enemy so hungry they lose {{Damamge}} hull.{{MaidDress}}",
-      "maidDress": "\n<c=text>Before</c> <c=card>throwing</c><c=text>, gain</c> {{Amount}} <c=status>SHIELD</c><c=text>.</c>"
+      "description": "Len <c=action>eats</c> a <c=status>banana</c>, making the enemy so hungry they lose {{Damage}} hull.{{MaidDress}}",
+      "maidDress": "\n<c=text>Before</c> <c=action>throwing</c><c=text>, gain</c> {{Amount}} <c=status>SHIELD</c><c=text>.</c>"
     },
     "GainBanana": {
       "name": {
         "gain": "Gain Banana",
-        "lose": "Lose Banana"
+        "lose": "Lose Banana",
+        "loseAll": "Lose All Bananas"
       },
       "description": {
-        "gain": "Add {0} bananas to your Banana Stash.",
-        "lose": "Remove {0} bananas from your Banana Stash.",
-        "loseAll": "Remove all bananas from your Banana Stash."
+        "gain": "Gain {{Amount}} <c=status>bananas</c>.",
+        "lose": "Lose {{Amount}} <c=status>bananas</c>.",
+        "loseAll": "Lose all <c=status>bananas</c>."
       }
     },
     "SmashBanana": {
       "name": "Smash Banana",
-      "description": "Get rid of {0} bananas. Doesn't trigger Banana Stash.",
+      "description": "Get rid of {{Amount}} <c=status>bananas</c>. Doesn't trigger Banana Stash.",
       "flavor": "<c=405a7f>Len is crying in the corner.</c>"
     },
     "ThrowBanana": {
       "name": "Throw Banana",
-      "description": "Len <c=card>throws</c> a banana so fast and strongly it deals {{Damage}} piercing damage to the enemy.{{MaidDress}}",
-      "maidDress": "\n<c=text>Before</c> <c=card>throwing</c><c=text>, gain</c> {{Amount}} <c=status>SHIELD</c><c=text>.</c>"
+      "description": "Len <c=action>throws</c> a <c=status>Banana</c> so fast and strongly it deals {{Damage}} piercing damage to the enemy.{{MaidDress}}",
+      "maidDress": "\n<c=text>Before</c> <c=action>throwing</c><c=text>, gain</c> {{Amount}} <c=status>SHIELD</c><c=text>.</c>"
     }
   },
   "artifact": {
     "BananaStash": {
       "name": "Banana Stash",
-      "description": "Each turn, Len <c=status>eats</c> a banana.\n<c=hurt>If there are no bananas, there will be no effect</c>."
+      "description": "Each turn, Len <c=action>eats</c> a <c=status>banana</c>.\n<c=hurt>If there are no bananas, there will be no effect</c>."
     },
     "Brioche": {
       "name": "Brioche",
-      "description": "On pickup, Banana damage is increased by 1."
+      "description": "On pickup, <c=status>Banana</c> damage is increased by 1."
     },
     "GlassBottle": {
       "name": "Glass Bottle",
-      "description": "At start of combat, <c=healing>gain</c> 3 bananas."
+      "description": "At start of combat, gain 3 <c=status>bananas</c>."
     },
     "MaidDress": {
       "name": "Maid Dress",
-      "description": "<c=healing>#Blessed.</c> Bananas now give you 2 <c=status>SHIELD</c> before <c=status>eating</c> or <c=card>throwing</c> them."
+      "description": "<c=healing>#Blessed.</c> <c=status>Bananas</c> now give you 2 <c=status>SHIELD</c> before <c=action>eating</c> or <c=action>throwing</c> them."
     },
     "TwinPower": {
       "name": "Twin Power",
-      "description": "<c=405a7f>Rin is hiding in the other ship.</c>\nGain 1 extra <c=energy>ENERGY</c> every turn. <c=hurt>On even turns, enemy ship gains 2</c> <c=status>overdrive</c>."
+      "description": "<c=405a7f>Rin is hiding in the other ship.</c>\nGain 1 extra <c=energy>ENERGY</c> every turn. <c=downside>On even turns, enemy ship gains 2</c> <c=status>overdrive</c>."
     }
   },
   "card": {
@@ -67,14 +72,14 @@
     },
     "BananaWall": {
       "name": "Banana Wall",
-      "description": "<c=hurt>Smash</c> a banana to gain {{Amount}} <c=status>shield</c>."
+      "description": "<c=hurt>Smash</c> a <c=status>banana</c> to gain <c=boldPink>{{Amount}}</c> <c=status>shield</c>."
     },
     "BarisolsChild": {
       "name": "Barisol's Child"
     },
     "Breaktime": {
       "name": "Breaktime",
-      "description": "<c=card>Throw</c> {{Amount}} bananas for the price of one."
+      "description": "<c=action>Throw</c> <c=boldPink>{{Amount}}</c> <c=status>bananas</c> for the price of one."
     },
     "BringItOn": {
       "name": "Bring It On"
@@ -82,9 +87,9 @@
     "ButterflyOnShoulder": {
       "name": "Butterfly On Shoulder",
       "description": {
-        "None": "<c=hurt>Smash</c> all bananas. Gain as many <c=status>notes</c>.",
-        "A": "<c=hurt>Smash</c> all bananas. Gain as many <c=status>notes</c>.",
-        "B": "<c=hurt>Smash</c> all bananas. Gain twice many <c=status>notes</c>."
+        "None": "<c=hurt>Smash</c> all <c=status>bananas</c>. Gain as many <c=status>notes</c>.",
+        "A": "<c=hurt>Smash</c> all <c=status>bananas</c>. Gain as many <c=status>notes</c>.",
+        "B": "<c=hurt>Smash</c> all <c=status>bananas</c>. Gain twice many <c=status>notes</c>."
       }
     },
     "ChildishWar": {
@@ -98,7 +103,7 @@
     },
     "HolyLanceExplosion": {
       "name": "Holy Lance Explosion",
-      "description": "Gain 1 <c=status>droneshift</c>. <c=hurt>Smash</c> a banana to launch a <c=midrow>sword</c>."
+      "description": "Gain 1 <c=status>droneshift</c>. <c=hurt>Smash</c> a <c=status>banana</c> to launch a <c=midrow>sword</c>."
     },
     "LawEvadingRock": {
       "name": "LawEvading Rock"
@@ -108,24 +113,24 @@
     },
     "Nakakapagpabagabag": {
       "name": "Nakakapagpabagabag",
-      "description": "<c=hurt>Smash</c> a banana to gain 1 <c=status>overdrive</c>."
+      "description": "<c=hurt>Smash</c> a <c=status>banana</c> to gain 1 <c=status>overdrive</c>."
     },
     "NiccoriTeamSurvey": {
       "name": "Niccori Team Survey",
-      "description": "<c=card>Throw</c> all bananas."
+      "description": "<c=action>Throw</c> all <c=status>bananas</c>."
     },
     "Paradichlorobenzene": {
       "name": "Paradichlorobenzene",
-      "description": "If you have bananas, the enemy loses all <c=status>shield</c>. <c=healing>Gain</c> a banana."
+      "description": "If you have <c=status>bananas</c>, the enemy loses all <c=status>shield</c>. <c=healing>Gain</c> a <c=status>banana</c>."
     },
     "PlusBoy": {
       "name": "Plus Boy",
-      "description": "<c=healing>Gain</c> {0} bananas."
+      "description": "Gain {0} <c=status>bananas</c>."
     },
     "RemoteControl": {
       "name": "Remote Control"
     },
-    "Servant of Evil": {
+    "ServantOfEvil": {
       "name": "Servant of Evil"
     },
     "TelecasterBBoy": {
@@ -133,14 +138,14 @@
     },
     "ToluthinAntenna": {
       "name": "Toluthin Antenna",
-      "description": "Add 1 of {0} <c=cardtrait>discount, temp</c> <c=hacker>Max</c> & <c=peri>Peri</c> cards to your hand."
+      "description": "Add 1 of {{Amount}} <c=cardtrait>discount, temp</c> <c=hacker>Max</c> & <c=peri>Peri</c> cards to your hand."
     },
     "VampiresPathoS": {
       "name": "Vampire's PathoS",
       "description": {
-        "None": "<c=card>Throw</c> a banana. <c=healing>Heal 1</c>.",
-        "A": "<c=card>Throw</c> a banana. <c=healing>Heal 1</c>.",
-        "B": "<c=card>Throw</c> 2 bananas. <c=healing>Heal 1</c>."
+        "None": "<c=action>Throw</c> <c=boldPink>a</c> <c=status>banana</c>. <c=healing>Heal 1</c>.",
+        "A": "<c=action>Throw</c> <c=boldPink>a</c> <c=status>banana</c>. <c=healing>Heal 1</c>.",
+        "B": "<c=action>Throw</c> <c=boldPink>2</c> <c=status>bananas</c>. <c=healing>Heal 1</c>."
       }
     }
   }

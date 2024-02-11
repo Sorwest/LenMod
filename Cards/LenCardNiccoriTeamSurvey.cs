@@ -1,10 +1,8 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
+using Sorwest.LenMod.Actions;
 using System.Collections.Generic;
 using System.Reflection;
-using Sorwest.LenMod.Actions;
-using Sorwest.LenMod.Artifacts;
-using System.Linq;
 
 namespace Sorwest.LenMod.Cards;
 
@@ -36,48 +34,28 @@ public class LenCardNiccoriTeamSurvey : Card, IModdedCard
     }
     public override List<CardAction> GetActions(State s, Combat c)
     {
-        var artifactBananaStash = s.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
-        int shieldNumber;
-        int enemyDamage;
-        int internalCounter;
-        if (artifactBananaStash is null || artifactBananaStash.counter <= 0)
+        List<CardAction> result = new();
+        if (s.ship.Get(ModEntry.Instance.BananaStatus.Status) > 0 || s.route is not Combat)
         {
-            return new();
-        }
-        else
-        {
-            enemyDamage = artifactBananaStash.enemyDamage;
-            shieldNumber = artifactBananaStash.shieldNumber;
-            internalCounter = artifactBananaStash.counter;
-        }
-        List<CardAction> result = new()
-        {
-            new AThrowBanana()
+            int internalCounter = s.ship.Get(ModEntry.Instance.BananaStatus.Status);
+            result.Add(new AThrowBanana()
             {
                 loseAll = true
-            }
-        };
-        do
-        {
-            if (internalCounter <= 0)
-                break;
-            if (shieldNumber > 0)
-            {
-                result.Add(new AStatus()
-                {
-                    status = Status.shield,
-                    statusAmount = shieldNumber,
-                    targetPlayer = true
-                });
-            }
-            result.Add(new AAttack()
-            {
-                damage = GetDmg(s, enemyDamage),
-                piercing = true
             });
-            internalCounter -= 1;
+            do
+            {
+                if (internalCounter <= 0)
+                    break;
+                result.Add(new ABananaDamage()
+                {
+                    type = BananaType.AAttack,
+                    dmg = GetDmg(s, 0),
+                    targetPlayer = false
+                });
+                internalCounter--;
+            }
+            while (internalCounter > 0);
         }
-        while (internalCounter > 0);
         return result;
     }
 }

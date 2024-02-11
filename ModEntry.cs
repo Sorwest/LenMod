@@ -1,12 +1,12 @@
-﻿using Nickel;
-using HarmonyLib;
+﻿using HarmonyLib;
 using Microsoft.Extensions.Logging;
 using Nanoray.PluginManager;
+using Nickel;
+using Sorwest.LenMod.Artifacts;
+using Sorwest.LenMod.Cards;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sorwest.LenMod.Cards;
-using Sorwest.LenMod.Artifacts;
 
 namespace Sorwest.LenMod;
 
@@ -23,9 +23,10 @@ public class ModEntry : SimpleMod
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
     internal IDeckEntry LenDeck { get; }
     internal ICharacterEntry LenCharacter { get; }
-    internal static Color LenColor => new Color("FFFFFF");
+    internal static Color LenColor => new Color("ffe569");
     internal static Color BlackTitle => new("000000");
     internal IStatusEntry MusicNoteStatus { get; }
+    internal IStatusEntry BananaStatus { get; }
     internal static IReadOnlyList<Type> LenStarterCardTypes { get; } = [
         typeof(LenCardBanana),
         typeof(LenCardBanana),
@@ -60,9 +61,16 @@ public class ModEntry : SimpleMod
         typeof(LenCardParadichlorobenzene),
         typeof(LenCardToluthinAntenna)
     ];
+    internal static IReadOnlyList<Type> LenStarterArtifactTypes { get; } = [
+        typeof(LenArtifactBananaStash)
+    ];
     internal static IReadOnlyList<Type> LenCommonArtifactTypes { get; } = [
+        typeof(LenArtifactGlassBottle),
+        typeof(LenArtifactMaidDress)
     ];
     internal static IReadOnlyList<Type> LenBossArtifactTypes { get; } = [
+        typeof(LenArtifactBrioche),
+        typeof(LenArtifactTwinPower)
     ];
     internal static IEnumerable<Type> AllCards
         => LenStarterCardTypes
@@ -70,7 +78,8 @@ public class ModEntry : SimpleMod
         .Concat(LenUncommonCardTypes)
         .Concat(LenRareCardTypes);
     internal static IEnumerable<Type> AllArtifacts
-        => LenCommonArtifactTypes
+        => LenStarterArtifactTypes
+        .Concat(LenCommonArtifactTypes)
         .Concat(LenBossArtifactTypes);
     internal IList<string> FaceSprites { get; } = [
         "Gameover",
@@ -90,6 +99,7 @@ public class ModEntry : SimpleMod
         "TwinPower"
     ];
     internal IList<string> IconSprites { get; } = [
+        "Banana",
         "EatBanana",
         "GainBananaGain",
         "GainBananaLose",
@@ -107,6 +117,9 @@ public class ModEntry : SimpleMod
         KokoroApi = helper.ModRegistry.GetApi<IKokoroApi>("Shockah.Kokoro")!;
         MoreDifficultiesApi = helper.ModRegistry.GetApi<IMoreDifficultiesApi>("TheJazMaster.MoreDifficulties");
         DraculaApi = helper.ModRegistry.GetApi<IDraculaApi>("Shockah.Dracula");
+
+        _ = new MusicNoteManager();
+        _ = new BananaManager();
 
         CustomTTGlossary.ApplyPatches(Harmony);
 
@@ -175,6 +188,17 @@ public class ModEntry : SimpleMod
             Name = AnyLocalizations.Bind(["status", "MusicNote", "name"]).Localize,
             Description = AnyLocalizations.Bind(["status", "MusicNote", "description"]).Localize
         });
+        BananaStatus = helper.Content.Statuses.RegisterStatus("BananaStatus", new()
+        {
+            Definition = new()
+            {
+                icon = Sprites["Banana"].Sprite,
+                color = LenColor,
+                isGood = true
+            },
+            Name = AnyLocalizations.Bind(["status", "Banana", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["status", "Banana", "description"]).Localize
+        });
 
         // DECK REGISTRATION BLOCK
         LenDeck = helper.Content.Decks.RegisterDeck("Len", new()
@@ -220,7 +244,18 @@ public class ModEntry : SimpleMod
         {
             Deck = LenDeck.Deck,
             StartLocked = LockedChar,
-            StarterCardTypes = LenStarterCardTypes,
+            Starters = new()
+            {
+                cards = [
+                    new LenCardBanana(),
+                    new LenCardBanana(),
+                    new LenCardBreaktime(),
+                    new LenCardBananaWall()
+                ],
+                artifacts = [
+                    new LenArtifactBananaStash()
+                ]
+            },
             BorderSprite = Sprites["len.panel"].Sprite,
             Description = AnyLocalizations.Bind(["character", "len", "description"]).Localize
         });
@@ -240,15 +275,31 @@ public class ModEntry : SimpleMod
             {
                 cards = new()
                 {
-                    new LenCardTelecasterBBoy(),
-                    new LenCardHolyLanceExplosion(),
-                    new LenCardPlusBoy()
+                    new LenCardTelecasterBBoy()
+                    {
+                        upgrade = Upgrade.A
+                    },
+                    new LenCardHolyLanceExplosion()
+                    {
+                        upgrade = Upgrade.A
+                    }
+                },
+                artifacts = new()
+                {
+                    new LenArtifactBananaStash()
+                    {
+                        counter = 3
+                    }
                 }
             }
         );
 
         // DRACULA BLOCK
         DraculaApi?.RegisterBloodTapOptionProvider(MusicNoteStatus.Status, (_, _, status) => [
+            new AHurt { targetPlayer = true, hurtAmount = 1 },
+            new AStatus { targetPlayer = true, status = status, statusAmount = 2 },
+        ]);
+        DraculaApi?.RegisterBloodTapOptionProvider(BananaStatus.Status, (_, _, status) => [
             new AHurt { targetPlayer = true, hurtAmount = 1 },
             new AStatus { targetPlayer = true, status = status, statusAmount = 2 },
         ]);

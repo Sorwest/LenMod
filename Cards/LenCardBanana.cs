@@ -1,8 +1,8 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
+using Sorwest.LenMod.Actions;
 using System.Collections.Generic;
 using System.Reflection;
-using Sorwest.LenMod.Actions;
 
 namespace Sorwest.LenMod.Cards;
 public class LenCardBanana : Card, IModdedCard
@@ -26,7 +26,7 @@ public class LenCardBanana : Card, IModdedCard
     {
         return new()
         {
-            cost = upgrade == Upgrade.None ? 1 : 0,
+            cost = upgrade == Upgrade.A ? 0 : 1,
             exhaust = upgrade == Upgrade.B ? false : true
         };
     }
@@ -40,7 +40,7 @@ public class LenCardBanana : Card, IModdedCard
             },
             new ADrawCard()
             {
-                count = 1
+                count = upgrade == Upgrade.B ? 2 : 1
             }
         };
     }

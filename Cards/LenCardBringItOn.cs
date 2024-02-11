@@ -2,8 +2,6 @@
 using Nickel;
 using System.Collections.Generic;
 using System.Reflection;
-using Sorwest.LenMod.Actions;
-using Sorwest.LenMod.Artifacts;
 
 namespace Sorwest.LenMod.Cards;
 public class LenCardBringItOn : Card, IModdedCard

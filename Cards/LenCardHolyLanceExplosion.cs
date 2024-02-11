@@ -1,10 +1,8 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
+using Sorwest.LenMod.Actions;
 using System.Collections.Generic;
 using System.Reflection;
-using Sorwest.LenMod.Actions;
-using Sorwest.LenMod.Artifacts;
-using System.Linq;
 
 namespace Sorwest.LenMod.Cards;
 
@@ -45,23 +43,21 @@ public class LenCardHolyLanceExplosion : Card, IModdedCard
                 targetPlayer = true
             }
         };
-        var artifactBananaStash = s.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
-        if (artifactBananaStash is null || artifactBananaStash.counter <= 0)
+        if (s.ship.Get(ModEntry.Instance.BananaStatus.Status) > 0 || s.route is not Combat)
         {
-            return result;
-        }
-        result.Add(new ASmashBanana()
-        {
-            amount = -1
-        });
-        result.Add(new ASpawn()
-        {
-            thing = new Missile()
+            result.Add(new ASmashBanana()
             {
-                missileType = MissileType.heavy,
-                skin = "sword"
-            }
-        });
+                amount = -1
+            });
+            result.Add(new ASpawn()
+            {
+                thing = new Missile()
+                {
+                    missileType = MissileType.heavy,
+                    skin = "sword"
+                }
+            });
+        }
         return result;
     }
 }
