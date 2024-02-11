@@ -121,7 +121,7 @@
     },
     "Paradichlorobenzene": {
       "name": "Paradichlorobenzene",
-      "description": "If you have <c=status>bananas</c>, the enemy loses all <c=status>shield</c>. <c=healing>Gain</c> a <c=status>banana</c>."
+      "description": "If you have <c=status>bananas</c>, enemy loses all <c=status>shield</c>. <c=healing>Gain</c> a <c=status>banana</c>."
     },
     "PlusBoy": {
       "name": "Plus Boy",
