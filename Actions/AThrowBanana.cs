@@ -29,7 +29,7 @@ public class AThrowBanana : AGainBanana
     }
     public override List<Tooltip> GetTooltips(State s)
     {
-        List<Tooltip> tooltips = new List<Tooltip>();
+
         var shieldAmount = GetBananaShield(s);
         var damageAmount = GetBananaDmg(s);
         var str = "";
@@ -37,13 +37,15 @@ public class AThrowBanana : AGainBanana
         {
             str = ModEntry.Instance.Localizations.Localize(["action", "ThrowBanana", "maidDress"], new { Amount = shieldAmount });
         }
-        tooltips.Add(new CustomTTGlossary(
-            CustomTTGlossary.GlossaryType.action,
-            () => ModEntry.Instance.Sprites["ThrowBanana"].Sprite,
-            () => ModEntry.Instance.Localizations.Localize(["action", "ThrowBanana", "name"]),
-            () => ModEntry.Instance.Localizations.Localize(["action", "ThrowBanana", "description"], new { Damage = damageAmount, MaidDress = str }),
-            key: $"{ModEntry.Instance.Package.Manifest.UniqueName}::ThrowBanana"
-        ));
-        return tooltips;
+        return [
+            new CustomTTGlossary(
+                CustomTTGlossary.GlossaryType.action,
+                () => ModEntry.Instance.Sprites["ThrowBanana"].Sprite,
+                () => ModEntry.Instance.Localizations.Localize(["action", "ThrowBanana", "name"]),
+                () => ModEntry.Instance.Localizations.Localize(["action", "ThrowBanana", "description"], new { Damage = damageAmount, MaidDress = str }),
+                key: $"{ModEntry.Instance.Package.Manifest.UniqueName}::ThrowBanana"
+            ),
+            .. base.GetTooltips(s)
+        ];
     }
 }

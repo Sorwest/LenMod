@@ -40,7 +40,7 @@
     },
     "ThrowBanana": {
       "name": "Throw Banana",
-      "description": "Len <c=action>throws</c> a <c=status>Banana</c> so fast and strongly it deals {{Damage}} piercing damage to the enemy.{{MaidDress}}",
+      "description": "Len <c=action>throws</c> a <c=status>banana</c> so fast and strongly it deals {{Damage}} piercing damage to the enemy.{{MaidDress}}",
       "maidDress": "\n<c=text>Before</c> <c=action>throwing</c><c=text>, gain</c> {{Amount}} <c=status>SHIELD</c><c=text>.</c>"
     }
   },

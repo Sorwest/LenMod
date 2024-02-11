@@ -9,11 +9,9 @@ public class ASmashBanana : AGainBanana
     }
     public override List<Tooltip> GetTooltips(State s)
     {
-        List<Tooltip> tooltips =
-        [
+        return [
             new TTText(ModEntry.Instance.Localizations.Localize(["action", "SmashBanana", "flavor"], new { Amount = -1 * amount })),
             .. base.GetTooltips(s)
         ];
-        return tooltips;
     }
 }
