@@ -142,11 +142,7 @@
     },
     "VampiresPathoS": {
       "name": "Vampire's PathoS",
-      "description": {
-        "None": "<c=action>Throw</c> <c=boldPink>a</c> <c=status>banana</c>. <c=healing>Heal 1</c>.",
-        "A": "<c=action>Throw</c> <c=boldPink>a</c> <c=status>banana</c>. <c=healing>Heal 1</c>.",
-        "B": "<c=action>Throw</c> <c=boldPink>2</c> <c=status>bananas</c>. <c=healing>Heal 1</c>."
-      }
+      "description": "<c=action>Throw</c> <c=boldPink>{{Amount}}</c> <c=status>bananas</c>. <c=healing>Heal 1</c>."
     }
   }
 }

@@ -28,7 +28,7 @@ public class LenCardVampiresPathos : Card, IModdedCard
         return new()
         {
             cost = upgrade == Upgrade.A ? 1 : 2,
-            description = ModEntry.Instance.Localizations.Localize(["card", "VampiresPathoS", "description", upgrade.ToString()])
+            description = ModEntry.Instance.Localizations.Localize(["card", "VampiresPathoS", "description"], new { Amount = upgrade == Upgrade.B ? 2 : 1 })
         };
     }
     public override List<CardAction> GetActions(State s, Combat c)
