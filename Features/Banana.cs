@@ -48,6 +48,7 @@ public class ABananaDamage : CardAction
 {
     public BananaType type;
     public int? dmg;
+    public bool fast;
     public bool targetPlayer;
     public override void Begin(G g, State s, Combat c)
     {
@@ -74,7 +75,8 @@ public class ABananaDamage : CardAction
             c.Queue(new AAttack()
             {
                 damage = damage,
-                piercing = targetPlayer
+                piercing = targetPlayer,
+                fast = fast
             });
         }
         else

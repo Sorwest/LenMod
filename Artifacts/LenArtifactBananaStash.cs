@@ -24,7 +24,7 @@ public class LenArtifactBananaStash : Artifact, IModdedArtifact
     }
     public override string Name() => "BANANA STASH";
     public int counter;
-    public bool stillHasBananas;
+    public bool stillHasBananas = true;
     public int enemyDamage;
     public int shieldNumber;
     public override int? GetDisplayNumber(State s)
@@ -33,7 +33,7 @@ public class LenArtifactBananaStash : Artifact, IModdedArtifact
     }
     public override Spr GetSprite()
     {
-        if (counter > 0 || stillHasBananas == true)
+        if (counter > 0 || stillHasBananas)
             return ModEntry.Instance.Sprites["BananaStash"].Sprite;
         else
         {
@@ -86,7 +86,7 @@ public class LenArtifactBananaStash : Artifact, IModdedArtifact
             CustomTTGlossary.GlossaryType.action,
             () => ModEntry.Instance.Sprites["EatBanana"].Sprite,
             () => ModEntry.Instance.Localizations.Localize(["action", "EatBanana", "name"]),
-            () => ModEntry.Instance.Localizations.Localize(["action", "EatBanana", "description"], new { Damage = enemyDamage, MaidDress = str }),
+            () => ModEntry.Instance.Localizations.Localize(["action", "EatBanana", "description"], new { Damage = enemyDamage > 0 ? enemyDamage : 1, MaidDress = str }),
             key: $"{ModEntry.Instance.Package.Manifest.UniqueName}::EatBanana"
         ));
         return tooltips;

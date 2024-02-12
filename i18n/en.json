@@ -8,7 +8,7 @@
   "status": {
     "MusicNote": {
       "name": "Music Note",
-      "description": "At start of turn, <c=action>eat</c> <=boldPink>{0}</c> <c=status>bananas</c> for free. <c=downside>Normal bananas are disabled</c>."
+      "description": "At start of turn, <c=action>eat</c> <=boldPink>{0}</c> <c=status>bananas</c> for free. <c=downside>Banana Stash passive eating is disabled</c>."
     },
     "Banana": {
       "name": "Banana",
@@ -117,11 +117,15 @@
     },
     "NiccoriTeamSurvey": {
       "name": "Niccori Team Survey",
-      "description": "<c=action>Throw</c> all <c=status>bananas</c>."
+      "description": {
+        "None": "<c=action>Throw</c> all <c=status>bananas</c>.",
+        "A": "<c=action>Throw</c> all <c=status>bananas</c>. Gain <c=boldPink>{{Amount}}</c> <c=status>bananas</c>.",
+        "B": "<c=action>Throw</c> all <c=status>bananas</c>. Gain <c=boldPink>{{Amount}}</c> <c=status>bananas</c>."
+      }
     },
     "Paradichlorobenzene": {
       "name": "Paradichlorobenzene",
-      "description": "If you have <c=status>bananas</c>, enemy loses all <c=status>shield</c>. <c=healing>Gain</c> a <c=status>banana</c>."
+      "description": "If you have <c=status>bananas</c>, enemy loses all <c=status>shield</c>. Gain a <c=status>banana</c>."
     },
     "PlusBoy": {
       "name": "Plus Boy",
@@ -138,15 +142,11 @@
     },
     "ToluthinAntenna": {
       "name": "Toluthin Antenna",
-      "description": "Add 1 of {{Amount}} <c=cardtrait>discount, temp</c> <c=hacker>Max</c> & <c=peri>Peri</c> cards to your hand."
+      "description": "Add 1 of <c=boldPink>{{Amount}}</c> <c=cardtrait>discount, temp</c> <c=hacker>Max</c> & <c=peri>Peri</c> cards to your hand."
     },
     "VampiresPathoS": {
       "name": "Vampire's PathoS",
-      "description": {
-        "None": "<c=action>Throw</c> <c=boldPink>a</c> <c=status>banana</c>. <c=healing>Heal 1</c>.",
-        "A": "<c=action>Throw</c> <c=boldPink>a</c> <c=status>banana</c>. <c=healing>Heal 1</c>.",
-        "B": "<c=action>Throw</c> <c=boldPink>2</c> <c=status>bananas</c>. <c=healing>Heal 1</c>."
-      }
+      "description": "<c=action>Throw</c> <c=boldPink>{{Amount}}</c> <c=status>bananas</c>. <c=healing>Heal 1</c>."
     }
   }
 }

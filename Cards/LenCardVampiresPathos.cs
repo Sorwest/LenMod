@@ -28,7 +28,7 @@ public class LenCardVampiresPathos : Card, IModdedCard
         return new()
         {
             cost = upgrade == Upgrade.A ? 1 : 2,
-            description = ModEntry.Instance.Localizations.Localize(["card", "VampiresPathoS", "description", upgrade.ToString()])
+            description = ModEntry.Instance.Localizations.Localize(["card", "VampiresPathoS", "description"], new { Amount = upgrade == Upgrade.B ? 2 : 1 })
         };
     }
     public override List<CardAction> GetActions(State s, Combat c)
@@ -44,15 +44,15 @@ public class LenCardVampiresPathos : Card, IModdedCard
         if (s.ship.Get(ModEntry.Instance.BananaStatus.Status) > 0 || s.route is not Combat)
         {
             int internalCounter = s.ship.Get(ModEntry.Instance.BananaStatus.Status) == 1 ? 1 : 2;
-            result.Insert(0, new AThrowBanana()
-            {
-                amount = -1
-            });
             do
             {
                 if (internalCounter <= 0)
                     break;
-                result.Insert(result.Count - 2, new ABananaDamage()
+                result.Add(new AThrowBanana()
+                {
+                    amount = -1
+                });
+                result.Add(new ABananaDamage()
                 {
                     type = BananaType.AAttack,
                     dmg = GetDmg(s, 0),
