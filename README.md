@@ -1,8 +1,8 @@
 
 <div align="center">
 	<h1>Kagamine Len</h1>
-	<img src="assets/character/neutral/Len_Neutral_0.png" alt="logo" width="auto" height="auto" />
-	<img src="assets/character/squint/Len_Squint_0.png" alt="logo" width="auto" height="auto" />
+	<img src="assets/character/Neutral/Len_Neutral_0.png" alt="logo" width="auto" height="auto" />
+	<img src="assets/character/Squint/Len_Squint_0.png" alt="logo" width="auto" height="auto" />
 	<p>What is banana boy doing here?</p>
 </div>
 
