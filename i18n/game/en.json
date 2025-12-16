@@ -1,0 +1,188 @@
+﻿{
+  "character": {
+    "len": {
+      "name": "Len",
+      "description": "What is a VTuber doing in this game?"
+    }
+  },
+  "enemy": {
+    "miku": {
+      "name": "Miku",
+      "title": "Green girl"
+    }
+  },
+  "settings": {
+    "EnabledMikuAI": {
+      "title": "Enable Act I Elite: MIKU",
+      "tooltipTitle": "Enable MIKU",
+      "description": "Whether to add this enemy to the pool or not."
+    },
+    "EnabledSounds": {
+      "title": "Enable Intrusive SFX",
+      "tooltipTitle": "Enable SFX",
+      "description": "Various cards trigger SFX-based music that may be annoying for some people."
+    }
+  },
+  "status": {
+    "BananaTreat": {
+      "name": "Banana Treat",
+      "description": "At start of turn, <c=action>eat</c> <=boldPink>{0}</c> <c=status>bananas</c> without reducing the stash."
+    },
+    "Banana": {
+      "name": "Banana",
+      "description": "Len <c=action>eats</c> and <c=action>throws</c> bananas for profit.",
+      "spoof": "spoofBanana"
+    },
+    "MusicNote": {
+      "name": "Music Note",
+      "description": "At start of turn, add a special card to hand. Gain 1 <c=status>note</c> on turn end if <c=hurt>hull</c> at <c=redd>half</c> or less. Reset at max stacks. <c=status>Persists across battles</c>."
+    }
+  },
+  "action": {
+    "EatBanana": {
+      "name": "Eat Banana",
+      "description": "Len <c=action>eats</c> a <c=status>banana</c>, making the enemy so hungry they lose <c=hurt>{{Damage}}</c> <c=hurt>hull</c>.  Requires bananas in most cases."
+    },
+    "GainBanana": {
+      "name": {
+        "gain": "Gain Banana",
+        "lose": "Lose Banana",
+        "loseAll": "Lose All Bananas"
+      },
+      "description": {
+        "gain": "Gain <c=boldPink>{{Amount}}</c> <c=status>bananas</c>.",
+        "lose": "Lose <c=boldPink>{{Amount}}</c> <c=status>bananas</c>.",
+        "loseAll": "Lose all <c=status>bananas</c>."
+      }
+    },
+    "SmashBanana": {
+      "name": "Smash Banana",
+      "description": "Destroy <c=status>bananas</c> for fun.",
+      "flavor": "<c=405a7f>Len is crying in the corner.</c>"
+    },
+    "ThrowBanana": {
+      "name": "Throw Banana",
+      "description": "Len <c=action>throws</c> a <c=status>banana</c> so fast it deals <c=boldPink>{{Damage}}</c> damage to the enemy. Requires bananas in most cases."
+    }
+  },
+  "artifact": {
+    "BananaStash": {
+      "name": "BANANA STASH",
+      "description": "<c=status>BANANAS</c> persist across battles."
+    },
+    "BananaSnack": {
+      "name": "BANANA SNACK",
+      "description": "At start of combat, lose 1 <c=status>BANANA</c> to gain 1 <c=status>BANANA TREAT</c>."
+    },
+    "Brioche": {
+      "name": "BRIOCHE",
+      "description": "<c=405a7f>Her favorite.</c>\nOn pickup, <c=status>BANANA</c> damage is increased by 1."
+    },
+    "GlassBottle": {
+      "name": "GLASS BOTTLE",
+      "description": "<c=405a7f>Who's wish was inside it?</c>\nAt start of combat, gain 3 <c=status>BANANAS</c>."
+    },
+    "Guillotine": {
+      "name": "GUILLOTINE",
+      "description": "<c=405a7f>I'll continue watching over you.</c>\nOn pickup, <c=action>thrown</c> <c=status>BANANAS</c>' damage becomes <c=action>piercing</c>."
+    },
+    "MaidDress": {
+      "name": "MAID DRESS",
+      "description": "<c=status>BANANAS</c> now give you 2 <c=status>SHIELD</c> before <c=action>eating</c> or <c=action>throwing</c> them."
+    },
+    "TwinPower": {
+      "name": "TWIN POWER",
+      "description": "Gain 1 extra <c=energy>ENERGY</c> every turn. <c=downside>On even turns, enemy ship gains 2</c> <c=status>overdrive</c>."
+    }
+  },
+  "card": {
+    "Banana": {
+      "name": "Banana"
+    },
+    "BananaDance": {
+      "name": "Banana Dance"
+    },
+    "BarisolsChild": {
+      "name": "Barisol's Child"
+    },
+    "Breaktime": {
+      "name": "Breaktime"
+    },
+    "BringItOn": {
+      "name": "Bring It On"
+    },
+    "ButterflyOnShoulder": {
+      "name": "Butterfly On Shoulder"
+    },
+    "ChildishWar": {
+      "name": "Childish War"
+    },
+    "FifthPierrot": {
+      "name": "Fifth Pierrot"
+    },
+    "FunkyNightTown": {
+      "name": "Funky Night Town"
+    },
+    "HolyLanceExplosion": {
+      "name": "Holy Lance Explosion"
+    },
+    "LawEvadingRock": {
+      "name": "LawEvading Rock"
+    },
+    "LikeDislike": {
+      "name": "Like Dislike"
+    },
+    "Nakakapagpabagabag": {
+      "name": "Nakakapagpabagabag"
+    },
+    "NiccoriTeamSurvey": {
+      "name": "Niccori Team Survey"
+    },
+    "Paradichlorobenzene": {
+      "name": "Paradichlorobenzene"
+    },
+    "PlusBoy": {
+      "name": "Plus Boy"
+    },
+    "RemoteControl": {
+      "name": "Remote Control"
+    },
+    "ServantOfEvil": {
+      "name": "Servant of Evil"
+    },
+    "TelecasterBBoy": {
+      "name": "Telecaster B-Boy"
+    },
+    "ToluthinAntenna": {
+      "name": "Toluthin Antenna",
+      "description": "Gain 1 <c=status>note</c>. Add 1 of {{Amount}} <c=cardtrait>discount, temp</c> cards to your hand."
+    },
+    "VampiresPathoS": {
+      "name": "Vampire's PathoS"
+    },
+    "LenExe": {
+      "name": "Len.EXE",
+      "description": "Add 1 of {{Amount}} <c=cardtrait>discount, temp</c> <c=ffe569>Len</c> cards to your hand."
+    },
+    "FanLetter": {
+      "name": "Fan Letter"
+    },
+    "CrowdWork": {
+      "name": "Crowd Work"
+    },
+    "TrendSetter": {
+      "name": "Trend Setter"
+    },
+    "Encore": {
+      "name": "Encore 39",
+      "descriptionLen": "<c=hurt>Flood</c> with <c=cardtrait>disc, temp</c> <c=ffe569>Bananas</c>, <c=ffe569>Fan Letters</c> & <c=ffe569>Close To Gray</c>.",
+      "descriptionMiku": "<c=hurt>Turn End: Flood</c> with <c=7ed2d6>Fan Letters</c>, <c=7ed2d6>Crowd Work</c> & <c=7ed2d6>World Is Mine</c>."
+    },
+    "CloseToGray": {
+      "name": "Close to Gray"
+    },
+    "WorldIsMine": {
+      "name": "World Is Mine"
+    }
+  }
+}

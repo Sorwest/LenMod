@@ -1,12 +1,14 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
+using Sorwest.LenMod.Actions;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
 
-public class LenCardTelecasterBBoy : Card, IModdedCard
+public class LenCardTelecasterBBoy : Card, IRegisterable
 {
+    public static IModSoundEntry TelecasterSound { get; set; } = null!;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard("TelecasterBBoy", new()
@@ -20,8 +22,9 @@ public class LenCardTelecasterBBoy : Card, IModdedCard
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "TelecasterBBoy", "name"]).Localize
         });
+        TelecasterSound = ModEntry.Instance.Helper.Content.Audio.RegisterSound(
+            ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/telecaster.mp3"));
     }
-    public override string Name() => "Telecaster B-Boy";
     public override CardData GetData(State state)
     {
         return new()
@@ -31,10 +34,20 @@ public class LenCardTelecasterBBoy : Card, IModdedCard
             retain = upgrade == Upgrade.B ? true : false
         };
     }
-    public override List<CardAction> GetActions(State s, Combat c)
+    public override List<CardAction> GetActions(State state, Combat combat)
     {
         return new()
         {
+            ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ASoundDummyAction()
+            {
+                sound = TelecasterSound
+            }).AsCardAction,
+            new AStatus()
+            {
+                status = Status.droneShift,
+                statusAmount = 1,
+                targetPlayer = true
+            },
             new AMove()
             {
                 dir = 2,

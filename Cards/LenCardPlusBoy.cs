@@ -1,12 +1,13 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
 using Sorwest.LenMod.Actions;
+using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
 
-public class LenCardPlusBoy : Card, IModdedCard
+public class LenCardPlusBoy : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -22,23 +23,29 @@ public class LenCardPlusBoy : Card, IModdedCard
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "PlusBoy", "name"]).Localize
         });
     }
-    public override string Name() => "Plus Boy";
     public override CardData GetData(State state)
     {
         return new()
         {
-            cost = 2,
-            singleUse = upgrade == Upgrade.B ? false : true
+            cost = upgrade == Upgrade.A ? 0 : 1,
+            exhaust = upgrade == Upgrade.None,
         };
     }
-    public override List<CardAction> GetActions(State s, Combat c)
+    public override List<CardAction> GetActions(State state, Combat combat)
     {
-        return new()
-        {
-            new AGainBanana()
-            {
-                amount = upgrade == Upgrade.None ? 6 : (upgrade == Upgrade.A ? 9 : 4)
-            }
-        };
+        return
+        [
+            upgrade == Upgrade.B ?
+                new AStatus()
+                {
+                    status = MusicNoteManager.MusicNoteStatus.Status,
+                    statusAmount = 1,
+                    targetPlayer = true
+                } :
+                new AGainBanana()
+                {
+                    amount = 3
+                }
+        ];
     }
 }

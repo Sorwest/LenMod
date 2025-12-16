@@ -1,11 +1,11 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
-using Sorwest.LenMod.Actions;
+using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
-public class LenCardButterflyOnShoulder : Card, IModdedCard
+public class LenCardButterflyOnShoulder : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -21,36 +21,25 @@ public class LenCardButterflyOnShoulder : Card, IModdedCard
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ButterflyOnShoulder", "name"]).Localize
         });
     }
-    public override string Name() => "Butterfly On Shoulder";
     public override CardData GetData(State state)
     {
         return new()
         {
             cost = upgrade == Upgrade.A ? 2 : 4,
-            exhaust = true,
-            description = ModEntry.Instance.Localizations.Localize(["card", "ButterflyOnShoulder", "description", upgrade.ToString()])
+            exhaust = upgrade == Upgrade.B ? false : true
         };
     }
-    public override List<CardAction> GetActions(State s, Combat c)
+    public override List<CardAction> GetActions(State state, Combat combat)
     {
-        List<CardAction> result = new();
-        if (s.ship.Get(ModEntry.Instance.BananaStatus.Status) > 0 || s.route is not Combat)
-        {
-            int internalCounter = s.ship.Get(ModEntry.Instance.BananaStatus.Status);
-            result = new()
+        return
+        [
+            new AStatus()
             {
-                new ASmashBanana()
-                {
-                    loseAll = true
-                },
-                new AStatus()
-                {
-                    status = ModEntry.Instance.MusicNoteStatus.Status,
-                    statusAmount = internalCounter * (upgrade == Upgrade.B ? 2 : 1),
-                    targetPlayer = true
-                }
-            };
-        }
-        return result;
+                status = MusicNoteManager.MusicNoteStatus.Status,
+                statusAmount = 12,
+                mode = AStatusMode.Set,
+                targetPlayer = true
+            }
+        ];
     }
 }

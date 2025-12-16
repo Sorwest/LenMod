@@ -1,12 +1,13 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
 using Sorwest.LenMod.Actions;
+using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
 
-public class LenCardVampiresPathos : Card, IModdedCard
+public class LenCardVampiresPathos : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -22,45 +23,58 @@ public class LenCardVampiresPathos : Card, IModdedCard
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "VampiresPathoS", "name"]).Localize
         });
     }
-    public override string Name() => "Vampire's PathoS";
     public override CardData GetData(State state)
     {
         return new()
         {
-            cost = upgrade == Upgrade.A ? 1 : 2,
-            description = ModEntry.Instance.Localizations.Localize(["card", "VampiresPathoS", "description"], new { Amount = upgrade == Upgrade.B ? 2 : 1 })
+            cost = upgrade == Upgrade.A ? 1 : 2
         };
     }
-    public override List<CardAction> GetActions(State s, Combat c)
+    private static int GetBananaDmg(State state)
     {
-        List<CardAction> result = new()
-        {
-            new AHeal()
+        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
+        return state.route is not Combat ? dmg : state.ship.Get(BananaManager.BananaStatus.Status) > 0 ? dmg : 0;
+    }
+    public override List<CardAction> GetActions(State state, Combat combat)
+    {
+        List<CardAction> result =
+        [
+            ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(
+                ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(
+                    ModEntry.Instance.KokoroApi.ActionCosts.MakeStatusResource(BananaManager.BananaStatus.Status),
+                    amount: 1
+                    ),
+                    new AHeal()
+                    {
+                        healAmount = 1,
+                        targetPlayer = true
+                    }
+                ).AsCardAction
+        ];
+        result.Add(ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
+            new ABananaHunger()
             {
-                healAmount = 1,
+                hurtAmount = GetBananaDmg(state),
                 targetPlayer = true
-            }
-        };
-        if (s.ship.Get(ModEntry.Instance.BananaStatus.Status) > 0 || s.route is not Combat)
-        {
-            int internalCounter = s.ship.Get(ModEntry.Instance.BananaStatus.Status) == 1 ? 1 : 2;
-            do
+            },
+            new ABananaDamage()
             {
-                if (internalCounter <= 0)
-                    break;
-                result.Add(new AThrowBanana()
-                {
-                    amount = -1
-                });
-                result.Add(new ABananaDamage()
-                {
-                    type = BananaType.AAttack,
-                    dmg = GetDmg(s, 0),
-                    targetPlayer = false
-                });
-                internalCounter--;
-            }
-            while (internalCounter > 0);
+                damage = GetBananaDmg(state)
+            }).AsCardAction
+        );
+        if (upgrade == Upgrade.B)
+        {
+            result.Add(ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(
+                ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(
+                    ModEntry.Instance.KokoroApi.ActionCosts.MakeStatusResource(BananaManager.BananaStatus.Status),
+                    amount: 2
+                    ),
+                    new AHeal()
+                    {
+                        healAmount = 1,
+                        targetPlayer = true
+                    }
+                ).AsCardAction);
         }
         return result;
     }

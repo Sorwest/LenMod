@@ -1,12 +1,14 @@
-﻿using Nickel;
-using System.Linq;
+﻿using Nanoray.PluginManager;
+using Nickel;
+using Sorwest.LenMod.Features;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Artifacts;
 
-public class LenArtifactGlassBottle : Artifact, IModdedArtifact
+public class LenArtifactGlassBottle : Artifact, IRegisterable
 {
-    public static void Register(IModHelper helper)
+    public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Artifacts.RegisterArtifact("GlassBottle", new()
         {
@@ -21,19 +23,20 @@ public class LenArtifactGlassBottle : Artifact, IModdedArtifact
             Description = ModEntry.Instance.AnyLocalizations.Bind(["artifact", "GlassBottle", "description"]).Localize
         });
     }
+    public override List<Tooltip>? GetExtraTooltips()
+        => [
+            ..StatusMeta.GetTooltips(BananaManager.BananaStatus.Status, 1)
+        ];
     public override string Name() => "GLASS BOTTLE";
     public override void OnCombatStart(State state, Combat combat)
     {
-        var artifactBananaStash = state.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
-        if (artifactBananaStash == null)
+        combat.Queue(new AStatus()
         {
-            state.artifacts.Add(new LenArtifactBananaStash());
-            artifactBananaStash = state.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
-        }
-        if (artifactBananaStash != null)
-        {
-            artifactBananaStash.counter += 3;
-            Pulse();
-        }
+            status = BananaManager.BananaStatus.Status,
+            statusAmount = 3,
+            targetPlayer = true,
+            timer = 0
+        });
+        Pulse();
     }
 }

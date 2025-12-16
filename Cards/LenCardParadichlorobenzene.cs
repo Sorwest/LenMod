@@ -1,13 +1,15 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
 using Sorwest.LenMod.Actions;
+using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
 
-public class LenCardParadichlorobenzene : Card, IModdedCard
+public class LenCardParadichlorobenzene : Card, IRegisterable, IHasCustomCardTraits
 {
+    public static IModSoundEntry BenzeneSound { get; set; } = null!;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard("Paradichlorobenzene", new()
@@ -21,37 +23,42 @@ public class LenCardParadichlorobenzene : Card, IModdedCard
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Paradichlorobenzene", "name"]).Localize
         });
+        BenzeneSound = ModEntry.Instance.Helper.Content.Audio.RegisterSound(
+            ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/benzene.mp3"));
     }
-    public override string Name() => "Paradichlorobenzene";
     public override CardData GetData(State state)
     {
         return new()
         {
-            cost = upgrade == Upgrade.A ? 0 : 2,
-            buoyant = upgrade == Upgrade.B ? true : false,
-            exhaust = true,
-            description = ModEntry.Instance.Localizations.Localize(["card", "Paradichlorobenzene", "description"])
+            cost = upgrade == Upgrade.A ? 3 : 4,
+            exhaust = true
         };
     }
-    public override List<CardAction> GetActions(State s, Combat c)
+    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
+    {
+        return new HashSet<ICardTraitEntry> { ModEntry.Instance.KokoroApi.Fleeting.Trait };
+    }
+    public override List<CardAction> GetActions(State state, Combat combat)
     {
         List<CardAction> result = new()
         {
-            new AGainBanana()
+            ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ASoundDummyAction()
             {
-                amount = 1
-            }
+                sound = BenzeneSound
+            }).AsCardAction,
+            ModEntry.Instance.KokoroApi.Conditional.MakeAction(
+                ModEntry.Instance.KokoroApi.Conditional.HasStatus(BananaManager.BananaStatus.Status),
+                new AStatus()
+                {
+                    status = Status.shield,
+                    statusAmount = 0,
+                    mode = AStatusMode.Set,
+                    targetPlayer = false
+                }).AsCardAction,
+            new AGainBanana() { loseAll = true }
         };
-        if (s.ship.Get(ModEntry.Instance.BananaStatus.Status) > 0 || s.route is not Combat)
-        {
-            result.Insert(0, new AStatus()
-            {
-                status = Status.shield,
-                statusAmount = 0,
-                mode = AStatusMode.Set,
-                targetPlayer = false
-            });
-        }
+        if (upgrade == Upgrade.B)
+            result.Add(new AGainBanana() { amount = 1 });
         return result;
     }
 }

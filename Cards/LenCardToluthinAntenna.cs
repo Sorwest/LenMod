@@ -1,11 +1,12 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
+using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
 
-public class LenCardToluthinAntenna : Card, IModdedCard
+public class LenCardToluthinAntenna : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -21,38 +22,34 @@ public class LenCardToluthinAntenna : Card, IModdedCard
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ToluthinAntenna", "name"]).Localize
         });
     }
-    public override string Name() => "Toluthin Antenna";
     public override CardData GetData(State state)
     {
         return new()
         {
-            exhaust = true,
             cost = upgrade == Upgrade.A ? 1 : 2,
+            exhaust = true,
             description = ModEntry.Instance.Localizations.Localize(["card", "ToluthinAntenna", "description"], new { Amount = upgrade == Upgrade.B ? 4 : 2 })
         };
     }
-    public override List<CardAction> GetActions(State s, Combat c)
+    public override List<CardAction> GetActions(State state, Combat combat)
     {
-        return new()
+        List<CardAction> result = new()
         {
-            new ACardOffering()
+            new AStatus()
             {
-                amount = upgrade == Upgrade.B ? 4 : 2,
-                limitDeck = Deck.hacker,
-                makeAllCardsTemporary = true,
-                canSkip = false,
-                inCombat = true,
-                discount = -1
+                status = MusicNoteManager.MusicNoteStatus.Status,
+                statusAmount = 1,
+                targetPlayer = true
             },
             new ACardOffering()
             {
                 amount = upgrade == Upgrade.B ? 4 : 2,
-                limitDeck = Deck.peri,
                 makeAllCardsTemporary = true,
                 canSkip = false,
                 inCombat = true,
                 discount = -1
             }
         };
+        return result;
     }
 }
