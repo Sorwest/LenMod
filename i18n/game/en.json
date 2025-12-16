@@ -26,7 +26,7 @@
   "status": {
     "BananaTreat": {
       "name": "Banana Treat",
-      "description": "At start of turn, <c=action>eat</c> <=boldPink>{0}</c> <c=status>bananas</c> without reducing the stack."
+      "description": "At start of turn, <c=action>eat</c> <=boldPink>{0}</c> <c=status>bananas</c> without reducing the stash."
     },
     "Banana": {
       "name": "Banana",

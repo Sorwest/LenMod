@@ -20,7 +20,7 @@
     "EnabledSounds": {
       "title": "Activar SFX intrusivos",
       "tooltipTitle": "Activar SFX",
-      "description": "Decide si quieres que suene música (acoplada a la opción de Sonido) al jugar una variedad de cartas."
+      "description": "Decide si quieres que suenen Sonidos al jugar una variedad de cartas."
     }
   },
   "status": {
