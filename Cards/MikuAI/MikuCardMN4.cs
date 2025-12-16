@@ -32,11 +32,7 @@ internal class MikuCardMN4 : Card, IRegisterable
             description = ModEntry.Instance.Localizations.Localize(["card", "Encore", "descriptionMiku"])
         };
     }
-    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
-    {
-        return new HashSet<ICardTraitEntry> { ModEntry.Instance.KokoroApi.Fleeting.Trait };
-    }
-    public override List<CardAction> GetActions(State state, Combat combat)
+    public override List<CardAction> GetActions(State s, Combat c)
     {
         return
         [

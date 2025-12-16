@@ -20,13 +20,13 @@
     "EnabledSounds": {
       "title": "Enable Intrusive SFX",
       "tooltipTitle": "Enable SFX",
-      "description": "Various cards trigger SFX-based music that may be annoying for some people."
+      "description": "Various cards trigger SFX-based music which may be annoying for some."
     }
   },
   "status": {
     "BananaTreat": {
       "name": "Banana Treat",
-      "description": "At start of turn, <c=action>eat</c> <=boldPink>{0}</c> <c=status>bananas</c> without reducing the stash."
+      "description": "At start of turn, <c=action>eat</c> <=boldPink>{0}</c> <c=status>bananas</c> without reducing the stack."
     },
     "Banana": {
       "name": "Banana",

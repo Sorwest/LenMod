@@ -39,7 +39,7 @@ internal class LenCardMN5 : Card, IRegisterable
             temporary = true
         };
     }
-    public override List<CardAction> GetActions(State state, Combat combat)
+    public override List<CardAction> GetActions(State s, Combat c)
     {
         return
         [
@@ -49,7 +49,7 @@ internal class LenCardMN5 : Card, IRegisterable
             }).AsCardAction,
             new AAttack()
             {
-                damage = GetDmg(state, upgrade == Upgrade.A ? 2 : 1),
+                damage = GetDmg(s, upgrade == Upgrade.A ? 2 : 1),
                 piercing = true
             },
             new ADrawCard()

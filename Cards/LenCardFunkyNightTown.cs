@@ -28,7 +28,7 @@ public class LenCardFunkyNightTown : Card, IRegisterable
             cost = upgrade == Upgrade.B ? 1 : 2
         };
     }
-    public override List<CardAction> GetActions(State state, Combat combat)
+    public override List<CardAction> GetActions(State s, Combat c)
     {
         return new()
         {
@@ -52,7 +52,7 @@ public class LenCardFunkyNightTown : Card, IRegisterable
             },
             new AAttack()
             {
-                damage = GetDmg(state, upgrade == Upgrade.A ? 2 : upgrade == Upgrade.B ? 0 : 1)
+                damage = GetDmg(s, upgrade == Upgrade.A ? 2 : upgrade == Upgrade.B ? 0 : 1)
             }
         };
     }

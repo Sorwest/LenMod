@@ -31,7 +31,7 @@ internal class LenCardMN2 : Card, IRegisterable
             temporary = true
         };
     }
-    public override List<CardAction> GetActions(State state, Combat combat)
+    public override List<CardAction> GetActions(State s, Combat c)
     {
         return
         [

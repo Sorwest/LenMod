@@ -32,7 +32,7 @@ internal class LenCardMN4 : Card, IRegisterable
             description = ModEntry.Instance.Localizations.Localize(["card", "Encore", "descriptionLen"])
         };
     }
-    public override List<CardAction> GetActions(State state, Combat combat)
+    public override List<CardAction> GetActions(State s, Combat c)
     {
         return
         [

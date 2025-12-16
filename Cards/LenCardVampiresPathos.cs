@@ -30,12 +30,12 @@ public class LenCardVampiresPathos : Card, IRegisterable
             cost = upgrade == Upgrade.A ? 1 : 2
         };
     }
-    private static int GetBananaDmg(State state)
+    private static int GetBananaDmg(State s)
     {
-        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
-        return state.route is not Combat ? dmg : state.ship.Get(BananaManager.BananaStatus.Status) > 0 ? dmg : 0;
+        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(s, "BananaDamage") + 1;
+        return s.route is not Combat ? dmg : s.ship.Get(BananaManager.BananaStatus.Status) > 0 ? dmg : 0;
     }
-    public override List<CardAction> GetActions(State state, Combat combat)
+    public override List<CardAction> GetActions(State s, Combat c)
     {
         List<CardAction> result =
         [
@@ -54,12 +54,12 @@ public class LenCardVampiresPathos : Card, IRegisterable
         result.Add(ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
             new ABananaHunger()
             {
-                hurtAmount = GetBananaDmg(state),
+                hurtAmount = GetBananaDmg(s),
                 targetPlayer = true
             },
             new ABananaDamage()
             {
-                damage = GetBananaDmg(state)
+                damage = GetBananaDmg(s)
             }).AsCardAction
         );
         if (upgrade == Upgrade.B)
