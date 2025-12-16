@@ -31,14 +31,14 @@ public class LenCardNiccoriTeamSurvey : Card, IRegisterable
             exhaust = upgrade == Upgrade.B ? false : true
         };
     }
-    private static int GetBananaDmg(State state)
+    private static int GetBananaDmg(State s)
     {
-        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
-        return state.route is not Combat ? dmg : state.ship.Get(BananaManager.BananaStatus.Status) > 0 ? dmg : 0;
+        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(s, "BananaDamage") + 1;
+        return s.route is not Combat ? dmg : s.ship.Get(BananaManager.BananaStatus.Status) > 0 ? dmg : 0;
     }
-    public override List<CardAction> GetActions(State state, Combat combat)
+    public override List<CardAction> GetActions(State s, Combat c)
     {
-        int amount = state.ship.Get(BananaManager.BananaStatus.Status);
+        int amount = s.ship.Get(BananaManager.BananaStatus.Status);
         List<CardAction> result =
         [
             new AVariableHint()
@@ -49,13 +49,13 @@ public class LenCardNiccoriTeamSurvey : Card, IRegisterable
                 new ABananaAttack()
                 {
                     xHint = 1,
-                    damage = GetDmg(state, amount * GetBananaDmg(state)),
+                    damage = GetDmg(s, amount * GetBananaDmg(s)),
                     targetPlayer = false
                 },
                 new ABananaDamage()
                 {
                     isThrow = true,
-                    damage = GetDmg(state, amount * GetBananaDmg(state)),
+                    damage = GetDmg(s, amount * GetBananaDmg(s)),
                     targetPlayer = false
                 }
             ).AsCardAction,

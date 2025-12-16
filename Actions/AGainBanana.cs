@@ -8,7 +8,7 @@ public class AGainBanana : CardAction
     public int amount;
     public bool loseAll;
     public bool smashBool;
-    public override void Begin(G g, State state, Combat combat)
+    public override void Begin(G g, State s, Combat c)
     {
         Status status = BananaManager.BananaStatus.Status;
         if (loseAll)

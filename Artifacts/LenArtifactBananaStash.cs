@@ -32,6 +32,12 @@ public class LenArtifactBananaStash : Artifact, IRegisterable
             ..StatusMeta.GetTooltips(BananaManager.BananaStatus.Status, 1)
         ];
     }
+    public override int? GetDisplayNumber(State s)
+    {
+        return [
+            ..StatusMeta.GetTooltips(BananaManager.BananaStatus.Status, 1)
+        ];
+    }
     public override int? GetDisplayNumber(State state)
     {
         return counter > 0 ? counter : null;
@@ -45,7 +51,7 @@ public class LenArtifactBananaStash : Artifact, IRegisterable
         else
             return ModEntry.Instance.Sprites["BananaStashOff"].Sprite;
     }
-    public override void OnReceiveArtifact(State state)
+    public override void OnReceiveArtifact(State s)
     {
         counter = 3;
     }
@@ -53,23 +59,23 @@ public class LenArtifactBananaStash : Artifact, IRegisterable
     {
         ModEntry.Instance.Helper.ModData.RemoveModData(state, "BananaStored");
     }
-    public override void OnCombatStart(State state, Combat combat)
+    public override void OnCombatStart(State s, Combat c)
     {
         if (counter > 0)
         {
-            ModEntry.Instance.Helper.ModData.SetModData(state, "BananaStored", counter);
-            state.ship.Set(BananaManager.BananaStatus.Status, counter);
+            ModEntry.Instance.Helper.ModData.SetModData(s, "BananaStored", counter);
+            s.ship.Set(BananaManager.BananaStatus.Status, counter);
             counter = 0;
         }
     }
-    public override void OnCombatEnd(State state)
+    public override void OnCombatEnd(State s)
     {
-        int amount = state.ship.Get(BananaManager.BananaStatus.Status);
+        int amount = s.ship.Get(BananaManager.BananaStatus.Status);
         counter = amount;
         stillHasBananas = amount > 0;
         if (amount > 0)
-            ModEntry.Instance.Helper.ModData.SetModData(state, "BananaStored", amount);
+            ModEntry.Instance.Helper.ModData.SetModData(s, "BananaStored", amount);
         else
-            ModEntry.Instance.Helper.ModData.RemoveModData(state, "BananaStored");
+            ModEntry.Instance.Helper.ModData.RemoveModData(s, "BananaStored");
     }
 }

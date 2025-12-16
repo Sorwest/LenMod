@@ -43,17 +43,17 @@ internal sealed class MikuAI : AI, IRegisterable
             Sprite = ModEntry.Instance.Sprites["mikucannonempty"].Sprite
         });
     }
-    public override void OnCombatStart(State state, Combat combat)
+    public override void OnCombatStart(State s, Combat c)
     {
-        combat.bg = new BGCrystalNebula();
+        c.bg = new BGCrystalNebula();
     }
-    public override Ship BuildShipForSelf(State state)
+    public override Ship BuildShipForSelf(State s)
     {
         character = new()
         {
             type = ModEntry.Instance.MikuNPC.CharacterType
         };
-        bool hard = state.GetHarderElites();
+        bool hard = s.GetHarderElites();
         int hp = hard ? 20 : 15;
         int shield = hard ? 7 : 3;
         return new Ship()
@@ -107,11 +107,11 @@ internal sealed class MikuAI : AI, IRegisterable
             ]
         };
     }
-    public override Song? GetSong(State state)
+    public override Song? GetSong(State s)
     {
         return Song.Elite;
     }
-    public override EnemyDecision PickNextIntent(State state, Combat combat, Ship ownShip)
+    public override EnemyDecision PickNextIntent(State s, Combat c, Ship ownShip)
     {
         if (aiCounter == 39)
             return MoveSet(
@@ -119,7 +119,7 @@ internal sealed class MikuAI : AI, IRegisterable
                 () => new EnemyDecision
                 {
 
-                    actions = AIHelpers.MoveToAimAt(state, ownShip, state.ship, 1, 99, movesFast: true, attackWeakPoints: true, avoidAsteroids: true, avoidMines: true),
+                    actions = AIHelpers.MoveToAimAt(s, ownShip, s.ship, 1, 99, movesFast: true, attackWeakPoints: true, avoidAsteroids: true, avoidMines: true),
                     intents =
                 [
                     new IntentAttack
@@ -154,7 +154,7 @@ internal sealed class MikuAI : AI, IRegisterable
                     }
                 ]
             });
-        bool hard = state.GetHarderElites();
+        bool hard = s.GetHarderElites();
         MissileType m1 = MissileType.normal;
         int b1 = 1;
         int d1 = 1;
@@ -174,7 +174,7 @@ internal sealed class MikuAI : AI, IRegisterable
             aiCounter++,
             () => new EnemyDecision
             {
-                actions = AIHelpers.MoveToAimAt(state, ownShip, state.ship, 0, 5, movesFast: false, attackWeakPoints: false, avoidAsteroids: false, avoidMines: false),
+                actions = AIHelpers.MoveToAimAt(s, ownShip, s.ship, 0, 5, movesFast: false, attackWeakPoints: false, avoidAsteroids: false, avoidMines: false),
                 intents =
                 [
                     new IntentAttack
@@ -225,7 +225,7 @@ internal sealed class MikuAI : AI, IRegisterable
             },
             () => new EnemyDecision
             {
-                actions = AIHelpers.MoveToAimAt(state, ownShip, state.ship, 1, 5, movesFast: false, attackWeakPoints: hard, avoidAsteroids: true, avoidMines: true),
+                actions = AIHelpers.MoveToAimAt(s, ownShip, s.ship, 1, 5, movesFast: false, attackWeakPoints: hard, avoidAsteroids: true, avoidMines: true),
                 intents =
                 [
                     hard ? new IntentMissile
@@ -263,7 +263,7 @@ internal sealed class MikuAI : AI, IRegisterable
             },
             () => new EnemyDecision
             {
-                actions = AIHelpers.MoveToAimAt(state, ownShip, state.ship, 1, 5, movesFast: false, attackWeakPoints: true, avoidAsteroids: false, avoidMines: false),
+                actions = AIHelpers.MoveToAimAt(s, ownShip, s.ship, 1, 5, movesFast: false, attackWeakPoints: true, avoidAsteroids: false, avoidMines: false),
                 intents = 
                 [
                     new IntentStatus
@@ -304,7 +304,7 @@ internal sealed class MikuAI : AI, IRegisterable
             },
             () => new EnemyDecision
             {
-                actions = AIHelpers.MoveToAimAt(state, ownShip, state.ship, 0, 5, movesFast: false, attackWeakPoints: false, avoidAsteroids: false, avoidMines: false),
+                actions = AIHelpers.MoveToAimAt(s, ownShip, s.ship, 0, 5, movesFast: false, attackWeakPoints: false, avoidAsteroids: false, avoidMines: false),
                 intents =
                 [
                     hard ? new IntentMissile

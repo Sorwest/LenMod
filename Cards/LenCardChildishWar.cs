@@ -27,7 +27,7 @@ public class LenCardChildishWar : Card, IRegisterable
             cost = upgrade == Upgrade.None ? 3 : (upgrade == Upgrade.A ? 2 : 0)
         };
     }
-    public override List<CardAction> GetActions(State state, Combat combat)
+    public override List<CardAction> GetActions(State s, Combat c)
     {
         List<CardAction> result = [
             new AStatus()
@@ -44,7 +44,7 @@ public class LenCardChildishWar : Card, IRegisterable
             },
             new AAttack()
             {
-                damage = GetDmg(state, upgrade == Upgrade.B ? 2 : 1)
+                damage = GetDmg(s, upgrade == Upgrade.B ? 2 : 1)
             }
         ];
         if (upgrade != Upgrade.B)

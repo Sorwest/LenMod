@@ -29,37 +29,37 @@ public class LenCardBreaktime : Card, IRegisterable
             cost = upgrade == Upgrade.None ? 1 : 0,
         };
     }
-    private static int GetBananaDmg(State state)
+    private static int GetBananaDmg(State s)
     {
-        bool normalDisplay = state.route is not Combat || state.ship.Get(BananaManager.BananaStatus.Status) >= 0;
-        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
+        bool normalDisplay = s.route is not Combat || s.ship.Get(BananaManager.BananaStatus.Status) >= 0;
+        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(s, "BananaDamage") + 1;
         return normalDisplay ? dmg : 0;
     }
-    public override List<CardAction> GetActions(State state, Combat combat)
+    public override List<CardAction> GetActions(State s, Combat c)
     {
         List<CardAction> result =
         [
             ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
                 new ABananaAttack()
                 {
-                    damage = GetDmg(state, GetBananaDmg(state))
+                    damage = GetDmg(s, GetBananaDmg(s))
                 },
                 new ABananaDamage()
                 {
-                    damage = GetDmg(state, GetBananaDmg(state)),
+                    damage = GetDmg(s, GetBananaDmg(s)),
                     isThrow = true
                 }
                 ).AsCardAction,
             ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
                 new ABananaHunger()
                 {
-                    hurtAmount = GetBananaDmg(state),
+                    hurtAmount = GetBananaDmg(s),
                     targetPlayer = true,
                     minimumBanana = 2
                 },
                 new ABananaDamage()
                 {
-                    damage = GetBananaDmg(state),
+                    damage = GetBananaDmg(s),
                     targetPlayer = false,
                     minimumBanana = 2
                 }
@@ -71,12 +71,12 @@ public class LenCardBreaktime : Card, IRegisterable
             ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
                 new ABananaHunger()
                 {
-                    hurtAmount = GetBananaDmg(state),
+                    hurtAmount = GetBananaDmg(s),
                     targetPlayer = true
                 },
                 new ABananaDamage()
                 {
-                    damage = GetBananaDmg(state),
+                    damage = GetBananaDmg(s),
                     keepBanana = true,
                     minimumBanana = 3
                 }).AsCardAction

@@ -28,9 +28,9 @@ public class LenArtifactGlassBottle : Artifact, IRegisterable
             ..StatusMeta.GetTooltips(BananaManager.BananaStatus.Status, 1)
         ];
     public override string Name() => "GLASS BOTTLE";
-    public override void OnCombatStart(State state, Combat combat)
+    public override void OnCombatStart(State s, Combat c)
     {
-        combat.Queue(new AStatus()
+        c.Queue(new AStatus()
         {
             status = BananaManager.BananaStatus.Status,
             statusAmount = 3,
