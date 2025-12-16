@@ -45,20 +45,15 @@
     },
     "GainBanana": {
       "name": {
-        "gain": "Banana-Winner",
-        "lose": "Banana-Loser",
-        "loseAll": "Banana-Ultra-Loser."
+        "gain": "Gain Banana",
+        "lose": "Lose Banana",
+        "loseAll": "Lose All Bananas"
       },
       "description": {
         "gain": "Ganas <c=boldPink>{{Amount}}</c> <c=status>bananas</c>.",
         "lose": "Pierdes <c=boldPink>{{Amount}}</c> <c=status>bananas</c>.",
         "loseAll": "Pierde todas tus <c=status>bananas</c>."
       }
-    },
-    "SmashBanana": {
-      "name": "Aplastar bananas",
-      "description": "Aplasta <c=status>bananas</c> por diversión.",
-      "flavor": "<c=405a7f>Len se puso a llorar en una esquina.</c>"
     },
     "ThrowBanana": {
       "name": "Tirar bananas",
@@ -88,11 +83,11 @@
     },
     "MaidDress": {
       "name": "VESTIDO DE WAIFU",
-      "description": "<c=healing>#Blessed.</c> Ganas 2 <c=status>ESCUDOS</c> antes de <c=action>comer</c> o <c=action>tirar</c> <c=status>BANANAS</c> al enemigo."
+      "description": "Ganas 2 <c=status>ESCUDOS</c> antes de <c=action>comer</c> o <c=action>tirar</c> <c=status>BANANAS</c> al enemigo."
     },
     "TwinPower": {
       "name": "ADORNO GEMELO",
-      "description": "<c=405a7f>Rin se esconde en la nave enemiga.</c>\nAdquieres 1 de <c=energy>ENERGIA</c> extra cada turno. <c=downside>En turnos pares, el enemigo gana 2</c> <c=status>superpoder</c>."
+      "description": "Adquieres 1 de <c=energy>ENERGIA</c> extra cada turno. <c=downside>En turnos pares, el enemigo gana 2</c> <c=status>superpoder</c>."
     }
   },
   "card": {
@@ -163,7 +158,7 @@
     },
     "LenExe": {
       "name": "Len.EXE",
-      "description": "Obtén 1 of {{Amount}} cartas <c=cardtrait>temp. con desc.</c> de <c=ffe569>Len</c>."
+      "description": "Obtén 1 de {{Amount}} cartas <c=cardtrait>temp. con desc.</c> de <c=ffe569>Len</c>."
     }
   },
   "FanLetter": {
@@ -173,12 +168,12 @@
     "name": "Crowd Work"
   },
   "TrendSetter": {
-    "name": "Trend Setter"
+    "name": "Set Trends"
   },
   "Encore": {
     "name": "Encore",
-    "descriptionLen": "<c=hurt>Flood</c> with <c=cardtrait>disc, temp</c> <c=ffe569>Bananas</c>, <c=ffe569>Fan Letters</c> & <c=ffe569>Close To Gray</c>.",
-    "descriptionMiku": "<c=hurt>Turn End: Flood</c> with <c=7ed2d6>Fan Letters</c>, <c=7ed2d6>Crowd Work</c> & <c=7ed2d6>World Is Mine</c>."
+    "descriptionLen": "<c=hurt>Obtén muchas</c> <c=cardtrait>desc, temp</c> <c=ffe569>Bananas</c>, <c=ffe569>Fan Letters</c> & <c=ffe569>Close To Gray</c>.",
+    "descriptionMiku": "<c=hurt>Turn End: Obtén muchas</c> <c=7ed2d6>Fan Letters</c>, <c=7ed2d6>Set Trends</c> & <c=7ed2d6>World Is Mine</c>."
   },
   "CloseToGray": {
     "name": "Close to Gray"

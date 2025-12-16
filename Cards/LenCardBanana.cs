@@ -25,7 +25,7 @@ public class LenCardBanana : Card, IRegisterable
     {
         return new()
         {
-            cost = upgrade == Upgrade.B ? 0 : 1
+            cost = upgrade == Upgrade.A ? 0 : 1
         };
     }
     public override List<CardAction> GetActions(State state, Combat combat)
@@ -38,7 +38,7 @@ public class LenCardBanana : Card, IRegisterable
             },
             new ADrawCard()
             {
-                count = upgrade == Upgrade.A ? 3 : 1
+                count = upgrade == Upgrade.B ? 3 : 1
             }
         };
     }

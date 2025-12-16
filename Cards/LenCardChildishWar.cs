@@ -24,7 +24,8 @@ public class LenCardChildishWar : Card, IRegisterable
     {
         return new()
         {
-            cost = upgrade == Upgrade.None ? 3 : (upgrade == Upgrade.A ? 2 : 0)
+            cost = upgrade == Upgrade.None ? 3 : (upgrade == Upgrade.A ? 2 : 0),
+            retain = upgrade != Upgrade.B
         };
     }
     public override List<CardAction> GetActions(State state, Combat combat)

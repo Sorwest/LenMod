@@ -55,11 +55,6 @@
         "loseAll": "Lose all <c=status>bananas</c>."
       }
     },
-    "SmashBanana": {
-      "name": "Smash Banana",
-      "description": "Destroy <c=status>bananas</c> for fun.",
-      "flavor": "<c=405a7f>Len is crying in the corner.</c>"
-    },
     "ThrowBanana": {
       "name": "Throw Banana",
       "description": "Len <c=action>throws</c> a <c=status>banana</c> so fast it deals <c=boldPink>{{Damage}}</c> damage to the enemy. Requires bananas in most cases."
@@ -171,12 +166,12 @@
       "name": "Crowd Work"
     },
     "TrendSetter": {
-      "name": "Trend Setter"
+      "name": "Set Trends"
     },
     "Encore": {
       "name": "Encore 39",
       "descriptionLen": "<c=hurt>Flood</c> with <c=cardtrait>disc, temp</c> <c=ffe569>Bananas</c>, <c=ffe569>Fan Letters</c> & <c=ffe569>Close To Gray</c>.",
-      "descriptionMiku": "<c=hurt>Turn End: Flood</c> with <c=7ed2d6>Fan Letters</c>, <c=7ed2d6>Crowd Work</c> & <c=7ed2d6>World Is Mine</c>."
+      "descriptionMiku": "<c=hurt>Turn End: Flood</c> with <c=7ed2d6>Fan Letters</c>, <c=7ed2d6>Set Trends</c> & <c=7ed2d6>World Is Mine</c>."
     },
     "CloseToGray": {
       "name": "Close to Gray"

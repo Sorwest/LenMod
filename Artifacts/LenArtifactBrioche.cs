@@ -29,7 +29,6 @@ public class LenArtifactBrioche : Artifact, IRegisterable
         if (!(MG.inst.g?.state is not { } state || state.IsOutsideRun()))
             dmg += ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage");
         return [
-                ..StatusMeta.GetTooltips(Status.shield, 2),
             new GlossaryTooltip($"action.{GetType().Namespace!}::AThrowBanana")
             {
                 Icon = ModEntry.Instance.Sprites["ThrowBanana"].Sprite,
@@ -46,7 +45,6 @@ public class LenArtifactBrioche : Artifact, IRegisterable
             }
             ];
     }
-
     public override void OnReceiveArtifact(State state)
     {
         ModEntry.Instance.Helper.ModData.SetModData(state, "BananaDamage", 1);
