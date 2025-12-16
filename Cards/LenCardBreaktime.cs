@@ -17,6 +17,7 @@ public class LenCardBreaktime : Card, IRegisterable
             {
                 deck = ModEntry.Instance.LenDeck.Deck,
                 rarity = Rarity.common,
+                dontOffer = true,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Breaktime", "name"]).Localize

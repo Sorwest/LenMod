@@ -287,8 +287,7 @@ public class ModEntry : SimpleMod
             {
                 cards = [
                     new LenCardBanana(),
-                    new LenCardBreaktime(),
-                    new LenCardBananaDance()
+                    new LenCardBreaktime()
                 ],
                 artifacts = [
                     new LenArtifactBananaStash(),
@@ -299,7 +298,6 @@ public class ModEntry : SimpleMod
             {
                 cards = [
                     new LenCardBanana(),
-                    new LenCardBreaktime(),
                     new LenCardBananaDance(),
                     new LenCardFunkyNightTown()
                 ],
