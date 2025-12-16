@@ -1,11 +1,12 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
 using Sorwest.LenMod.Actions;
+using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
-public class LenCardBreaktime : Card, IModdedCard
+public class LenCardBreaktime : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -21,38 +22,78 @@ public class LenCardBreaktime : Card, IModdedCard
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Breaktime", "name"]).Localize
         });
     }
-    public override string Name() => "Breaktime";
     public override CardData GetData(State state)
     {
         return new()
         {
-            cost = 1,
-            description = ModEntry.Instance.Localizations.Localize(["card", "Breaktime", "description"], new { Amount = upgrade == Upgrade.A ? 3 : 2 })
+            cost = upgrade == Upgrade.None ? 1 : 0,
         };
+    }
+    private static int GetBananaDmg(State s)
+    {
+        bool normalDisplay = s.route is not Combat || s.ship.Get(BananaManager.BananaStatus.Status) >= 0;
+        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(s, "BananaDamage") + 1;
+        return normalDisplay ? dmg : 0;
     }
     public override List<CardAction> GetActions(State s, Combat c)
     {
-        List<CardAction> result = new();
-        if (s.ship.Get(ModEntry.Instance.BananaStatus.Status) > 0 || s.route is not Combat)
-        {
-            int internalCounter = upgrade == Upgrade.A ? 3 : 2;
-            result.Add(new AThrowBanana()
-            {
-                amount = -1
-            });
-            do
-            {
-                if (internalCounter <= 0)
-                    break;
-                result.Add(new ABananaDamage()
+        List<CardAction> result =
+        [
+            ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
+                new ABananaAttack()
                 {
-                    type = BananaType.AAttack,
-                    dmg = GetDmg(s, 0),
-                    targetPlayer = false
-                });
-                internalCounter--;
-            }
-            while (internalCounter > 0);
+                    damage = GetDmg(s, GetBananaDmg(s))
+                },
+                new ABananaDamage()
+                {
+                    damage = GetDmg(s, GetBananaDmg(s)),
+                    isThrow = true
+                }
+                ).AsCardAction,
+            ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
+                new ABananaHunger()
+                {
+                    hurtAmount = GetBananaDmg(s),
+                    targetPlayer = true,
+                    minimumBanana = 2
+                },
+                new ABananaDamage()
+                {
+                    damage = GetBananaDmg(s),
+                    targetPlayer = false,
+                    minimumBanana = 2
+                }
+                ).AsCardAction
+        ];
+        if (upgrade == Upgrade.A)
+        {
+            result.Add(
+            ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
+                new ABananaHunger()
+                {
+                    hurtAmount = GetBananaDmg(s),
+                    targetPlayer = true
+                },
+                new ABananaDamage()
+                {
+                    damage = GetBananaDmg(s),
+                    keepBanana = true,
+                    minimumBanana = 3
+                }).AsCardAction
+            );
+        }
+        else if (upgrade == Upgrade.B)
+        {
+            result.Add(ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(
+                ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(
+                    ModEntry.Instance.KokoroApi.ActionCosts.MakeStatusResource(BananaManager.BananaStatus.Status),
+                    amount: 1
+                ),
+                new AGainBanana()
+                {
+                    amount = 4
+                }
+                ).AsCardAction);
         }
         return result;
     }

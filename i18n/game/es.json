@@ -1,0 +1,189 @@
+﻿{
+  "character": {
+    "len": {
+      "name": "Len",
+      "description": "¿Qué está haciendo un VTuber en este juego?"
+    }
+  },
+  "enemy": {
+    "miku": {
+      "name": "Miku",
+      "title": "Chica verde"
+    }
+  },
+  "settings": {
+    "EnabledMikuAI": {
+      "title": "Enemigo Elite Acto I: MIKU",
+      "tooltipTitle": "Agregar MIKU",
+      "description": "Decide si quieres encontrar a este enemigo en tu partida."
+    },
+    "EnabledSounds": {
+      "title": "Activar SFX intrusivos",
+      "tooltipTitle": "Activar SFX",
+      "description": "Decide si quieres que suene música (acoplada a la opción de Sonido) al jugar una variedad de cartas."
+    }
+  },
+  "status": {
+    "BananaTreat": {
+      "name": "Snack de Banana",
+      "description": "Len <c=action>come</c> <=boldPink>{0}</c> <c=status>bananas</c> gratis al comenzar cada turno."
+    },
+    "Banana": {
+      "name": "Banana",
+      "description": "Len te apoya <c=action>comiendo</c> y <c=action>tirando</c> bananas.",
+      "spoof": "spoofBanana"
+    },
+    "MusicNote": {
+      "name": "Nota Musical",
+      "description": "Cada turno obtén una carta especial. Ganans 1 <c=status>nota</c> si terminas tu turno con el <c=hurt>casco</c> a la <c=redd>mitad</c> o menos. Pierde todas las <c=status>notas</c> al llegar al máximo. <c=status>Persiste entre combates</c>."
+    }
+  },
+  "action": {
+    "EatBanana": {
+      "name": "Comer Bananas",
+      "description": "Len <c=action>come</c> una <c=status>banana</c>, atacando el estómago del <c=hurt>casco</c> enemigo por <c=hurt>{{Damage}}</c> de daño."
+    },
+    "GainBanana": {
+      "name": {
+        "gain": "Banana-Winner",
+        "lose": "Banana-Loser",
+        "loseAll": "Banana-Ultra-Loser."
+      },
+      "description": {
+        "gain": "Ganas <c=boldPink>{{Amount}}</c> <c=status>bananas</c>.",
+        "lose": "Pierdes <c=boldPink>{{Amount}}</c> <c=status>bananas</c>.",
+        "loseAll": "Pierde todas tus <c=status>bananas</c>."
+      }
+    },
+    "SmashBanana": {
+      "name": "Aplastar bananas",
+      "description": "Aplasta <c=status>bananas</c> por diversión.",
+      "flavor": "<c=405a7f>Len se puso a llorar en una esquina.</c>"
+    },
+    "ThrowBanana": {
+      "name": "Tirar bananas",
+      "description": "Len <c=action>tira</c> una <c=status>banana</c> increíblemente rápido, atacando por <=boldPink>{{Damage}}</c> de daño al enemigo."
+    }
+  },
+  "artifact": {
+    "BananaStash": {
+      "name": "BANANA STASH",
+      "description": "<c=status>BANANAS</c> persisten tras cada batalla."
+    },
+    "BananaSnack": {
+      "name": "BANANA SNACK",
+      "description": "Pierdes 1 <c=status>BANANA</c> para ganar 1 <c=status>SNACK</c> en el primer turno."
+    },
+    "Brioche": {
+      "name": "BRIOCHE",
+      "description": "Al obtenerse, el daño causado por <c=status>BANANAS</c> incrementa por 1 de forma permanente."
+    },
+    "GlassBottle": {
+      "name": "BOTELLA A LA DERIVA",
+      "description": "Ganas 3 <c=status>BANANAS</c> en el primer turno."
+    },
+    "Guillotine": {
+      "name": "GUILLOTINA",
+      "description": "Al obtenerse, el daño causado por <c=action>tirar</c> <c=status>BANANAS</c> se vuelve <c=action>perforante</c>."
+    },
+    "MaidDress": {
+      "name": "VESTIDO DE WAIFU",
+      "description": "<c=healing>#Blessed.</c> Ganas 2 <c=status>ESCUDOS</c> antes de <c=action>comer</c> o <c=action>tirar</c> <c=status>BANANAS</c> al enemigo."
+    },
+    "TwinPower": {
+      "name": "ADORNO GEMELO",
+      "description": "<c=405a7f>Rin se esconde en la nave enemiga.</c>\nAdquieres 1 de <c=energy>ENERGIA</c> extra cada turno. <c=downside>En turnos pares, el enemigo gana 2</c> <c=status>superpoder</c>."
+    }
+  },
+  "card": {
+    "Banana": {
+      "name": "Banana"
+    },
+    "Banana Dance": {
+      "name": "Banana Dance"
+    },
+    "BarisolsChild": {
+      "name": "Barisol's Child"
+    },
+    "Breaktime": {
+      "name": "Breaktime"
+    },
+    "BringItOn": {
+      "name": "Bring It On"
+    },
+    "ButterflyOnShoulder": {
+      "name": "Butterfly On Shoulder"
+    },
+    "ChildishWar": {
+      "name": "Childish War"
+    },
+    "FifthPierrot": {
+      "name": "Fifth Pierrot"
+    },
+    "FunkyNightTown": {
+      "name": "Funky Night Town"
+    },
+    "HolyLanceExplosion": {
+      "name": "Holy Lance Explosion"
+    },
+    "LawEvadingRock": {
+      "name": "LawEvading Rock"
+    },
+    "LikeDislike": {
+      "name": "Like Dislike"
+    },
+    "Nakakapagpabagabag": {
+      "name": "Nakakapagpabagabag"
+    },
+    "NiccoriTeamSurvey": {
+      "name": "Niccori Team Survey"
+    },
+    "Paradichlorobenzene": {
+      "name": "Paradichlorobenzene"
+    },
+    "PlusBoy": {
+      "name": "Plus Boy"
+    },
+    "RemoteControl": {
+      "name": "Remote Control"
+    },
+    "ServantOfEvil": {
+      "name": "Servant of Evil"
+    },
+    "TelecasterBBoy": {
+      "name": "Telecaster B-Boy"
+    },
+    "ToluthinAntenna": {
+      "name": "Toluthin Antenna",
+      "description": "Ganas 1 <c=status>nota</c>. Obtén 1 de {{Amount}}</c> cartas <c=cardtrait>temp. con descuento</c>."
+    },
+    "VampiresPathoS": {
+      "name": "Vampire's PathoS",
+      "description": "<c=action>Tira</c> <c=boldPink>{{Amount}}</c> <c=status>bananas</c>. <c=healing>Recupera 1</c>."
+    },
+    "LenExe": {
+      "name": "Len.EXE",
+      "description": "Obtén 1 of {{Amount}} cartas <c=cardtrait>temp. con desc.</c> de <c=ffe569>Len</c>."
+    }
+  },
+  "FanLetter": {
+    "name": "Fan Letter"
+  },
+  "CrowdWork": {
+    "name": "Crowd Work"
+  },
+  "TrendSetter": {
+    "name": "Trend Setter"
+  },
+  "Encore": {
+    "name": "Encore",
+    "descriptionLen": "<c=hurt>Flood</c> with <c=cardtrait>disc, temp</c> <c=ffe569>Bananas</c>, <c=ffe569>Fan Letters</c> & <c=ffe569>Close To Gray</c>.",
+    "descriptionMiku": "<c=hurt>Turn End: Flood</c> with <c=7ed2d6>Fan Letters</c>, <c=7ed2d6>Crowd Work</c> & <c=7ed2d6>World Is Mine</c>."
+  },
+  "CloseToGray": {
+    "name": "Close to Gray"
+  },
+  "WorldIsMine": {
+    "name": "World Is Mine"
+  }
+}

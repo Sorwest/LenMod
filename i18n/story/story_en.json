@@ -1,0 +1,166 @@
+{ // INSERT TO EXISTING EVENTS
+  "GrandmaShop": {
+    "1": {
+      "who": "Sorwest.LenMod::Len",
+      "what": "Bananas!",
+      "tag": "neutral"
+    }
+  },
+  // NEW DIALOGUE FOR EXISTING EVENT CONDITIONS
+  "ChoiceCardRewardOfYourColorChoice_Sorwest.LenMod::Len": {
+    "1": {
+      "who": "Sorwest.LenMod::Len",
+      "what": "Ohhh! This is cool!",
+      "tag": "happy"
+    },
+    "2": {
+      "who": "Sorwest.LenMod::Len",
+      "what": "Nice! One of my favorites.",
+      "tag": "happy"
+    }
+  },
+  "LoseCharacterCard_Sorwest.LenMod::Len": {
+    "1": {
+      "who": "Sorwest.LenMod::Len",
+      "what": "Oh, I guess this is bye-bye...",
+      "tag": "sad"
+    },
+    "2": {
+      "who": "Sorwest.LenMod::Len",
+      "what": "Goodbye, friend...",
+      "tag": "sad"
+    }
+  },
+  "CrystallizedFriendEvent_Sorwest.LenMod::Len": {
+    "1": {
+      "who": "Sorwest.LenMod::Len",
+      "what": "Hello World!",
+      "tag": "happy"
+    },
+    "2": {
+      "who": "Sorwest.LenMod::Len",
+      "what": "Oh, hello!",
+      "tag": "happy"
+    }
+  },
+  "Sorwest.LenMod::Len_CharStart_0": {
+    "1": {
+      "who": "comp",
+      "what": "Alright, who is it this time?",
+      "tag": "neutral"
+    },
+    "2": {
+      "who": "Sorwest.LenMod::Len",
+      "what": "Hello, kitty!",
+      "tag": "neutral"
+    },
+    "3": {
+      "who": "comp",
+      "what": "...",
+      "tag": "neutral"
+    },
+    "4": {
+      "who": "comp",
+      "what": "You've gotta be kidd... Sigh...",
+      "tag": "squint"
+    },
+    "5": {
+      "who": "comp",
+      "what": "Name?",
+      "tag": "neutral"
+    },
+    "6": {
+      "who": "Sorwest.LenMod::Len",
+      "what": "Len, hello!",
+      "tag": "happy"
+    },
+    "7": {
+      "who": "comp",
+      "what": "Right...",
+      "tag": "squint"
+    },
+    "8": {
+      "who": "comp",
+      "what": "Sigh... Welcome aboard.",
+      "tag": "neutral"
+    }
+  },
+  // NEW RUN WIN AND MEMORIES
+  "": {
+
+  },
+  // MIKU COMBAT SHOUTS
+  "Sorwest.LenMod::Len_MikuFight_0": {
+    "1": {
+      "who": "Sorwest.LenMod::miku",
+      "what": "Hey there, Len. Prepared? I'll crush ya.",
+      "tag": "neutral"
+    },
+    "2": {
+      "who": "Sorwest.LenMod::Len",
+      "what": "I told you, I didn't eat the leek!",
+      "tag": "sad"
+    }
+  },
+  "Sowest.LenMod::Len_MikuFight_1": {
+    "1": {
+      "who": "Sorwest.LenMod::miku",
+      "what": "Well, well, well. Back again for another beating?",
+      "tag": "neutral"
+    },
+    "2": {
+      "who": "Sorwest.LenMod::Len",
+      "what": "Sigh...",
+      "tag": "neutral"
+    }
+  },
+  "Sowest.LenMod::Len_MikuFight_2": {
+    "1": {
+      "who": "Sorwest.LenMod::Len",
+      "what": "Let's just kill her.",
+      "tag": "neutral"
+    },
+    "2": {
+      "who": "Sorwest.LenMod::miku",
+      "what": "Sure, I'll like to see you try the impossible.",
+      "tag": "neutral"
+    }
+  },
+  // MID-COMBAT DIALOGUE
+  "Sorwest.LenMod::Len_JustPlayedASashaCard_0": {
+    "1": {
+      "who": "Sorwest.LenMod::Len",
+      "what": "Wiiii!!",
+      "tag": "happy"
+    }
+  },
+  "Sorwest.LenMod::Len_WeGotHurtButNotTooBad_0": {
+    "1": {
+      "who": "Sorwest.LenMod::Len",
+      "what": "Uh oh...",
+      "tag": "sad"
+    }
+  },
+  "Sorwest.LenMod::Len_OneHitPointThisIsFine_0": {
+    "1": {
+      "who": "Sorwest.LenMod::Len",
+      "what": "We're gonna be fine... right?",
+      "tag": "sad"
+    }
+  },
+  "Sorwest.LenMod::Len_OneHitPointThisIsFine_1": {
+    "1": {
+      "who": "Sorwest.LenMod::Len",
+      "what": "I think we're not fine...",
+      "tag": "sad"
+    }
+  },
+  // CARD LOOKUPS
+
+  "Sorwest.LenMod::Len_Card_ServantOfEvil_0": {
+    "1": {
+      "who": "Sorwest.LenMod::Len",
+      "what": "I'll protect you, it's a promise."
+    }
+  }
+}

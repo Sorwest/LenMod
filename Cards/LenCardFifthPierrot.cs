@@ -1,11 +1,13 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
+using Sorwest.LenMod.Actions;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
-public class LenCardFifthPierrot : Card, IModdedCard
+public class LenCardFifthPierrot : Card, IRegisterable
 {
+    public static IModSoundEntry PierrotSound { get; set; } = null!;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard("FifthPierrot", new()
@@ -19,8 +21,9 @@ public class LenCardFifthPierrot : Card, IModdedCard
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "FifthPierrot", "name"]).Localize
         });
+        PierrotSound = ModEntry.Instance.Helper.Content.Audio.RegisterSound(
+            ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/pierrot.mp3"));
     }
-    public override string Name() => "Fifth Pierrot";
     public override CardData GetData(State state)
     {
         return new()
@@ -31,8 +34,11 @@ public class LenCardFifthPierrot : Card, IModdedCard
     }
     public override List<CardAction> GetActions(State s, Combat c)
     {
-        List<CardAction> result = new()
-        {
+        List<CardAction> result = [
+            ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ASoundDummyAction()
+            {
+                sound = PierrotSound
+            }).AsCardAction,
             new AStatus()
             {
                 status = Status.powerdrive,
@@ -47,9 +53,9 @@ public class LenCardFifthPierrot : Card, IModdedCard
                 targetPlayer = true
             },
             new AEndTurn()
-        };
+        ];
         if (upgrade == Upgrade.A)
-            result.Insert(0, new AAttack()
+            result.Insert(1, new AAttack()
             {
                 damage = GetDmg(s, 0),
                 stunEnemy = true

@@ -6,7 +6,7 @@ using System.Reflection;
 namespace Sorwest.LenMod.Cards
 {
     [CardMeta(rarity = Rarity.common, upgradesTo = new Upgrade[] { Upgrade.A, Upgrade.B })]
-    public class LenCardLawEvadingRock : Card, IModdedCard
+    public class LenCardLawEvadingRock : Card, IRegisterable
     {
         public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
         {
@@ -22,30 +22,44 @@ namespace Sorwest.LenMod.Cards
                 Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "LawEvadingRock", "name"]).Localize
             });
         }
-        public override string Name() => "LawEvading Rock";
         public override CardData GetData(State state)
         {
             return new()
             {
-                cost = 0,
-                recycle = upgrade == Upgrade.B ? true : false
+                cost = upgrade == Upgrade.B ? 1 : 0
             };
         }
         public override List<CardAction> GetActions(State s, Combat c)
         {
-            List<CardAction> result = new()
-            {
+            List<CardAction> result =
+            [
                 new ASpawn()
-                {
-                    thing = new Asteroid()
-                }
-            };
-            if (upgrade == Upgrade.A)
-                result.Insert(0, new ASpawn()
                 {
                     thing = new Asteroid(),
                     offset = -1
+                }
+            ];
+            if (upgrade == Upgrade.A)
+            {
+                result.Add(new AMove()
+                {
+                    dir = -2,
+                    targetPlayer = true
                 });
+            }
+            else if (upgrade == Upgrade.B)
+            {
+                result.Insert(0, new ASpawn()
+                {
+                    thing = new Asteroid(),
+                    offset = -2
+                });
+                result.Insert(0, new ASpawn()
+                {
+                    thing = new Asteroid(),
+                    offset = -3
+                });
+            }
             return result;
         }
     }

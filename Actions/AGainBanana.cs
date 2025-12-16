@@ -1,23 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using Nickel;
+using Sorwest.LenMod.Features;
+using System.Collections.Generic;
 
 namespace Sorwest.LenMod.Actions;
 public class AGainBanana : CardAction
 {
     public int amount;
     public bool loseAll;
+    public bool smashBool;
     public override void Begin(G g, State s, Combat c)
     {
+        Status status = BananaManager.BananaStatus.Status;
+        if (loseAll)
+            amount = 0;
         timer = 0;
         c.QueueImmediate(new AStatus()
         {
-            status = ModEntry.Instance.BananaStatus.Status,
+            status = status,
             statusAmount = amount,
+            mode = loseAll ? AStatusMode.Set : AStatusMode.Add,
             targetPlayer = true
         });
     }
     public override Icon? GetIcon(State s)
     {
-        Icon icon = new Icon();
+        Icon icon = new();
         if (amount < 0)
             icon = new Icon(ModEntry.Instance.Sprites["GainBananaLose"].Sprite, amount * -1, Colors.textMain);
         else if (amount > 0)
@@ -29,30 +36,36 @@ public class AGainBanana : CardAction
     public override List<Tooltip> GetTooltips(State s)
     {
         List<Tooltip> tooltips = new();
+        if (smashBool && !loseAll)
+        {
+            tooltips.Add(new TTText(
+                ModEntry.Instance.Localizations.Localize(["action", "SmashBanana", "flavor"])
+            ));
+        }
         if (amount < 0)
-            tooltips.Add(new CustomTTGlossary(
-                CustomTTGlossary.GlossaryType.action,
-                () => ModEntry.Instance.Sprites["GainBananaLose"].Sprite,
-                () => ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "name", "lose"]),
-                () => ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "description", "lose"], new { Amount = -1 * amount }),
-                key: $"{ModEntry.Instance.Package.Manifest.UniqueName}::LoseBanana"
-            ));
+            tooltips.Add(new GlossaryTooltip($"action.{ModEntry.Instance.Package.Manifest.UniqueName}::AGainBananaLose")
+            {
+                Icon = ModEntry.Instance.Sprites["GainBananaLose"].Sprite,
+                TitleColor = Colors.action,
+                Title = ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "name", "lose"]),
+                Description = ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "description", "lose"], new { Amount = -1 * amount }),
+            });
         else if (amount > 0)
-            tooltips.Add(new CustomTTGlossary(
-                CustomTTGlossary.GlossaryType.action,
-                () => ModEntry.Instance.Sprites["GainBananaGain"].Sprite,
-                () => ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "name", "gain"]),
-                () => ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "description", "gain"], new { Amount = amount }),
-                key: $"{ModEntry.Instance.Package.Manifest.UniqueName}::GainBanana"
-            ));
-        else if (loseAll)
-            tooltips.Add(new CustomTTGlossary(
-                CustomTTGlossary.GlossaryType.action,
-                () => ModEntry.Instance.Sprites["GainBananaLoseAll"].Sprite,
-                () => ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "name", "loseAll"]),
-                () => ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "description", "loseAll"]),
-                key: $"{ModEntry.Instance.Package.Manifest.UniqueName}::LoseBananaAll"
-            ));
+            tooltips.Add(new GlossaryTooltip($"action.{ModEntry.Instance.Package.Manifest.UniqueName}::AGainBananaGain")
+            {
+                Icon = ModEntry.Instance.Sprites["GainBananaGain"].Sprite,
+                TitleColor = Colors.action,
+                Title = ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "name", "gain"]),
+                Description = ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "description", "gain"], new { Amount = amount }),
+            });
+        if (loseAll)
+            tooltips.Add(new GlossaryTooltip($"action.{ModEntry.Instance.Package.Manifest.UniqueName}::AGainBananaLoseAll")
+            {
+                Icon = ModEntry.Instance.Sprites["GainBananaLoseAll"].Sprite,
+                TitleColor = Colors.action,
+                Title = ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "name", "loseAll"]),
+                Description = ModEntry.Instance.Localizations.Localize(["action", "GainBanana", "description", "loseAll"]),
+            });
         return tooltips;
     }
 }

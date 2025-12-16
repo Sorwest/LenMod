@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
-public class LenCardBanana : Card, IModdedCard
+public class LenCardBanana : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -21,13 +21,12 @@ public class LenCardBanana : Card, IModdedCard
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Banana", "name"]).Localize
         });
     }
-    public override string Name() => "Banana";
     public override CardData GetData(State state)
     {
         return new()
         {
-            cost = upgrade == Upgrade.A ? 0 : 1,
-            exhaust = upgrade == Upgrade.B ? false : true
+            cost = upgrade == Upgrade.B ? 0 : 1,
+            exhaust = upgrade == Upgrade.B ? true : false
         };
     }
     public override List<CardAction> GetActions(State s, Combat c)
@@ -36,11 +35,11 @@ public class LenCardBanana : Card, IModdedCard
         {
             new AGainBanana()
             {
-                amount = upgrade == Upgrade.A ? 3 : 2
+                amount = 1
             },
             new ADrawCard()
             {
-                count = upgrade == Upgrade.B ? 2 : 1
+                count = upgrade == Upgrade.A ? 3 : 1
             }
         };
     }
