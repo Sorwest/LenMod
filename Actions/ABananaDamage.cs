@@ -10,22 +10,22 @@ public class ABananaDamage : CardAction
     public bool targetPlayer;
     public bool keepBanana = false;
     public int minimumBanana = 1;
-    private static int GetBananaDmg(State s)
+    private static int GetBananaDmg(State state)
     {
-        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(s, "BananaDamage") + 1;
-        return s.route is not Combat ? dmg : (s.ship.Get(BananaManager.BananaStatus.Status) > 0 ? dmg : 0);
+        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
+        return state.route is not Combat ? dmg : (state.ship.Get(BananaManager.BananaStatus.Status) > 0 ? dmg : 0);
     }
-    private static int GetBananaShield(State s)
+    private static int GetBananaShield(State state)
     {
-        return ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(s, "BananaShield");
+        return ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaShield");
     }
-    private static int GetBananaPiercing(State s)
+    private static int GetBananaPiercing(State state)
     {
-        return ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(s, "BananaPiercing");
+        return ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaPiercing");
     }
-    private static bool DoWeHaveCannonsThough(State s)
+    private static bool DoWeHaveCannonsThough(State state)
     {
-        foreach (Part part in s.ship.parts)
+        foreach (Part part in state.ship.parts)
         {
             if (part.type == PType.cannon)
             {
@@ -33,7 +33,7 @@ public class ABananaDamage : CardAction
             }
         }
 
-        if (s.route is Combat combat)
+        if (state.route is Combat combat)
         {
             foreach (StuffBase value in combat.stuff.Values)
             {
@@ -46,16 +46,16 @@ public class ABananaDamage : CardAction
 
         return false;
     }
-    public override Icon? GetIcon(State s)
+    public override Icon? GetIcon(State state)
     {
-        string spriteName = isThrow ? (ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(s, "BananaPiercing") > 0 ? "ThrowBananaPiercing" : "ThrowBanana") : "EatBanana";
+        string spriteName = isThrow ? (ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaPiercing") > 0 ? "ThrowBananaPiercing" : "ThrowBanana") : "EatBanana";
         return new Icon(ModEntry.Instance.Sprites[spriteName].Sprite, damage, Colors.textMain);
     }
-    public override List<Tooltip> GetTooltips(State s)
+    public override List<Tooltip> GetTooltips(State state)
     {
-        int dmg = GetBananaDmg(s);
+        int dmg = GetBananaDmg(state);
         string bananaType = isThrow ? "ThrowBanana" : "EatBanana";
-        string spriteName = isThrow ? (ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(s, "BananaPiercing") > 0 ? "ThrowBananaPiercing" : "ThrowBanana") : "EatBanana";
+        string spriteName = isThrow ? (ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaPiercing") > 0 ? "ThrowBananaPiercing" : "ThrowBanana") : "EatBanana";
         return
         [
             new GlossaryTooltip($"action.{ModEntry.Instance.Package.Manifest.UniqueName}::A{bananaType}")
@@ -67,15 +67,15 @@ public class ABananaDamage : CardAction
             }
         ];
     }
-    public override void Begin(G g, State s, Combat c)
+    public override void Begin(G g, State state, Combat c)
     {
-        if (s.ship.Get(BananaManager.BananaStatus.Status) < minimumBanana && !keepBanana)
+        if (state.ship.Get(BananaManager.BananaStatus.Status) < minimumBanana && !keepBanana)
             return;
-        int shield = GetBananaShield(s);
-        int piercing = GetBananaPiercing(s);
+        int shield = GetBananaShield(state);
+        int piercing = GetBananaPiercing(state);
         if (shield > 0)
         {
-            c.Queue(new AStatus()
+            combat.Queue(new AStatus()
             {
                 status = Status.shield,
                 statusAmount = shield,
@@ -83,9 +83,9 @@ public class ABananaDamage : CardAction
                 timer = 0
             });
         }
-        if (isThrow && DoWeHaveCannonsThough(s))
+        if (isThrow && DoWeHaveCannonsThough(state))
         {
-            c.Queue(new ABananaAttack()
+            combat.Queue(new ABananaAttack()
             {
                 damage = damage,
                 piercing = piercing > 0,
@@ -94,15 +94,15 @@ public class ABananaDamage : CardAction
         }
         else if (!isThrow)
         {
-            c.Queue(new ABananaHunger()
+            combat.Queue(new ABananaHunger()
             {
                 hurtAmount = damage,
                 targetPlayer = targetPlayer
             });
         }
-        if (!keepBanana && (!isThrow || DoWeHaveCannonsThough(s)))
+        if (!keepBanana && (!isThrow || DoWeHaveCannonsThough(state)))
         {
-            c.Queue(new AStatus()
+            combat.Queue(new AStatus()
             {
                 status = BananaManager.BananaStatus.Status,
                 statusAmount = -1,
@@ -115,34 +115,34 @@ public class ABananaDamage : CardAction
 public class ABananaAttack : AAttack
 {
     public int minimumBanana = 1;
-    private int GetBananaDmg(State s)
+    private int GetBananaDmg(State state)
     {
-        bool normalDisplay = s.route is not Combat || s.ship.Get(BananaManager.BananaStatus.Status) >= minimumBanana;
-        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(s, "BananaDamage") + 1;
+        bool normalDisplay = state.route is not Combat || state.ship.Get(BananaManager.BananaStatus.Status) >= minimumBanana;
+        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
         return normalDisplay ? dmg : 0;
     }
-    private Spr GetIconSprite(State s)
+    private Spr GetIconSprite(State state)
     {
-        bool normalDisplay = s.route is not Combat || s.ship.Get(BananaManager.BananaStatus.Status) >= minimumBanana;
-        return ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(s, "BananaPiercing") > 0 ?
+        bool normalDisplay = state.route is not Combat || state.ship.Get(BananaManager.BananaStatus.Status) >= minimumBanana;
+        return ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaPiercing") > 0 ?
             (normalDisplay ? ModEntry.Instance.Sprites["ThrowBananaPiercing"].Sprite : ModEntry.Instance.Sprites["ThrowBananaPiercingCost"].Sprite)
           : (normalDisplay ? ModEntry.Instance.Sprites["ThrowBanana"].Sprite : ModEntry.Instance.Sprites["ThrowBananaCost"].Sprite);
     }
-    public override Icon? GetIcon(State s)
+    public override Icon? GetIcon(State state)
     {
         Color color;
-        if (s.route is not Combat || DoWeHaveCannonsThough(s))
+        if (state.route is not Combat || DoWeHaveCannonsThough(state))
             color = Colors.redd;
         else
             color = Colors.attackFail;
-        return new Icon(GetIconSprite(s), damage, color, false);
+        return new Icon(GetIconSprite(state), damage, color, false);
     }
-    public override List<Tooltip> GetTooltips(State s)
+    public override List<Tooltip> GetTooltips(State state)
     {
         //attack highlight happens in tooltip call
-        Combat? combat = (Combat)s.route;
-        int n = s.ship.x;
-        foreach (Part part in s.ship.parts)
+        Combat? combat = (Combat)state.route;
+        int n = state.ship.x;
+        foreach (Part part in state.ship.parts)
         {
             if (part.type == PType.cannon && part.active)
             {
@@ -154,13 +154,13 @@ public class ABananaAttack : AAttack
             }
             n++;
         }
-        int dmg = GetBananaDmg(s);
-        dmg = dmg > 0 ? dmg : ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(s, "BananaDamage") + 1;
+        int dmg = GetBananaDmg(state);
+        dmg = dmg > 0 ? dmg : ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
         return
         [
             new GlossaryTooltip($"action.{ModEntry.Instance.Package.Manifest.UniqueName}::AThrowBanana")
             {
-                Icon = GetIconSprite(s),
+                Icon = GetIconSprite(state),
                 TitleColor = Colors.action,
                 Title = ModEntry.Instance.Localizations.Localize(["action", "ThrowBanana", "name"]),
                 Description = ModEntry.Instance.Localizations.Localize(["action", "ThrowBanana", "description"], new { Damage = dmg }),
@@ -171,25 +171,25 @@ public class ABananaAttack : AAttack
 public class ABananaHunger : AHurt
 {
     public int minimumBanana = 1;
-    private int GetBananaDmg(State s)
+    private int GetBananaDmg(State state)
     {
-        bool normalDisplay = s.route is not Combat || s.ship.Get(BananaManager.BananaStatus.Status) >= minimumBanana;
-        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(s, "BananaDamage") + 1;
+        bool normalDisplay = state.route is not Combat || state.ship.Get(BananaManager.BananaStatus.Status) >= minimumBanana;
+        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
         return normalDisplay ? dmg : 0;
     }
-    private Spr GetIconSprite(State s)
+    private Spr GetIconSprite(State state)
     {
-        bool normalDisplay = s.route is not Combat || s.ship.Get(BananaManager.BananaStatus.Status) >= minimumBanana;
+        bool normalDisplay = state.route is not Combat || state.ship.Get(BananaManager.BananaStatus.Status) >= minimumBanana;
         return normalDisplay ? ModEntry.Instance.Sprites["EatBanana"].Sprite : ModEntry.Instance.Sprites["EatBananaCost"].Sprite;
     }
-    public override Icon? GetIcon(State s)
+    public override Icon? GetIcon(State state)
     {
-        return new Icon(GetIconSprite(s), hurtAmount, Colors.redd, false);
+        return new Icon(GetIconSprite(state), hurtAmount, Colors.redd, false);
     }
-    public override List<Tooltip> GetTooltips(State s)
+    public override List<Tooltip> GetTooltips(State state)
     {
-        int dmg = GetBananaDmg(s);
-        dmg = dmg > 0 ? dmg : ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(s, "BananaDamage") + 1;
+        int dmg = GetBananaDmg(state);
+        dmg = dmg > 0 ? dmg : ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
         return
         [
             new GlossaryTooltip($"action.{ModEntry.Instance.Package.Manifest.UniqueName}::AEatBanana")

@@ -34,18 +34,18 @@ public class LenCardHolyLanceExplosion : Card, IRegisterable
             buoyant = upgrade == Upgrade.B
         };
     }
-    private static int GetBananaDmg(State s)
+    private static int GetBananaDmg(State state)
     {
-        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(s, "BananaDamage") + 1;
-        return s.route is not Combat ? dmg : s.ship.Get(BananaManager.BananaStatus.Status) > 0 ? dmg : 0;
+        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
+        return state.route is not Combat ? dmg : state.ship.Get(BananaManager.BananaStatus.Status) > 0 ? dmg : 0;
     }
-    public override List<CardAction> GetActions(State s, Combat c)
+    public override List<CardAction> GetActions(State state, Combat c)
     {
         List<CardAction> result =
         [
             new AAttack()
             {
-                damage = GetDmg(s, GetBananaDmg(s) + (upgrade == Upgrade.B ? 1 : 0)),
+                damage = GetDmg(state, GetBananaDmg(state) + (upgrade == Upgrade.B ? 1 : 0)),
                 piercing = true,
                 fast = true
             },
@@ -63,7 +63,7 @@ public class LenCardHolyLanceExplosion : Card, IRegisterable
                     }
                 }).AsCardAction
         ];
-        if (s.ship.Get(BananaManager.BananaStatus.Status) > 0)
+        if (state.ship.Get(BananaManager.BananaStatus.Status) > 0)
             result.Add(ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(
                 new ASoundDummyAction()
                 {

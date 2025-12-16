@@ -29,18 +29,18 @@ public class LenCardLikeDislike : Card, IRegisterable
             flippable = upgrade == Upgrade.B ? true : false
         };
     }
-    public override List<CardAction> GetActions(State s, Combat c)
+    public override List<CardAction> GetActions(State state, Combat c)
     {
         return new()
         {
             new AAttack()
             {
-                damage = GetDmg(s, 0),
+                damage = GetDmg(state, 0),
                 stunEnemy = true
             },
             new AAttack()
             {
-                damage = GetDmg(s, 1),
+                damage = GetDmg(state, 1),
                 piercing = true
             },
             new AMove()
@@ -50,7 +50,7 @@ public class LenCardLikeDislike : Card, IRegisterable
             },
             new AAttack()
             {
-                damage = GetDmg(s, upgrade == Upgrade.B ? 3 : 2)
+                damage = GetDmg(state, upgrade == Upgrade.B ? 3 : 2)
             }
         };
     }

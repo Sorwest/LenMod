@@ -32,13 +32,13 @@ internal class LenCardMN1 : Card, IRegisterable
             temporary = true
         };
     }
-    public override List<CardAction> GetActions(State s, Combat c)
+    public override List<CardAction> GetActions(State state, Combat c)
     {
         return
         [
             new AAttack()
             {
-                damage = GetDmg(s, upgrade == Upgrade.B ? 2 : upgrade == Upgrade.A ? 1 : 0),
+                damage = GetDmg(state, upgrade == Upgrade.B ? 2 : upgrade == Upgrade.A ? 1 : 0),
                 stunEnemy = true
             },
             new AGainBanana()

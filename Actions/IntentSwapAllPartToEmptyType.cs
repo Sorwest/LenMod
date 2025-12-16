@@ -7,9 +7,9 @@ public class IntentSwapAllPartToEmptyType : Intent
     public required string keyNormal;
     public required string keyEmpty;
     public required PType type;
-    public override void Apply(State s, Combat c, Ship fromShip, int actualX)
+    public override void Apply(State state, Combat c, Ship fromShip, int actualX)
     {
-        c.Queue(new ASwapPart()
+        combat.Queue(new ASwapPart()
         {
             keyNormal = keyNormal,
             keyEmpty = keyEmpty,
@@ -17,7 +17,7 @@ public class IntentSwapAllPartToEmptyType : Intent
         });
     }
 
-    public override string GetSingleTooltip(State s, Combat c, Ship fromShip)
+    public override string GetSingleTooltip(State state, Combat c, Ship fromShip)
     {
         return "intent.completeMystery";
     }
@@ -27,7 +27,7 @@ public class ASwapPart : CardAction
     public required string keyNormal;
     public required string keyEmpty;
     public required PType type;
-    public override void Begin(G g, State s, Combat c)
+    public override void Begin(G g, State state, Combat c)
     {
         Ship ship = c.otherShip;
         Audio.Play(Event.TogglePart);

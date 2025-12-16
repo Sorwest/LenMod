@@ -41,7 +41,7 @@ internal class MikuCardMN5 : Card, IRegisterable
             retain = true
         };
     }
-    public override List<CardAction> GetActions(State s, Combat c)
+    public override List<CardAction> GetActions(State state, Combat c)
     {
         return [
             ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(new AHeal(){ healAmount = 2, targetPlayer = false }).AsCardAction,

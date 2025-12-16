@@ -5,7 +5,7 @@ namespace Sorwest.LenMod.Actions;
 public class ASoundDummyAction : CardAction
 {
     public IModSoundEntry? sound;
-    public override void Begin(G g, State s, Combat c)
+    public override void Begin(G g, State state, Combat c)
     {
         if (!ModEntry.Instance.Settings.ProfileBased.Current.EnabledSounds)
             return;
@@ -18,7 +18,7 @@ public class ARandomSoundDummyAction : CardAction
 {
     public required List<IModSoundEntry> sounds;
     public int? weight;
-    public override void Begin(G g, State s, Combat c)
+    public override void Begin(G g, State state, Combat c)
     {
         if (!ModEntry.Instance.Settings.ProfileBased.Current.EnabledSounds)
             return;
@@ -31,13 +31,13 @@ public class ARandomSoundDummyAction : CardAction
                 counter--;
             }
             while (counter > 0);
-            IModSoundEntry sound = sounds[s.rngActions.NextInt() % sounds.Count];
+            IModSoundEntry sound = sounds[state.rngActions.NextInt() % sounds.Count];
             if (sound is not ISoundEntry)
                 sound?.CreateInstance();
         }
         else
         {
-            IModSoundEntry sound = sounds[s.rngActions.NextInt() % sounds.Count];
+            IModSoundEntry sound = sounds[state.rngActions.NextInt() % sounds.Count];
             if (sound is not ISoundEntry)
                 sound?.CreateInstance();
         }

@@ -4,14 +4,14 @@ namespace Sorwest.LenMod.Actions;
 
 public class ABananaTreatDamage : CardAction
 {
-    private static int GetBananaDmg(State s)
+    private static int GetBananaDmg(State state)
     {
-        return 1 + ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(s, "BananaDamage");
+        return 1 + ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage");
     }
     public bool targetPlayer;
-    public override void Begin(G g, State s, Combat c)
+    public override void Begin(G g, State state, Combat c)
     {
-        Ship source = targetPlayer ? c.otherShip : s.ship;
+        Ship source = targetPlayer ? c.otherShip : state.ship;
         Status status = BananaTreatManager.BananaTreatStatus.Status;
         int amount = source.Get(status);
         if (amount > 0)
@@ -19,9 +19,9 @@ public class ABananaTreatDamage : CardAction
             int internalCounter = amount;
             do
             {
-                c.Queue(new ABananaDamage()
+                combat.Queue(new ABananaDamage()
                 {
-                    damage = GetBananaDmg(s),
+                    damage = GetBananaDmg(state),
                     statusPulse = status,
                     targetPlayer = targetPlayer,
                     keepBanana = true

@@ -36,19 +36,19 @@ public class LenCardNakakapagpabagabag : Card, IRegisterable
             buoyant = upgrade == Upgrade.B ? true : false
         };
     }
-    private static int GetBananaDmg(State s)
+    private static int GetBananaDmg(State state)
     {
-        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(s, "BananaDamage") + 1;
-        return s.route is not Combat ? dmg : s.ship.Get(BananaManager.BananaStatus.Status) > 0 ? dmg : 0;
+        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
+        return state.route is not Combat ? dmg : state.ship.Get(BananaManager.BananaStatus.Status) > 0 ? dmg : 0;
     }
-    public override List<CardAction> GetActions(State s, Combat c)
+    public override List<CardAction> GetActions(State state, Combat c)
     {
         ExternalAPI.IKokoroApi.IV2.IActionCostsApi.IResourceCost spoofCostResource = ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(
             ModEntry.Instance.KokoroApi.ActionCosts.MakeStatusResource(
-                s.EnumerateAllArtifacts().OfType<LenArtifactGuillotine>().FirstOrDefault() is not null ? BananaManager.ThrowBananaPiercingStatus.Status : BananaManager.ThrowBananaStatus.Status),
+                state.EnumerateAllArtifacts().OfType<LenArtifactGuillotine>().FirstOrDefault() is not null ? BananaManager.ThrowBananaPiercingStatus.Status : BananaManager.ThrowBananaStatus.Status),
                 amount: 1
             );
-        if (s.ship.Get(BananaManager.BananaStatus.Status) > 0)
+        if (state.ship.Get(BananaManager.BananaStatus.Status) > 0)
             spoofCostResource.CostUnsatisfiedIconOverride = [ModEntry.Instance.Sprites["ThrowBanana"].Sprite];
         CardAction spoofCostAction = ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(
             spoofCostResource,
@@ -69,14 +69,14 @@ public class LenCardNakakapagpabagabag : Card, IRegisterable
         result.Add(ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(
             new ABananaAttack()
             {
-                damage = GetDmg(s, GetBananaDmg(s)),
+                damage = GetDmg(state, GetBananaDmg(state)),
                 targetPlayer = false
             }).SetShowTooltips(true).AsCardAction);
         result.Add(ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(
             new AStatus()
             {
                 status = Status.overdrive,
-                statusAmount = s.ship.Get(BananaManager.BananaStatus.Status) > 0 ? 1 : 0,
+                statusAmount = state.ship.Get(BananaManager.BananaStatus.Status) > 0 ? 1 : 0,
                 targetPlayer = true
             }).SetShowTooltips(true).AsCardAction);
         return result;

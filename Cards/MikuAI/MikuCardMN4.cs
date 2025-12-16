@@ -32,7 +32,7 @@ internal class MikuCardMN4 : Card, IRegisterable
             description = ModEntry.Instance.Localizations.Localize(["card", "Encore", "descriptionMiku"])
         };
     }
-    public override List<CardAction> GetActions(State s, Combat c)
+    public override List<CardAction> GetActions(State state, Combat c)
     {
         return
         [

@@ -29,21 +29,21 @@ public class LenCardBananaDance : Card, IRegisterable
             cost = upgrade == Upgrade.A ? 0 : 1
         };
     }
-    private static int GetBananaDmg(State s)
+    private static int GetBananaDmg(State state)
     {
-        bool normalDisplay = s.route is not Combat || s.ship.Get(BananaManager.BananaStatus.Status) >= 0;
-        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(s, "BananaDamage") + 1;
+        bool normalDisplay = state.route is not Combat || state.ship.Get(BananaManager.BananaStatus.Status) >= 0;
+        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
         return normalDisplay ? dmg : 0;
     }
-    public override List<CardAction> GetActions(State s, Combat c)
+    public override List<CardAction> GetActions(State state, Combat c)
     {
-        bool normalDisplay = s.route is not Combat || s.ship.Get(BananaManager.BananaStatus.Status) > 0;
+        bool normalDisplay = state.route is not Combat || state.ship.Get(BananaManager.BananaStatus.Status) > 0;
         List<CardAction> result =
         [
             ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(
                 new ABananaDamage()
                 {
-                    damage = GetBananaDmg(s),
+                    damage = GetBananaDmg(state),
                     targetPlayer = false
                 }).SetShowTooltips(true).AsCardAction
         ];
