@@ -28,7 +28,7 @@ public class LenCardFunkyNightTown : Card, IRegisterable
             cost = upgrade == Upgrade.B ? 1 : 2
         };
     }
-    public override List<CardAction> GetActions(State state, Combat c)
+    public override List<CardAction> GetActions(State state, Combat combat)
     {
         return new()
         {

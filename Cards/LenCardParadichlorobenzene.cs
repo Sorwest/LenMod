@@ -38,7 +38,7 @@ public class LenCardParadichlorobenzene : Card, IRegisterable, IHasCustomCardTra
     {
         return new HashSet<ICardTraitEntry> { ModEntry.Instance.KokoroApi.Fleeting.Trait };
     }
-    public override List<CardAction> GetActions(State state, Combat c)
+    public override List<CardAction> GetActions(State state, Combat combat)
     {
         List<CardAction> result = new()
         {

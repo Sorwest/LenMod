@@ -9,9 +9,9 @@ public class ABananaTreatDamage : CardAction
         return 1 + ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage");
     }
     public bool targetPlayer;
-    public override void Begin(G g, State state, Combat c)
+    public override void Begin(G g, State state, Combat combat)
     {
-        Ship source = targetPlayer ? c.otherShip : state.ship;
+        Ship source = targetPlayer ? combat.otherShip : state.ship;
         Status status = BananaTreatManager.BananaTreatStatus.Status;
         int amount = source.Get(status);
         if (amount > 0)

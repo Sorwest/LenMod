@@ -29,7 +29,7 @@ public class LenCardEXECard : Card, IRegisterable
             description = ModEntry.Instance.Localizations.Localize(["card", "LenExe", "description"], new { Amount = upgrade == Upgrade.A ? 3 : 2 })
         };
     }
-    public override List<CardAction> GetActions(State state, Combat c)
+    public override List<CardAction> GetActions(State state, Combat combat)
     {
         List<CardAction> result = [
             new ACardOffering()

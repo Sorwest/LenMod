@@ -29,7 +29,7 @@ public class LenCardLikeDislike : Card, IRegisterable
             flippable = upgrade == Upgrade.B ? true : false
         };
     }
-    public override List<CardAction> GetActions(State state, Combat c)
+    public override List<CardAction> GetActions(State state, Combat combat)
     {
         return new()
         {

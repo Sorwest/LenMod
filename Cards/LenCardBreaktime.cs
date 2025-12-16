@@ -35,7 +35,7 @@ public class LenCardBreaktime : Card, IRegisterable
         int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
         return normalDisplay ? dmg : 0;
     }
-    public override List<CardAction> GetActions(State state, Combat c)
+    public override List<CardAction> GetActions(State state, Combat combat)
     {
         List<CardAction> result =
         [

@@ -27,7 +27,7 @@ public class LenCardChildishWar : Card, IRegisterable
             cost = upgrade == Upgrade.None ? 3 : (upgrade == Upgrade.A ? 2 : 0)
         };
     }
-    public override List<CardAction> GetActions(State state, Combat c)
+    public override List<CardAction> GetActions(State state, Combat combat)
     {
         List<CardAction> result = [
             new AStatus()

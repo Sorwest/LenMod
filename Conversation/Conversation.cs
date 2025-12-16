@@ -16,14 +16,14 @@ internal sealed class CustomSay : Say
 {
     private static int NextId = 1;
 
-    public string? text { get; set; }
+    public string? Text { get; set; }
     public string? DynamicLoopTag { get; set; }
 
     internal static readonly Dictionary<string, Func<G, string>> RegisteredDynamicLoopTags = [];
 
     public override bool Execute(G g, IScriptTarget target, ScriptCtx ctx)
     {
-        if (text is null)
+        if (Text is null)
             return base.Execute(g, target, ctx);
         if (!string.IsNullOrEmpty(hash))
             return base.Execute(g, target, ctx);
@@ -34,7 +34,7 @@ internal sealed class CustomSay : Say
                 : DynamicLoopTag;
 
         hash = $"{GetType().FullName}:{NextId++}";
-        DB.currentLocale.strings[GetLocKey(ctx.script, hash)] = text;
+        DB.currentLocale.strings[GetLocKey(ctx.script, hash)] = Text;
         return base.Execute(g, target, ctx);
     }
 }

@@ -43,9 +43,9 @@ internal sealed class MikuAI : AI, IRegisterable
             Sprite = ModEntry.Instance.Sprites["mikucannonempty"].Sprite
         });
     }
-    public override void OnCombatStart(State state, Combat c)
+    public override void OnCombatStart(State state, Combat combat)
     {
-        c.bg = new BGCrystalNebula();
+        combat.bg = new BGCrystalNebula();
     }
     public override Ship BuildShipForSelf(State state)
     {
@@ -111,7 +111,7 @@ internal sealed class MikuAI : AI, IRegisterable
     {
         return Song.Elite;
     }
-    public override EnemyDecision PickNextIntent(State state, Combat c, Ship ownShip)
+    public override EnemyDecision PickNextIntent(State state, Combat combat, Ship ownShip)
     {
         if (aiCounter == 39)
             return MoveSet(

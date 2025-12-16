@@ -53,7 +53,7 @@ public class LenArtifactBananaStash : Artifact, IRegisterable
     {
         ModEntry.Instance.Helper.ModData.RemoveModData(state, "BananaStored");
     }
-    public override void OnCombatStart(State state, Combat c)
+    public override void OnCombatStart(State state, Combat combat)
     {
         if (counter > 0)
         {

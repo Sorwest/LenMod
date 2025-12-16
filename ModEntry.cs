@@ -17,10 +17,10 @@ namespace Sorwest.LenMod;
 public class ModEntry : SimpleMod
 {
     public static string Name => "Sorwest.LenMod::Len";
-    internal bool LockedChar = false;
+    internal static bool LockedChar => false;
     internal static ModEntry Instance { get; private set; } = null!;
     internal Harmony Harmony { get; }
-    internal readonly IKokoroApi.IV2 KokoroApi;
+    internal IKokoroApi.IV2 KokoroApi { get; }
     internal IMoreDifficultiesApi? MoreDifficultiesApi { get; }
     internal IDraculaApi? DraculaApi { get; }
     internal Settings Settings { get; private set; }
@@ -280,6 +280,7 @@ public class ModEntry : SimpleMod
         LenCharacter = helper.Content.Characters.V2.RegisterPlayableCharacter("Len", new()
         {
             Deck = LenDeck.Deck,
+            StartLocked = LockedChar,
             Description = AnyLocalizations.Bind(["character", "len", "description"]).Localize,
             BorderSprite = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/character/Len_PanelFrame_0.png")).Sprite,
             Starters = new()

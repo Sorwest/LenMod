@@ -67,7 +67,7 @@ public class ABananaDamage : CardAction
             }
         ];
     }
-    public override void Begin(G g, State state, Combat c)
+    public override void Begin(G g, State state, Combat combat)
     {
         if (state.ship.Get(BananaManager.BananaStatus.Status) < minimumBanana && !keepBanana)
             return;

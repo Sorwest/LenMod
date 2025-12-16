@@ -35,7 +35,7 @@ public class LenCardBananaDance : Card, IRegisterable
         int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
         return normalDisplay ? dmg : 0;
     }
-    public override List<CardAction> GetActions(State state, Combat c)
+    public override List<CardAction> GetActions(State state, Combat combat)
     {
         bool normalDisplay = state.route is not Combat || state.ship.Get(BananaManager.BananaStatus.Status) > 0;
         List<CardAction> result =
