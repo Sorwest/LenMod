@@ -172,8 +172,8 @@
   },
   "Encore": {
     "name": "Encore",
-    "descriptionLen": "<c=hurt>Obtén muchas</c> <c=cardtrait>desc, temp</c> <c=ffe569>Bananas</c>, <c=ffe569>Fan Letters</c> & <c=ffe569>Close To Gray</c>.",
-    "descriptionMiku": "<c=hurt>Turn End: Obtén muchas</c> <c=7ed2d6>Fan Letters</c>, <c=7ed2d6>Set Trends</c> & <c=7ed2d6>World Is Mine</c>."
+    "descriptionLen": "Añade 3x <c=cardtrait>desc, temp</c> <c=ffe569>Bananas</c>, <c=ffe569>Fan Letters</c> & <c=ffe569>Close To Gray</c> al mazo.",
+    "descriptionMiku": "<c=hurt>Turn End:</c> Añade 1 <c=7ed2d6>Fan Letter</c>, 2 <c=7ed2d6>Set Trends</c> & 3 <c=7ed2d6>World Is Mine</c> al mazo."
   },
   "CloseToGray": {
     "name": "Close to Gray"

@@ -43,7 +43,7 @@ internal class LenCardMN1 : Card, IRegisterable
             },
             new AGainBanana()
             {
-                amount = 1
+                amount = upgrade == Upgrade.A ? 2 : 1
             }
         ];
     }

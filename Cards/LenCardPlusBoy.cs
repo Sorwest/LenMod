@@ -27,7 +27,7 @@ public class LenCardPlusBoy : Card, IRegisterable
     {
         return new()
         {
-            cost = upgrade == Upgrade.A ? 0 : 1,
+            cost = 1,
             exhaust = upgrade == Upgrade.None,
         };
     }
@@ -39,7 +39,7 @@ public class LenCardPlusBoy : Card, IRegisterable
                 new AStatus()
                 {
                     status = MusicNoteManager.MusicNoteStatus.Status,
-                    statusAmount = 1,
+                    statusAmount = 2,
                     targetPlayer = true
                 } :
                 new AGainBanana()

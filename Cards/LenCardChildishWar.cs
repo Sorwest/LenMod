@@ -25,7 +25,7 @@ public class LenCardChildishWar : Card, IRegisterable
         return new()
         {
             cost = upgrade == Upgrade.None ? 3 : (upgrade == Upgrade.A ? 2 : 0),
-            retain = upgrade != Upgrade.B
+            retain = upgrade == Upgrade.A
         };
     }
     public override List<CardAction> GetActions(State state, Combat combat)
@@ -52,7 +52,7 @@ public class LenCardChildishWar : Card, IRegisterable
             result.Insert(2, new AStatus()
             {
                 status = Status.tempShield,
-                statusAmount = 10,
+                statusAmount = 6,
                 targetPlayer = true
             });
         return result;

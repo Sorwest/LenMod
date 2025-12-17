@@ -40,7 +40,7 @@ internal sealed class CustomSay : Say
 }
 internal sealed class CustomTitle : TitleCard
 {
-    public string? text;
+    public string? text { get; set; }
 
     public override bool Execute(G g, IScriptTarget target, ScriptCtx ctx)
     {
