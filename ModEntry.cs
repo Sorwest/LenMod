@@ -77,11 +77,11 @@ public class ModEntry : SimpleMod
     ];
     internal static IReadOnlyList<Type> LenStarterArtifactTypes { get; } = [
         typeof(LenArtifactBananaStash),
-        typeof(LenArtifactBananaSnack),
         typeof(LenArtifactGuillotine)
     ];
     internal static IReadOnlyList<Type> LenCommonArtifactTypes { get; } = [
         typeof(LenArtifactGlassBottle),
+        typeof(LenArtifactBananaSnack),
         typeof(LenArtifactMaidDress)
     ];
     internal static IReadOnlyList<Type> LenBossArtifactTypes { get; } = [
@@ -290,8 +290,7 @@ public class ModEntry : SimpleMod
                     new LenCardBreaktime()
                 ],
                 artifacts = [
-                    new LenArtifactBananaStash(),
-                    new LenArtifactBananaSnack()
+                    new LenArtifactBananaStash()
                 ]
             },
             SoloStarters = new()

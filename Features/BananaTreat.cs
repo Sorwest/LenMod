@@ -1,7 +1,9 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
 using Sorwest.LenMod.Actions;
+using Sorwest.LenMod.Artifacts;
 using Sorwest.LenMod.ExternalAPI;
+using System.Linq;
 
 namespace Sorwest.LenMod.Features;
 internal sealed class BananaTreatManager : IRegisterable, IKokoroApi.IV2.IStatusLogicApi.IHook
@@ -29,7 +31,10 @@ internal sealed class BananaTreatManager : IRegisterable, IKokoroApi.IV2.IStatus
         {
             if (args.Timing != IKokoroApi.IV2.IStatusLogicApi.StatusTurnTriggerTiming.TurnStart)
                 return false;
-            if (args.Status == BananaManager.BananaStatus.Status && args.Ship.Get(args.Status) > 0 && args.Combat.turn == 1)
+            if (args.Status == BananaManager.BananaStatus.Status
+                && args.Ship.Get(args.Status) > 0
+                && args.Combat.turn == 1
+                && args.State.EnumerateAllArtifacts().OfType<LenArtifactBananaSnack>().FirstOrDefault() is not null)
             {
                 args.Combat.Queue(new AStatus()
                 {

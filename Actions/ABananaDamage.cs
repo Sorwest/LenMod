@@ -83,6 +83,16 @@ public class ABananaDamage : CardAction
                 timer = 0
             });
         }
+        if (!keepBanana && (!isThrow || DoWeHaveCannonsThough(state)))
+        {
+            combat.Queue(new AStatus()
+            {
+                status = BananaManager.BananaStatus.Status,
+                statusAmount = -1,
+                targetPlayer = !targetPlayer,
+                timer = 0
+            });
+        }
         if (isThrow && DoWeHaveCannonsThough(state))
         {
             combat.Queue(new ABananaAttack()
@@ -98,16 +108,6 @@ public class ABananaDamage : CardAction
             {
                 hurtAmount = damage,
                 targetPlayer = targetPlayer
-            });
-        }
-        if (!keepBanana && (!isThrow || DoWeHaveCannonsThough(state)))
-        {
-            combat.Queue(new AStatus()
-            {
-                status = BananaManager.BananaStatus.Status,
-                statusAmount = -1,
-                targetPlayer = !targetPlayer,
-                timer = 0
             });
         }
     }

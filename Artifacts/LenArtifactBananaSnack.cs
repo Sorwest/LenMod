@@ -16,8 +16,7 @@ public class LenArtifactBananaSnack : Artifact, IRegisterable
             Meta = new()
             {
                 owner = ModEntry.Instance.LenDeck.Deck,
-                pools = [ArtifactPool.EventOnly],
-                unremovable = true
+                pools = [ArtifactPool.Common]
             },
             Sprite = ModEntry.Instance.Sprites["BananaSnack"].Sprite,
             Name = ModEntry.Instance.AnyLocalizations.Bind(["artifact", "BananaSnack", "name"]).Localize,
