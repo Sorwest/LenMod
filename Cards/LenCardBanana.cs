@@ -37,7 +37,7 @@ public class LenCardBanana : Card, IRegisterable
                 ModEntry.Instance.KokoroApi.Conditional.Equation(
                     ModEntry.Instance.KokoroApi.Conditional.Status(BananaManager.BananaStatus.Status),
                     ExternalAPI.IKokoroApi.IV2.IConditionalApi.EquationOperator.LessThanOrEqual,
-                    ModEntry.Instance.KokoroApi.Conditional.Constant(upgrade == Upgrade.A ? 6 : 4),
+                    ModEntry.Instance.KokoroApi.Conditional.Constant(upgrade == Upgrade.A ? 7 : 4),
                     ExternalAPI.IKokoroApi.IV2.IConditionalApi.EquationStyle.Possession),
                 new ADrawCard()
             {

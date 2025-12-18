@@ -23,6 +23,26 @@ public class ABananaDamage : CardAction
     {
         return ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaPiercing");
     }
+    public string GetSpriteStr(State state)
+    {
+        string spriteName;
+        if (isThrow)
+        {
+            if (GetBananaPiercing(state) > 0)
+            {
+                spriteName = "ThrowBananaPiercing";
+            }
+            else
+            {
+                spriteName = "ThrowBanana";
+            }
+        }
+        else
+        {
+            spriteName = "EatBanana";
+        }
+        return spriteName;
+    }
     private static bool DoWeHaveCannonsThough(State state)
     {
         foreach (Part part in state.ship.parts)
@@ -48,19 +68,16 @@ public class ABananaDamage : CardAction
     }
     public override Icon? GetIcon(State state)
     {
-        string spriteName = isThrow ? (ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaPiercing") > 0 ? "ThrowBananaPiercing" : "ThrowBanana") : "EatBanana";
-        return new Icon(ModEntry.Instance.Sprites[spriteName].Sprite, damage, Colors.textMain);
+        return new Icon(ModEntry.Instance.Sprites[GetSpriteStr(state)].Sprite, damage, Colors.textMain);
     }
     public override List<Tooltip> GetTooltips(State state)
     {
         int dmg = GetBananaDmg(state);
         string bananaType = isThrow ? "ThrowBanana" : "EatBanana";
-        string spriteName = isThrow ? (ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaPiercing") > 0 ? "ThrowBananaPiercing" : "ThrowBanana") : "EatBanana";
-        return
-        [
+        return [
             new GlossaryTooltip($"action.{ModEntry.Instance.Package.Manifest.UniqueName}::A{bananaType}")
             {
-                Icon = ModEntry.Instance.Sprites[spriteName].Sprite,
+                Icon = ModEntry.Instance.Sprites[GetSpriteStr(state)].Sprite,
                 TitleColor = Colors.action,
                 Title = ModEntry.Instance.Localizations.Localize(["action", bananaType, "name"]),
                 Description = ModEntry.Instance.Localizations.Localize(["action", bananaType, "description"], new { Damage = dmg }),

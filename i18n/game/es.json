@@ -38,6 +38,12 @@
       "description": "Cada turno obtén una carta especial. Ganans 1 <c=status>nota</c> si terminas tu turno con el <c=hurt>casco</c> a la <c=redd>mitad</c> o menos. Pierde todas las <c=status>notas</c> al llegar al máximo. <c=status>Persiste entre combates</c>."
     }
   },
+  "midrow": {
+    "Butterfly": {
+      "name": "Mariposa",
+      "description": "Alien Alien. Cuando es destruída, la nave atacante obtiene 1 <c=status>NOTA</c>."
+    }
+  },
   "action": {
     "EatBanana": {
       "name": "Comer Bananas",
@@ -153,32 +159,34 @@
       "description": "Ganas 1 <c=status>nota</c>. Obtén 1 de {{Amount}}</c> cartas <c=cardtrait>temp. con descuento</c>."
     },
     "VampiresPathoS": {
-      "name": "Vampire's PathoS",
-      "description": "<c=action>Tira</c> <c=boldPink>{{Amount}}</c> <c=status>bananas</c>. <c=healing>Recupera 1</c>."
+      "name": "Vampire's PathoS"
     },
     "LenExe": {
       "name": "Len.EXE",
       "description": "Obtén 1 de {{Amount}} cartas <c=cardtrait>temp. con desc.</c> de <c=ffe569>Len</c>."
+    },
+    "FanLetter": {
+      "name": "Fan Letter"
+    },
+    "CrowdWork": {
+      "name": "Crowd Work"
+    },
+    "TrendSetter": {
+      "name": "Set Trends"
+    },
+    "Vocavoid": {
+      "name": "Vocavoid"
+    },
+    "Encore": {
+      "name": "Encore",
+      "descriptionLen": "Añade 3x <c=cardtrait>desc, temp</c> <c=ffe569>Banana</c>, <c=ffe569>Fan Letter</c> & <c=ffe569>Close To Gray</c> al mazo.",
+      "descriptionMiku": "<c=hurt>Turn End:</c> Añade 1 <c=7ed2d6>Fan Letter</c>, 2 <c=7ed2d6>Set Trend</c> & 3 <c=7ed2d6>World Is Mine</c> al mazo."
+    },
+    "CloseToGray": {
+      "name": "Close to Gray"
+    },
+    "WorldIsMine": {
+      "name": "World Is Mine"
     }
-  },
-  "FanLetter": {
-    "name": "Fan Letter"
-  },
-  "CrowdWork": {
-    "name": "Crowd Work"
-  },
-  "TrendSetter": {
-    "name": "Set Trends"
-  },
-  "Encore": {
-    "name": "Encore",
-    "descriptionLen": "Añade 3x <c=cardtrait>desc, temp</c> <c=ffe569>Banana</c>, <c=ffe569>Fan Letter</c> & <c=ffe569>Close To Gray</c> al mazo.",
-    "descriptionMiku": "<c=hurt>Turn End:</c> Añade 1 <c=7ed2d6>Fan Letter</c>, 2 <c=7ed2d6>Set Trend</c> & 3 <c=7ed2d6>World Is Mine</c> al mazo."
-  },
-  "CloseToGray": {
-    "name": "Close to Gray"
-  },
-  "WorldIsMine": {
-    "name": "World Is Mine"
   }
 }

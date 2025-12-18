@@ -1,5 +1,6 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
+using Sorwest.LenMod.Actions;
 using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
@@ -25,21 +26,23 @@ public class LenCardButterflyOnShoulder : Card, IRegisterable
     {
         return new()
         {
-            cost = upgrade == Upgrade.A ? 2 : 4,
-            exhaust = upgrade == Upgrade.B ? false : true
+            cost = upgrade == Upgrade.A ? 1 : 2,
+            exhaust = true
         };
     }
     public override List<CardAction> GetActions(State state, Combat combat)
     {
-        return
-        [
-            new AStatus()
+        List<CardAction> result = [
+            new AButterflyField(),
+            new ASpawn()
             {
-                status = MusicNoteManager.MusicNoteStatus.Status,
-                statusAmount = 12,
-                mode = AStatusMode.Set,
-                targetPlayer = true
+                thing = new Butterfly()
             }
         ];
+        if (upgrade == Upgrade.B)
+        {
+            result.Add(new ASpawn() { thing = new Butterfly(), offset = -1 });
+        }
+        return result;
     }
 }

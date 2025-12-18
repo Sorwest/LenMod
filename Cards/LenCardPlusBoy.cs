@@ -27,25 +27,25 @@ public class LenCardPlusBoy : Card, IRegisterable
     {
         return new()
         {
-            cost = 1,
+            cost = upgrade == Upgrade.B ? 0 : 1,
             exhaust = upgrade != Upgrade.A,
         };
     }
     public override List<CardAction> GetActions(State state, Combat combat)
     {
-        return
-        [
-            upgrade == Upgrade.B ?
-                new AStatus()
+        return [upgrade switch
+            {
+                Upgrade.B => new AStatus()
                 {
                     status = MusicNoteManager.MusicNoteStatus.Status,
-                    statusAmount = 2,
+                    statusAmount = 1,
                     targetPlayer = true
-                } :
-                new AGainBanana()
+                },
+                _ => new AGainBanana()
                 {
                     amount = 3
                 }
+            }
         ];
     }
 }

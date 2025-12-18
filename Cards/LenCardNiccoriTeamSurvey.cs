@@ -33,7 +33,6 @@ public class LenCardNiccoriTeamSurvey : Card, IRegisterable
     }
     public override List<CardAction> GetActions(State state, Combat combat)
     {
-        int amount = state.ship.Get(BananaManager.BananaStatus.Status) + ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage"); ;
         List<CardAction> result =
         [
             new AVariableHint()

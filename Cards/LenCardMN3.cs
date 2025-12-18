@@ -27,7 +27,7 @@ internal class LenCardMN3 : Card, IRegisterable
     {
         return new()
         {
-            cost = (int)upgrade - 2,
+            cost = 2 - (int)upgrade,
             retain = true,
             singleUse = true,
             temporary = true

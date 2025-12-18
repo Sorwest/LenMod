@@ -162,6 +162,8 @@ public class ModEntry : SimpleMod
         "BananaCost",
         "BananaCostSatisfied",
         "BananaTreat",
+        "Butterfly",
+        "ButterflyField",
         "EatBanana",
         "EatBananaCost",
         "GainBananaGain",
@@ -171,6 +173,10 @@ public class ModEntry : SimpleMod
         "ThrowBananaPiercing",
         "ThrowBananaPiercingCost",
         "MusicNote"
+        ];
+    internal IList<string> MidrowSprites { get; } = [
+        "ButterflyDrone",
+        "ButterflyTorso"
         ];
     internal Dictionary<string, ISpriteEntry> Sprites { get; } = [];
 
@@ -269,6 +275,19 @@ public class ModEntry : SimpleMod
                 Sprites.Add(key: $"{icon}", value: helper.Content.Sprites.RegisterSprite(file));
         }
 
+        foreach (string midrow in MidrowSprites)
+        {
+            file = package.PackageRoot.GetRelativeFile($"assets/drones/{midrow}.png");
+            if (file.Exists)
+                Sprites.Add(key: $"{midrow}", value: helper.Content.Sprites.RegisterSprite(file));
+        }
+        // extra animations
+        for (int midrow = 0; midrow < 8; midrow++)
+        {
+            file = package.PackageRoot.GetRelativeFile($"assets/drones/Butterfly_{midrow}.png");
+            if (file.Exists)
+                Sprites.Add(key: $"{midrow}", value: helper.Content.Sprites.RegisterSprite(file));
+        }
         // DECK REGISTRATION BLOCK
         LenDeck = helper.Content.Decks.RegisterDeck("Len", new()
         {

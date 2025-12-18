@@ -2,7 +2,7 @@
   "character": {
     "len": {
       "name": "Len",
-      "description": "Uses his love of bananas to do a <c=keyword>little bit of everything</c>."
+      "description": "A singer from another Sekai. Uses his love of bananas to do a <c=keyword>little bit of everything</c>."
     }
   },
   "enemy": {
@@ -36,6 +36,12 @@
     "MusicNote": {
       "name": "Music Note",
       "description": "At start of turn, add a special card to hand. Gain 1 <c=status>note</c> on turn end if <c=hurt>hull</c> at <c=redd>half</c> or less. Reset at max stacks. <c=status>Persists across battles</c>."
+    }
+  },
+  "midrow": {
+    "Butterfly": {
+      "name": "Butterfly",
+      "description": "Rock-based lifeform. When destroyed, the attacker gains 1 <c=status>NOTE</c>."
     }
   },
   "action": {
@@ -172,7 +178,7 @@
       "name": "Vocavoid"
     },
     "Encore": {
-      "name": "Encore 39",
+      "name": "Encore",
       "descriptionLen": "Add 3x <c=cardtrait>disc, temp</c> <c=ffe569>Banana</c>, <c=ffe569>Fan Letter</c> & <c=ffe569>Close To Gray</c> to draw.",
       "descriptionMiku": "<c=hurt>Turn End:</c> Add 1 <c=7ed2d6>Fan Letter</c>, 2 <c=7ed2d6>Set Trend</c> & 3 <c=7ed2d6>World Is Mine</c> to draw."
     },

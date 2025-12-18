@@ -12,6 +12,9 @@ namespace Sorwest.LenMod.Features;
 public class MusicNoteManager : IRegisterable
 {
     internal static IStatusEntry MusicNoteStatus { get; private set; } = null!;
+    internal static List<string> ColorList = [  "4ba0a0", "4baaa2", "4fb4a1", "58be9f",
+                                        "64c89b", "73d196", "86d990", "9ae189",
+                                        "b1e882", "caee7c", "e4f477", "fff875"];
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         MusicNoteStatus = helper.Content.Statuses.RegisterStatus("MusicNoteStatus", new()
@@ -127,9 +130,6 @@ public class MusicNoteManager : IRegisterable
         {
             if (args.Status != MusicNoteStatus.Status)
                 return null;
-            List<string> colorList = [  "4ba0a0", "4baaa2", "4fb4a1", "58be9f",
-                                        "64c89b", "73d196", "86d990", "9ae189",
-                                        "b1e882", "caee7c", "e4f477", "fff875"];
             Color[] colors = new Color[12];
             for (int i = 0; i < colors.Length; i++)
             {
@@ -138,7 +138,7 @@ public class MusicNoteManager : IRegisterable
                 else if (i >= args.Amount)
                     colors[i] = ModEntry.Instance.KokoroApi.StatusRendering.DefaultInactiveStatusBarColor;
                 else
-                    colors[i] = new Color(colorList[i]);
+                    colors[i] = new Color(ColorList[i]);
             }
             return ModEntry.Instance.KokoroApi.StatusRendering.MakeBarStatusInfoRenderer().SetSegments(colors).SetRows(2).SetHorizontalSpacing(0);
         }
