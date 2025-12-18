@@ -1,6 +1,7 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
 using Sorwest.LenMod.Actions;
+using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -28,19 +29,32 @@ internal class LenCardMN1 : Card, IRegisterable
         return new()
         {
             cost = 0,
-            retain = true,
+            retain = upgrade != Upgrade.None,
             singleUse = true,
             temporary = true
         };
+    }
+    private static int GetBananaDmg(State state)
+    {
+        bool normalDisplay = state.route is not Combat || state.ship.Get(BananaManager.BananaStatus.Status) >= 0;
+        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
+        return normalDisplay ? dmg : 0;
     }
     public override List<CardAction> GetActions(State state, Combat combat)
     {
         return
         [
-            new AGainBanana()
-            {
-                amount = (int)upgrade + 1
-            }
+            ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
+                new ABananaAttack()
+                {
+                    damage = GetDmg(state, (upgrade == Upgrade.B ? 1 : 0) + GetBananaDmg(state))
+                },
+                new ABananaDamage()
+                {
+                    damage = GetDmg(state, (upgrade == Upgrade.B ? 1 : 0) + GetBananaDmg(state)),
+                    isThrow = true
+                }
+            ).AsCardAction,
         ];
     }
 }

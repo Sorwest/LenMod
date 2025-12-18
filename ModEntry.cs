@@ -115,6 +115,7 @@ public class ModEntry : SimpleMod
         => [
             typeof(BananaManager),
             typeof(BananaTreatManager),
+            typeof(BananaTreeManager),
             typeof(MusicNoteManager),
             typeof(ConvoManager)
         ];
@@ -162,6 +163,7 @@ public class ModEntry : SimpleMod
         "BananaCost",
         "BananaCostSatisfied",
         "BananaTreat",
+        "BananaTree",
         "ButterflyField",
         "EatBanana",
         "EatBananaCost",
@@ -280,7 +282,7 @@ public class ModEntry : SimpleMod
                 Sprites.Add(key: $"{midrow}", value: helper.Content.Sprites.RegisterSprite(file));
 
             // extra animations
-            for (int i = 1; i <= 5; i++)
+            for (int i = 1; i <= 6; i++)
             {
                 file = package.PackageRoot.GetRelativeFile($"assets/drones/{midrow}_{i}.png");
                 if (file.Exists)
@@ -420,16 +422,15 @@ public class ModEntry : SimpleMod
                     new AHurt { targetPlayer = true, hurtAmount = 1 },
                     new AStatus { targetPlayer = true, status = status, statusAmount = 1 },
                 ]);
-                api.RegisterBloodTapOptionProvider(BananaManager.BananaStatus.Status, (_, _, status) => [
-                    new AHurt { targetPlayer = true, hurtAmount = 1 },
-                    new AStatus { targetPlayer = true, status = status, statusAmount = 3 },
-                ]);
-                api.RegisterBloodTapOptionProvider(MusicNoteManager.MusicNoteStatus.Status, (_, _, status) => [
+                api.RegisterBloodTapOptionProvider(BananaTreeManager.BananaTreeStatus.Status, (_, _, status) => [
                     new AHurt { targetPlayer = true, hurtAmount = 1 },
                     new AStatus { targetPlayer = true, status = status, statusAmount = 2 },
                 ]);
+                api.RegisterBloodTapOptionProvider(MusicNoteManager.MusicNoteStatus.Status, (_, _, status) => [
+                    new AHurt { targetPlayer = true, hurtAmount = 1 },
+                    new AStatus { targetPlayer = true, status = status, statusAmount = 3 },
+                ]);
             });
-
 
         // COST BLOCK
         KokoroApi.ActionCosts.RegisterStatusResourceCostIcon(BananaManager.BananaStatus.Status, Sprites["BananaCostSatisfied"].Sprite, Sprites["BananaCost"].Sprite);
@@ -437,4 +438,6 @@ public class ModEntry : SimpleMod
         KokoroApi.ActionCosts.RegisterStatusResourceCostIcon(BananaManager.ThrowBananaStatus.Status, Sprites["ThrowBanana"].Sprite, Sprites["ThrowBananaCost"].Sprite);
         KokoroApi.ActionCosts.RegisterStatusResourceCostIcon(BananaManager.ThrowBananaPiercingStatus.Status, Sprites["ThrowBananaPiercing"].Sprite, Sprites["ThrowBananaPiercingCost"].Sprite);
     }
+    public override object? GetApi(IModManifest requestingMod)
+        => new ApiImplementation();
 }

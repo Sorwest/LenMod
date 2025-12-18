@@ -1,5 +1,6 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
+using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -31,7 +32,14 @@ public class LenCardEXECard : Card, IRegisterable
     }
     public override List<CardAction> GetActions(State state, Combat combat)
     {
-        List<CardAction> result = [
+        return
+        [
+            new AStatus()
+            {
+                status = BananaTreeManager.BananaTreeStatus.Status,
+                statusAmount = 1,
+                targetPlayer = true
+            },
             new ACardOffering()
             {
                 amount = upgrade == Upgrade.A ? 3 : 2,
@@ -42,6 +50,5 @@ public class LenCardEXECard : Card, IRegisterable
                 discount = -1
             }
         ];
-        return result;
     }
 }

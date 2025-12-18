@@ -39,20 +39,10 @@ public class LenCardBreaktime : Card, IRegisterable
     }
     public override List<CardAction> GetActions(State state, Combat combat)
     {
-        List<CardAction> result =
-        [
-            ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
-                new ABananaAttack()
-                {
-                    damage = GetDmg(state, GetBananaDmg(state))
-                },
-                new ABananaDamage()
-                {
-                    damage = GetDmg(state, GetBananaDmg(state)),
-                    isThrow = true
-                }
-                ).AsCardAction,
-            ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
+        List<CardAction> result = [];
+        if (upgrade == Upgrade.B)
+        {
+            result.Add(ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
                 new ABananaHunger()
                 {
                     hurtAmount = GetBananaDmg(state),
@@ -65,35 +55,75 @@ public class LenCardBreaktime : Card, IRegisterable
                     targetPlayer = false,
                     minimumBanana = 2
                 }
-                ).AsCardAction
-        ];
-        if (upgrade == Upgrade.A)
-        {
-            result.Add(
-            ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
+                ).AsCardAction);
+            result.Add(ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
                 new ABananaHunger()
                 {
                     hurtAmount = GetBananaDmg(state),
-                    targetPlayer = true
+                    targetPlayer = true,
+                    minimumBanana = 2
                 },
                 new ABananaDamage()
                 {
                     damage = GetBananaDmg(state),
-                    keepBanana = true,
-                    minimumBanana = 3
-                }).AsCardAction
-            );
+                    targetPlayer = false,
+                    minimumBanana = 2
+                }
+                ).AsCardAction);
         }
-        else if (upgrade == Upgrade.B)
+        else
         {
-            result.Add(ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(
-                ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(
-                    ModEntry.Instance.KokoroApi.ActionCosts.MakeStatusResource(BananaManager.BananaStatus.Status),
-                    amount: 1
-                ),
-                new AGainBanana()
+            result.Add(ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
+                    new ABananaAttack()
+                    {
+                        damage = GetDmg(state, GetBananaDmg(state))
+                    },
+                    new ABananaDamage()
+                    {
+                        damage = GetDmg(state, GetBananaDmg(state)),
+                        isThrow = true
+                    }
+                    ).AsCardAction);
+        }
+        if (upgrade == Upgrade.A)
+        {
+            result.Add(ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
+                    new ABananaAttack()
+                    {
+                        damage = GetDmg(state, GetBananaDmg(state))
+                    },
+                    new ABananaDamage()
+                    {
+                        damage = GetDmg(state, GetBananaDmg(state)),
+                        isThrow = true
+                    }
+                    ).AsCardAction);
+            result.Add(ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
+                    new ABananaAttack()
+                    {
+                        damage = GetDmg(state, GetBananaDmg(state))
+                    },
+                    new ABananaDamage()
+                    {
+                        damage = GetDmg(state, GetBananaDmg(state)),
+                        isThrow = true
+                    }
+                    ).AsCardAction);
+        }
+        else
+        {
+            result.Add(ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
+                new ABananaHunger()
                 {
-                    amount = 4
+                    hurtAmount = GetBananaDmg(state),
+                    targetPlayer = true,
+                    minimumBanana = 2
+                },
+                new ABananaDamage()
+                {
+                    damage = GetBananaDmg(state),
+                    targetPlayer = false,
+                    minimumBanana = 2
                 }
                 ).AsCardAction);
         }

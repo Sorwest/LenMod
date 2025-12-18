@@ -32,8 +32,8 @@ public class LenCardBanana : Card, IRegisterable
     }
     public override List<CardAction> GetActions(State state, Combat combat)
     {
-        return new()
-        {
+        return
+        [
             ModEntry.Instance.KokoroApi.Conditional.MakeAction(
                 ModEntry.Instance.KokoroApi.Conditional.Equation(
                     ModEntry.Instance.KokoroApi.Conditional.Status(BananaManager.BananaStatus.Status),
@@ -48,6 +48,6 @@ public class LenCardBanana : Card, IRegisterable
             {
                 amount = 1
             }
-        };
+        ];
     }
 }

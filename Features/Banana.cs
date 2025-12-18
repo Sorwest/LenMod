@@ -31,6 +31,7 @@ internal sealed class BananaManager : IRegisterable
             postfix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(State_PopulateRun_Postfix))
         );
 
+
         // SPOOF STATUSES
         EatBananaStatus = helper.Content.Statuses.RegisterStatus("EatBananaStatus", new()
         {

@@ -35,13 +35,17 @@
     },
     "MusicNote": {
       "name": "Nota Musical",
-      "description": "Cada turno obtén una carta especial. Ganans 1 <c=status>nota</c> si terminas tu turno con el <c=hurt>casco</c> a la <c=redd>mitad</c> o menos. Pierde todas las <c=status>notas</c> al llegar al máximo. <c=status>Persiste entre combates</c>."
+      "description": "Cada turno obtén una carta especial. Ganas 1 <c=status>nota</c> si terminas tu turno con el <c=hurt>casco</c> a la <c=redd>mitad</c> o menos. Pierde todas las <c=status>notas</c> al llegar al máximo. <c=status>Persiste entre combates</c>."
+    },
+    "BananaTree": {
+      "name": "Banana Tree",
+      "description": "Obtén <c=boldPink>{0}</c> <c=status>bananas</c> al comenzar cada turno."
     }
   },
   "midrow": {
     "Butterfly": {
       "name": "Mariposa",
-      "description": "Alien Alien. Cuando es destruída, la nave atacante obtiene 1 <c=status>NOTA</c>."
+      "description": "Cuando es destruída, la nave atacante obtiene 1 <c=status>NOTA</c>."
     }
   },
   "action": {

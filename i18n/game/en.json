@@ -36,6 +36,10 @@
     "MusicNote": {
       "name": "Music Note",
       "description": "At start of turn, add a special card to hand. Gain 1 <c=status>note</c> on turn end if <c=hurt>hull</c> at <c=redd>half</c> or less. Reset at max stacks. <c=status>Persists across battles</c>."
+    },
+    "BananaTree": {
+      "name": "Banana Tree",
+      "description":  "At start of turn, gain <c=boldPink>{0}</c> <c=status>bananas</c>."
     }
   },
   "midrow": {
@@ -163,7 +167,7 @@
     },
     "LenExe": {
       "name": "Len.EXE",
-      "description": "Add 1 of {{Amount}} <c=cardtrait>discount, temp</c> <c=ffe569>Len</c> cards to your hand."
+      "description": "Gain 1 <c=status>banana tree</c>. Add 1 of {{Amount}} <c=cardtrait>disc, temp</c> <c=ffe569>Len</c> cards to your hand."
     },
     "FanLetter": {
       "name": "Fan Letter"

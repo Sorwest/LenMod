@@ -45,7 +45,7 @@ public class LenCardHolyLanceExplosion : Card, IRegisterable
         [
             new AAttack()
             {
-                damage = GetDmg(state, GetBananaDmg(state) + (upgrade == Upgrade.B ? 1 : 0)),
+                damage = GetDmg(state, upgrade == Upgrade.B ? 2 : 1),
                 piercing = true,
                 fast = true
             },
