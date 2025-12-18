@@ -2,6 +2,7 @@
 using Nickel;
 using Sorwest.LenMod.Actions;
 using Sorwest.LenMod.Features;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -30,13 +31,17 @@ public class LenCardParadichlorobenzene : Card, IRegisterable, IHasCustomCardTra
     {
         return new()
         {
-            cost = upgrade == Upgrade.A ? 3 : 4,
+            cost = upgrade == Upgrade.A ? 2 : 4,
             exhaust = true
         };
     }
     public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
     {
-        return new HashSet<ICardTraitEntry> { ModEntry.Instance.KokoroApi.Fleeting.Trait };
+        return (HashSet<ICardTraitEntry>)(upgrade switch
+        {
+            Upgrade.B => [],
+            _ => [ModEntry.Instance.KokoroApi.Fleeting.Trait]
+        });
     }
     public override List<CardAction> GetActions(State state, Combat combat)
     {

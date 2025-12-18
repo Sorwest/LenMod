@@ -27,7 +27,7 @@ public class LenCardNiccoriTeamSurvey : Card, IRegisterable
     {
         return new()
         {
-            cost = upgrade == Upgrade.B ? 4 : (upgrade == Upgrade.None ? 3 : 2),
+            cost = upgrade == Upgrade.A ? 3 : 4,
             exhaust = true
         };
     }

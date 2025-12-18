@@ -27,7 +27,7 @@ public class LenCardBreaktime : Card, IRegisterable
     {
         return new()
         {
-            cost = upgrade == Upgrade.A ? 0 : 1,
+            cost = 1,
         };
     }
     private static int GetBananaDmg(State state)

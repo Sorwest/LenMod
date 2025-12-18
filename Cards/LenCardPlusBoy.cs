@@ -28,7 +28,7 @@ public class LenCardPlusBoy : Card, IRegisterable
         return new()
         {
             cost = 1,
-            exhaust = upgrade == Upgrade.None,
+            exhaust = upgrade != Upgrade.A,
         };
     }
     public override List<CardAction> GetActions(State state, Combat combat)

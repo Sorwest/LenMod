@@ -1,6 +1,7 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
 using Sorwest.LenMod.Actions;
+using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -25,20 +26,26 @@ public class LenCardBanana : Card, IRegisterable
     {
         return new()
         {
-            cost = upgrade == Upgrade.A ? 0 : 1
+            cost = 1
         };
     }
     public override List<CardAction> GetActions(State state, Combat combat)
     {
         return new()
         {
+            ModEntry.Instance.KokoroApi.Conditional.MakeAction(
+                ModEntry.Instance.KokoroApi.Conditional.Equation(
+                    ModEntry.Instance.KokoroApi.Conditional.Status(BananaManager.BananaStatus.Status),
+                    ExternalAPI.IKokoroApi.IV2.IConditionalApi.EquationOperator.LessThanOrEqual,
+                    ModEntry.Instance.KokoroApi.Conditional.Constant(upgrade == Upgrade.A ? 6 : 4),
+                    ExternalAPI.IKokoroApi.IV2.IConditionalApi.EquationStyle.Possession),
+                new ADrawCard()
+            {
+                count = upgrade == Upgrade.B ? 3 : 1
+            }).AsCardAction,
             new AGainBanana()
             {
                 amount = 1
-            },
-            new ADrawCard()
-            {
-                count = upgrade == Upgrade.B ? 3 : 1
             }
         };
     }

@@ -10,8 +10,7 @@ public class ASoundDummyAction : CardAction
         if (!ModEntry.Instance.Settings.ProfileBased.Current.EnabledSounds)
             return;
         timer = 0;
-        if (sound is not ISoundEntry)
-            sound?.CreateInstance();
+        sound?.CreateInstance();
     }
 }
 public class ARandomSoundDummyAction : CardAction
@@ -32,14 +31,12 @@ public class ARandomSoundDummyAction : CardAction
             }
             while (counter > 0);
             IModSoundEntry sound = sounds[state.rngActions.NextInt() % sounds.Count];
-            if (sound is not ISoundEntry)
-                sound?.CreateInstance();
+            sound?.CreateInstance();
         }
         else
         {
             IModSoundEntry sound = sounds[state.rngActions.NextInt() % sounds.Count];
-            if (sound is not ISoundEntry)
-                sound?.CreateInstance();
+            sound?.CreateInstance();
         }
     }
 }
