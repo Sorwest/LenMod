@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
+
 public class LenCardBringItOn : Card, IRegisterable
 {
     public static IModSoundEntry BringitSound { get; set; } = null!;

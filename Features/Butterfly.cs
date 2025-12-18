@@ -1,15 +1,12 @@
-﻿using HarmonyLib;
-using Nanoray.PluginManager;
-using Nickel;
+﻿using Nickel;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using static Sorwest.LenMod.ExternalAPI.IKokoroApi;
 
 namespace Sorwest.LenMod.Features;
+
 internal sealed class Butterfly : StuffBase
 {
-    public static List<Spr> flappingSprites = [.. Enumerable.Range(1, 8).Select(i => ModEntry.Instance.Sprites[$"Butterfly_{i}"].Sprite)];
+    public static List<Spr> flappingSprites = [.. Enumerable.Range(1, 5).Select(i => ModEntry.Instance.Sprites[$"Butterfly_{i}"].Sprite)];
     public override Spr? GetIcon()
     {
         return ModEntry.Instance.Sprites["ButterflyField"].Sprite;
@@ -25,9 +22,8 @@ internal sealed class Butterfly : StuffBase
     }
     public override void Render(G g, Vec v)
     {
-        Spr spr = flappingSprites.GetModulo((int)(g.state.time * 24.0 + (double)(x * 10)));
-        DrawWithHilight(g, ModEntry.Instance.Sprites["ButterflyTorso"].Sprite, v + GetOffset(g), false, false);
-        DrawWithHilight(g, spr, v + GetOffset(g), false, false);
+        DrawWithHilight(g, ModEntry.Instance.Sprites["Butterfly"].Sprite, v + GetOffset(g), false, false);
+        DrawWithHilight(g, flappingSprites.GetModulo((int)(g.state.time * 4.0 + (double)(x * 10))), v + GetOffset(g), false, false);
     }
     public override List<Tooltip> GetTooltips()
     {

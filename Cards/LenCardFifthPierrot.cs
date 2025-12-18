@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
+
 public class LenCardFifthPierrot : Card, IRegisterable
 {
     public static IModSoundEntry PierrotSound { get; set; } = null!;

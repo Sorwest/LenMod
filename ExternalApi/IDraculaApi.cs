@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 
 namespace Sorwest.LenMod.ExternalAPI;
+
 public interface IDraculaApi
 {
     IDeckEntry DraculaDeck { get; }

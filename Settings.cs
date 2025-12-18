@@ -4,6 +4,7 @@ using Sorwest.LenMod.ExternalAPI;
 using System;
 
 namespace Sorwest.LenMod;
+
 internal sealed class Settings
 {
     [JsonProperty]

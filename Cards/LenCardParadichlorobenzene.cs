@@ -2,7 +2,6 @@
 using Nickel;
 using Sorwest.LenMod.Actions;
 using Sorwest.LenMod.Features;
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 

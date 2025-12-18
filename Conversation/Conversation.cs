@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 
 namespace Sorwest.LenMod.Conversation;
+
 internal sealed class ConvoManager : IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)

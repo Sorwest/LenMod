@@ -1,4 +1,5 @@
 ﻿namespace Sorwest.LenMod.Conversation;
+
 internal class CombatConvo
 {
     internal static void Inject()

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Enemies;
+
 internal sealed class MikuAI : AI, IRegisterable
 {
     [JsonProperty]
@@ -158,7 +159,7 @@ internal sealed class MikuAI : AI, IRegisterable
                         fromX = 6
                     }
                 ]
-            });
+                });
         bool hard = state.GetHarderElites();
         MissileType m1 = MissileType.normal;
         int b1 = 1;
@@ -239,7 +240,7 @@ internal sealed class MikuAI : AI, IRegisterable
                         missileType = m1,
                         fromX = 0
                     } : new IntentSpawn
-                    { 
+                    {
                         thing = new Asteroid(),
                         fromX = 0
                     },
@@ -269,7 +270,7 @@ internal sealed class MikuAI : AI, IRegisterable
             () => new EnemyDecision
             {
                 actions = AIHelpers.MoveToAimAt(state, ownShip, state.ship, 1, 5, movesFast: false, attackWeakPoints: true, avoidAsteroids: false, avoidMines: false),
-                intents = 
+                intents =
                 [
                     new IntentStatus
                     {

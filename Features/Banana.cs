@@ -4,6 +4,7 @@ using Nickel;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Features;
+
 internal sealed class BananaManager : IRegisterable
 {
     internal static IStatusEntry BananaStatus { get; private set; } = null!;

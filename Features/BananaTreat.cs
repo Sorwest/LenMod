@@ -6,6 +6,7 @@ using Sorwest.LenMod.ExternalAPI;
 using System.Linq;
 
 namespace Sorwest.LenMod.Features;
+
 internal sealed class BananaTreatManager : IRegisterable, IKokoroApi.IV2.IStatusLogicApi.IHook
 {
     internal static IStatusEntry BananaTreatStatus { get; private set; } = null!;

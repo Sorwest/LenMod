@@ -1,10 +1,11 @@
-﻿using Nickel;
-using FSPRO;
+﻿using FSPRO;
+using Nickel;
+using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Linq;
-using Sorwest.LenMod.Features;
 
 namespace Sorwest.LenMod.Actions;
+
 public class AButterflyField : CardAction
 {
     public override void Begin(G g, State s, Combat c)

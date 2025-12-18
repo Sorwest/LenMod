@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
+
 public class LenCardChildishWar : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)

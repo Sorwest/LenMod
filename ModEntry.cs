@@ -162,7 +162,6 @@ public class ModEntry : SimpleMod
         "BananaCost",
         "BananaCostSatisfied",
         "BananaTreat",
-        "Butterfly",
         "ButterflyField",
         "EatBanana",
         "EatBananaCost",
@@ -175,8 +174,7 @@ public class ModEntry : SimpleMod
         "MusicNote"
         ];
     internal IList<string> MidrowSprites { get; } = [
-        "ButterflyDrone",
-        "ButterflyTorso"
+        "Butterfly"
         ];
     internal Dictionary<string, ISpriteEntry> Sprites { get; } = [];
 
@@ -280,14 +278,16 @@ public class ModEntry : SimpleMod
             file = package.PackageRoot.GetRelativeFile($"assets/drones/{midrow}.png");
             if (file.Exists)
                 Sprites.Add(key: $"{midrow}", value: helper.Content.Sprites.RegisterSprite(file));
+
+            // extra animations
+            for (int i = 1; i <= 5; i++)
+            {
+                file = package.PackageRoot.GetRelativeFile($"assets/drones/{midrow}_{i}.png");
+                if (file.Exists)
+                    Sprites.Add(key: $"{midrow}_{i}", value: helper.Content.Sprites.RegisterSprite(file));
+            }
         }
-        // extra animations
-        for (int midrow = 1; midrow <= 8; midrow++)
-        {
-            file = package.PackageRoot.GetRelativeFile($"assets/drones/Butterfly_{midrow}.png");
-            if (file.Exists)
-                Sprites.Add(key: $"Butterfly_{midrow}", value: helper.Content.Sprites.RegisterSprite(file));
-        }
+
         // DECK REGISTRATION BLOCK
         LenDeck = helper.Content.Decks.RegisterDeck("Len", new()
         {

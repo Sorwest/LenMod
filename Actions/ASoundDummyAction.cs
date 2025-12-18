@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 namespace Sorwest.LenMod.Actions;
+
 public class ASoundDummyAction : CardAction
 {
     public IModSoundEntry? sound;

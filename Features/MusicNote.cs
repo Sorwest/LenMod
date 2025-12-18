@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Features;
+
 public class MusicNoteManager : IRegisterable
 {
     internal static IStatusEntry MusicNoteStatus { get; private set; } = null!;
@@ -74,7 +75,7 @@ public class MusicNoteManager : IRegisterable
             int note = args.Ship.Get(args.Status);
             if (note <= 0)
                 return false;
-            int notemod = (note-1) % 3;
+            int notemod = (note - 1) % 3;
             if (args.Timing == IKokoroApi.IV2.IStatusLogicApi.StatusTurnTriggerTiming.TurnEnd)
             {
                 if (note != 12
