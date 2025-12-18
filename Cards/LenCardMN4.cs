@@ -1,5 +1,6 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
+using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -15,88 +16,38 @@ internal class LenCardMN4 : Card, IRegisterable
             Meta = new()
             {
                 deck = ModEntry.Instance.LenDeck.Deck,
-                rarity = Rarity.rare,
-                dontOffer = true
+                rarity = Rarity.uncommon,
+                dontOffer = true,
+                upgradesTo = [Upgrade.A, Upgrade.B]
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Encore", "name"]).Localize
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "TrendSetter", "name"]).Localize
         });
     }
     public override CardData GetData(State state)
     {
         return new()
         {
-            cost = 3,
+            cost = 0,
             retain = true,
             singleUse = true,
-            temporary = true,
-            description = ModEntry.Instance.Localizations.Localize(["card", "Encore", "descriptionLen"])
+            temporary = true
         };
     }
     public override List<CardAction> GetActions(State state, Combat combat)
     {
         return
         [
-            new AAddCard()
+            new AAttack()
             {
-                amount = 1,
-                card = new LenCardBanana() { discount = -1, temporaryOverride = true },
-                destination = CardDestination.Deck,
-                omitFromTooltips = true
+                damage = GetDmg(state, (int)upgrade + 2),
+                piercing = true
             },
-            new AAddCard()
+            new AStatus()
             {
-                amount = 1,
-                card = new LenCardBanana() { discount = -1, temporaryOverride = true, upgrade = Upgrade.A },
-                destination = CardDestination.Deck,
-                omitFromTooltips = true
-            },
-            new AAddCard()
-            {
-                amount = 1,
-                card = new LenCardBanana() { discount = -1, temporaryOverride = true, upgrade = Upgrade.B },
-                destination = CardDestination.Deck,
-                omitFromTooltips = true
-            },
-            new AAddCard()
-            {
-                amount = 1,
-                card = new LenCardMN1() { discount = -1 },
-                destination = CardDestination.Deck,
-                omitFromTooltips = true
-            },
-            new AAddCard()
-            {
-                amount = 2,
-                card = new LenCardMN1() { discount = -1, upgrade = Upgrade.A },
-                destination = CardDestination.Deck,
-                omitFromTooltips = true
-            },
-            new AAddCard()
-            {
-                amount = 2,
-                card = new LenCardMN1() { discount = -1, upgrade = Upgrade.B },
-                destination = CardDestination.Deck
-            },
-            new AAddCard()
-            {
-                amount = 1,
-                card = new LenCardMN5() { discount = -1 },
-                destination = CardDestination.Deck
-            },
-            new AAddCard()
-            {
-                amount = 1,
-                card = new LenCardMN5() { discount = -1, upgrade = Upgrade.A },
-                destination = CardDestination.Deck,
-                omitFromTooltips = true
-            },
-            new AAddCard()
-            {
-                amount = 2,
-                card = new LenCardMN5() { discount = -1, upgrade = Upgrade.B },
-                destination = CardDestination.Deck,
-                omitFromTooltips = true
-            },
+                status = ModEntry.Instance.LenCharacter.MissingStatus.Status,
+                statusAmount = 1,
+                targetPlayer = true
+            }
         ];
     }
 }

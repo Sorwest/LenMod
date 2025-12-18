@@ -16,7 +16,8 @@ internal class LenCardMN2 : Card, IRegisterable
             {
                 deck = ModEntry.Instance.LenDeck.Deck,
                 rarity = Rarity.common,
-                dontOffer = true
+                dontOffer = true,
+                upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "CrowdWork", "name"]).Localize
         });
@@ -25,7 +26,7 @@ internal class LenCardMN2 : Card, IRegisterable
     {
         return new()
         {
-            cost = 1,
+            cost = upgrade == Upgrade.B ? 0 : 1,
             retain = true,
             singleUse = true,
             temporary = true
@@ -35,7 +36,7 @@ internal class LenCardMN2 : Card, IRegisterable
     {
         return
         [
-            new ASpawn() { thing = new Missile() { missileType = MissileType.heavy } }
+            new ASpawn() { thing = new Missile() { missileType = upgrade == Upgrade.None ? MissileType.normal : MissileType.heavy } }
         ];
     }
 }

@@ -27,8 +27,8 @@ public class LenCardNiccoriTeamSurvey : Card, IRegisterable
     {
         return new()
         {
-            cost = upgrade == Upgrade.A ? 2 : 3,
-            exhaust = upgrade == Upgrade.B ? false : true
+            cost = upgrade == Upgrade.B ? 4 : (upgrade == Upgrade.None ? 3 : 2),
+            exhaust = true
         };
     }
     public override List<CardAction> GetActions(State state, Combat combat)
@@ -40,23 +40,16 @@ public class LenCardNiccoriTeamSurvey : Card, IRegisterable
             {
                 status = BananaManager.BananaStatus.Status,
             },
-            ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
-                new ABananaAttack()
-                {
-                    xHint = 1,
-                    damage = GetDmg(state, amount),
-                    targetPlayer = false
-                },
-                new ABananaDamage()
-                {
-                    isThrow = true,
-                    damage = GetDmg(state, amount),
-                    targetPlayer = false
-                }
-            ).AsCardAction,
+            new AStatus()
+            {
+                xHint = upgrade == Upgrade.B ? 2 : 1,
+                status = MusicNoteManager.MusicNoteStatus.Status,
+                statusAmount = (upgrade == Upgrade.B ? 2 : 1) * state.ship.Get(BananaManager.BananaStatus.Status),
+                targetPlayer = true
+            },
             new AGainBanana() { loseAll = true }
         ];
-        if (upgrade != Upgrade.None)
+        if (upgrade == Upgrade.B)
         {
             result.Add(new AGainBanana()
             {

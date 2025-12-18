@@ -42,8 +42,8 @@ public class MusicNoteManager : IRegisterable
         });
 
         ModEntry.Instance.Harmony.Patch(
-        original: AccessTools.DeclaredMethod(typeof(Ship), nameof(Ship.Set)),
-        prefix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(Ship_Set_Prefix))
+            original: AccessTools.DeclaredMethod(typeof(Ship), nameof(Ship.Set)),
+            prefix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(Ship_Set_Prefix))
         );
 
         ModEntry.Instance.Harmony.Patch(
@@ -71,9 +71,11 @@ public class MusicNoteManager : IRegisterable
             int note = args.Ship.Get(args.Status);
             if (note <= 0)
                 return false;
+            int notemod = (note-1) % 3;
             if (args.Timing == IKokoroApi.IV2.IStatusLogicApi.StatusTurnTriggerTiming.TurnEnd)
             {
-                if (note != 12 && (args.Ship.hull == 1 || (args.Ship.hull * 2 <= args.Ship.hullMax)))
+                if (note != 12
+                    && (args.Ship.hull == 1 || (args.Ship.hull * 2 <= args.Ship.hullMax)))
                     args.Combat.Queue(new AStatus()
                     {
                         status = MusicNoteStatus.Status,
@@ -82,35 +84,39 @@ public class MusicNoteManager : IRegisterable
                     });
                 return false;
             }
+            Card card = new LenCardMN5();
+            bool isMiku = args.Ship.ai?.GetType() == typeof(MikuAI);
             if (note == 12)
             {
                 args.Combat.Queue(new AStatus() { status = MusicNoteStatus.Status, mode = AStatusMode.Set, statusAmount = 0, targetPlayer = args.Ship.isPlayerShip });
-                Card card = new LenCardMN4();
-                if (args.Ship.ai?.GetType() == typeof(MikuAI))
+                if (isMiku)
+                    card = new MikuCardMN5();
+            }
+            else if (note > 9)
+            {
+                card = new LenCardMN4 { upgrade = (Upgrade)notemod };
+                if (isMiku)
                     card = new MikuCardMN4();
-                args.Combat.Queue(new AAddCard() { amount = 1, card = card, destination = CardDestination.Hand });
             }
-            else if (note > 8)
+            else if (note > 6)
             {
-                Card card = new LenCardMN3();
-                if (args.Ship.ai is not null && args.Ship.ai.GetType() == typeof(MikuAI))
+                card = new LenCardMN3 { upgrade = (Upgrade)notemod };
+                if (isMiku)
                     card = new MikuCardMN3();
-                args.Combat.Queue(new AAddCard() { amount = 1, card = card, destination = CardDestination.Hand });
             }
-            else if (note > 4)
+            else if (note > 3)
             {
-                Card card = new LenCardMN2();
-                if (args.Ship.ai is not null && args.Ship.ai.GetType() == typeof(MikuAI))
+                card = new LenCardMN2 { upgrade = (Upgrade)notemod };
+                if (isMiku)
                     card = new MikuCardMN2();
-                args.Combat.Queue(new AAddCard() { amount = 1, card = card, destination = CardDestination.Hand });
             }
             else
             {
-                Card card = new LenCardMN1();
-                if (args.Ship.ai is not null && args.Ship.ai.GetType() == typeof(MikuAI))
+                card = new LenCardMN1 { upgrade = (Upgrade)notemod };
+                if (isMiku)
                     card = new MikuCardMN1();
-                args.Combat.Queue(new AAddCard() { amount = 1, card = card, destination = CardDestination.Hand });
             }
+            args.Combat.Queue(new AAddCard() { amount = 1, card = card, destination = CardDestination.Hand });
             args.Ship.PulseStatus(args.Status);
             return false;
         }

@@ -1,5 +1,6 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
+using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -15,44 +16,35 @@ internal class MikuCardMN4 : Card, IRegisterable
             Meta = new()
             {
                 deck = ModEntry.Instance.MikuDeck.Deck,
-                rarity = Rarity.rare,
+                rarity = Rarity.uncommon,
                 dontOffer = true
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Encore", "name"]).Localize
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Vocavoid", "name"]).Localize
         });
     }
     public override CardData GetData(State state)
     {
         return new()
         {
-            cost = 39,
+            cost = 2,
+            exhaust = true,
             retain = true,
-            singleUse = true,
-            temporary = true,
-            description = ModEntry.Instance.Localizations.Localize(["card", "Encore", "descriptionMiku"])
+            temporary = true
         };
     }
     public override List<CardAction> GetActions(State state, Combat combat)
     {
         return
         [
-            ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(new AAddCard()
+            ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(new AStatus()
             {
-                amount = 1,
-                card = new MikuCardMN1(),
-                destination = CardDestination.Deck,
+                status = ModEntry.Instance.LenCharacter.MissingStatus.Status,
+                statusAmount = 1,
+                targetPlayer = true
             }).AsCardAction,
-            ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(new AAddCard()
+            ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(new ADrawCard()
             {
-                amount = 2,
-                card = new MikuCardMN3(),
-                destination = CardDestination.Deck
-            }).AsCardAction,
-            ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(new AAddCard()
-            {
-                amount = 3,
-                card = new MikuCardMN5(),
-                destination = CardDestination.Deck
+                count = 1
             }).AsCardAction
         ];
     }

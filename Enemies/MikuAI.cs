@@ -2,7 +2,9 @@
 using Newtonsoft.Json;
 using Nickel;
 using Sorwest.LenMod.Actions;
+using Sorwest.LenMod.Artifacts;
 using Sorwest.LenMod.Features;
+using System.Linq;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Enemies;
@@ -15,7 +17,10 @@ internal sealed class MikuAI : AI, IRegisterable
         helper.Content.Enemies.RegisterEnemy(new()
         {
             EnemyType = MethodBase.GetCurrentMethod()!.DeclaringType!,
-            ShouldAppearOnMap = (_, map) => (ModEntry.Instance.Settings.ProfileBased.Current.EnabledMikuAI && map is MapLawless) ? BattleType.Elite : null,
+            ShouldAppearOnMap = (_, map)
+            => (ModEntry.Instance.Settings.ProfileBased.Current.EnabledMikuAI
+                && _.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault() is not null
+                && map is MapLawless) ? BattleType.Elite : null,
             Name = ModEntry.Instance.AnyLocalizations.Bind(["enemy", "miku", "title"]).Localize
         });
         helper.Content.Ships.RegisterPart("mikuchassis", new()
@@ -113,7 +118,7 @@ internal sealed class MikuAI : AI, IRegisterable
     }
     public override EnemyDecision PickNextIntent(State state, Combat combat, Ship ownShip)
     {
-        if (aiCounter == 39)
+        if (aiCounter >= 39)
             return MoveSet(
                 aiCounter++,
                 () => new EnemyDecision
@@ -124,32 +129,32 @@ internal sealed class MikuAI : AI, IRegisterable
                 [
                     new IntentAttack
                     {
-                        damage = 39,
+                        damage = aiCounter,
                         fromX = 0
                     },
                     new IntentAttack
                     {
-                        damage = 39,
+                        damage = aiCounter,
                         fromX = 1
                     },
                     new IntentAttack
                     {
-                        damage = 39,
+                        damage = aiCounter,
                         fromX = 3
                     },
                     new IntentAttack
                     {
-                        damage = 39,
+                        damage = aiCounter,
                         fromX = 4
                     },
                     new IntentAttack
                     {
-                        damage = 39,
+                        damage = aiCounter,
                         fromX = 5
                     },
                     new IntentAttack
                     {
-                        damage = 39,
+                        damage = aiCounter,
                         fromX = 6
                     }
                 ]

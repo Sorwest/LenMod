@@ -66,14 +66,16 @@ public class ModEntry : SimpleMod
         typeof(LenCardMN2),
         typeof(LenCardMN3),
         typeof(LenCardMN4),
-        typeof(LenCardMN5)
+        typeof(LenCardMN5),
+        typeof(LenCardMN6)
     ];
     internal static IReadOnlyList<Type> MikuEncoreCardTypes { get; } = [
         typeof(MikuCardMN1),
         typeof(MikuCardMN2),
         typeof(MikuCardMN3),
         typeof(MikuCardMN4),
-        typeof(MikuCardMN5)
+        typeof(MikuCardMN5),
+        typeof(MikuCardMN6)
     ];
     internal static IReadOnlyList<Type> LenStarterArtifactTypes { get; } = [
         typeof(LenArtifactBananaStash),

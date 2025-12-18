@@ -17,7 +17,8 @@ internal class LenCardMN1 : Card, IRegisterable
             {
                 deck = ModEntry.Instance.LenDeck.Deck,
                 rarity = Rarity.common,
-                dontOffer = true
+                dontOffer = true,
+                upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "FanLetter", "name"]).Localize
         });
@@ -36,14 +37,9 @@ internal class LenCardMN1 : Card, IRegisterable
     {
         return
         [
-            new AAttack()
-            {
-                damage = GetDmg(state, upgrade == Upgrade.B ? 2 : upgrade == Upgrade.A ? 1 : 0),
-                stunEnemy = true
-            },
             new AGainBanana()
             {
-                amount = upgrade == Upgrade.A ? 2 : 1
+                amount = (int)upgrade + 1
             }
         ];
     }

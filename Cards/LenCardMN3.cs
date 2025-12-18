@@ -17,7 +17,8 @@ internal class LenCardMN3 : Card, IRegisterable
             {
                 deck = ModEntry.Instance.LenDeck.Deck,
                 rarity = Rarity.uncommon,
-                dontOffer = true
+                dontOffer = true,
+                upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "TrendSetter", "name"]).Localize
         });
@@ -26,7 +27,7 @@ internal class LenCardMN3 : Card, IRegisterable
     {
         return new()
         {
-            cost = 2,
+            cost = (int)upgrade - 2,
             retain = true,
             singleUse = true,
             temporary = true
