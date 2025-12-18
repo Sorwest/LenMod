@@ -66,14 +66,14 @@ internal class LenCardMN5 : Card, IRegisterable
             },
             new AAddCard()
             {
-                amount = 2,
+                amount = 1,
                 card = new LenCardMN1() { discount = -1, upgrade = Upgrade.A },
                 destination = CardDestination.Deck,
                 omitFromTooltips = true
             },
             new AAddCard()
             {
-                amount = 2,
+                amount = 1,
                 card = new LenCardMN1() { discount = -1, upgrade = Upgrade.B },
                 destination = CardDestination.Deck,
                 omitFromTooltips = true
@@ -93,7 +93,7 @@ internal class LenCardMN5 : Card, IRegisterable
             },
             new AAddCard()
             {
-                amount = 2,
+                amount = 1,
                 card = new LenCardMN6() { discount = -1, upgrade = Upgrade.B },
                 destination = CardDestination.Deck,
                 omitFromTooltips = true

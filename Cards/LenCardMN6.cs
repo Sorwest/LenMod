@@ -50,7 +50,7 @@ internal class LenCardMN6 : Card, IRegisterable
             }).AsCardAction,
             new AAttack()
             {
-                damage = GetDmg(state, upgrade == Upgrade.A ? 2 : 1),
+                damage = GetDmg(state, upgrade == Upgrade.None ? 1 : 2),
                 piercing = true
             },
             new ADrawCard()
