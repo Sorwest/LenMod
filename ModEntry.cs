@@ -282,11 +282,11 @@ public class ModEntry : SimpleMod
                 Sprites.Add(key: $"{midrow}", value: helper.Content.Sprites.RegisterSprite(file));
         }
         // extra animations
-        for (int midrow = 0; midrow < 8; midrow++)
+        for (int midrow = 1; midrow <= 8; midrow++)
         {
             file = package.PackageRoot.GetRelativeFile($"assets/drones/Butterfly_{midrow}.png");
             if (file.Exists)
-                Sprites.Add(key: $"{midrow}", value: helper.Content.Sprites.RegisterSprite(file));
+                Sprites.Add(key: $"Butterfly_{midrow}", value: helper.Content.Sprites.RegisterSprite(file));
         }
         // DECK REGISTRATION BLOCK
         LenDeck = helper.Content.Decks.RegisterDeck("Len", new()
