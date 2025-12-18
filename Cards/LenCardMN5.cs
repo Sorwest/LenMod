@@ -75,7 +75,8 @@ internal class LenCardMN5 : Card, IRegisterable
             {
                 amount = 2,
                 card = new LenCardMN1() { discount = -1, upgrade = Upgrade.B },
-                destination = CardDestination.Deck
+                destination = CardDestination.Deck,
+                omitFromTooltips = true
             },
             new AAddCard()
             {

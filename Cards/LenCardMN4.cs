@@ -20,7 +20,7 @@ internal class LenCardMN4 : Card, IRegisterable
                 dontOffer = true,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "TrendSetter", "name"]).Localize
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Vocavoid", "name"]).Localize
         });
     }
     public override CardData GetData(State state)

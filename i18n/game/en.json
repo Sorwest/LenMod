@@ -2,7 +2,7 @@
   "character": {
     "len": {
       "name": "Len",
-      "description": "What is a VTuber doing in this game?"
+      "description": "Uses his love of bananas to do a <c=keyword>little bit of everything</c>."
     }
   },
   "enemy": {
@@ -173,8 +173,8 @@
     },
     "Encore": {
       "name": "Encore 39",
-      "descriptionLen": "Add 3x <c=cardtrait>disc, temp</c> <c=ffe569>Bananas</c>, <c=ffe569>Fan Letters</c> & <c=ffe569>Close To Gray</c> to deck.",
-      "descriptionMiku": "<c=hurt>Turn End:</c> Add 1 <c=7ed2d6>Fan Letter</c>, 2 <c=7ed2d6>Set Trends</c> & 3 <c=7ed2d6>World Is Mine</c> to deck."
+      "descriptionLen": "Add 3x <c=cardtrait>disc, temp</c> <c=ffe569>Banana</c>, <c=ffe569>Fan Letter</c> & <c=ffe569>Close To Gray</c> to deck.",
+      "descriptionMiku": "<c=hurt>Turn End:</c> Add 1 <c=7ed2d6>Fan Letter</c>, 2 <c=7ed2d6>Set Trend</c> & 3 <c=7ed2d6>World Is Mine</c> to deck."
     },
     "CloseToGray": {
       "name": "Close to Gray"
