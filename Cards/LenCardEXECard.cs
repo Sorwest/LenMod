@@ -27,7 +27,8 @@ public class LenCardEXECard : Card, IRegisterable
         return new()
         {
             cost = upgrade == Upgrade.A ? 0 : 1,
-            description = ModEntry.Instance.Localizations.Localize(["card", "LenExe", "description"], new { Amount = upgrade == Upgrade.A ? 3 : 2 })
+            exhaust = true,
+            description = ModEntry.Instance.Localizations.Localize(["card", "LenExe", "description"], new { Amount = upgrade == Upgrade.B ? 3 : 2 })
         };
     }
     public override List<CardAction> GetActions(State state, Combat combat)
@@ -42,7 +43,7 @@ public class LenCardEXECard : Card, IRegisterable
             },
             new ACardOffering()
             {
-                amount = upgrade == Upgrade.A ? 3 : 2,
+                amount = upgrade == Upgrade.B ? 3 : 2,
                 limitDeck = ModEntry.Instance.LenDeck.Deck,
                 makeAllCardsTemporary = true,
                 canSkip = false,

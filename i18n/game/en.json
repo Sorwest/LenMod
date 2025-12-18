@@ -39,7 +39,7 @@
     },
     "BananaTree": {
       "name": "Banana Tree",
-      "description":  "At start of turn, gain <c=boldPink>{0}</c> <c=status>bananas</c>."
+      "description":  "At start of turn, gain 2 <c=status>bananas</c> per tree."
     }
   },
   "midrow": {

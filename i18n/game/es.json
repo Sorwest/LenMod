@@ -38,8 +38,8 @@
       "description": "Cada turno obtén una carta especial. Ganas 1 <c=status>nota</c> si terminas tu turno con el <c=hurt>casco</c> a la <c=redd>mitad</c> o menos. Pierde todas las <c=status>notas</c> al llegar al máximo. <c=status>Persiste entre combates</c>."
     },
     "BananaTree": {
-      "name": "Banana Tree",
-      "description": "Obtén <c=boldPink>{0}</c> <c=status>bananas</c> al comenzar cada turno."
+      "name": "Platanera",
+      "description": "Obtén 2 <c=status>bananas</c> al comenzar cada turno por cada árbol."
     }
   },
   "midrow": {
@@ -167,7 +167,7 @@
     },
     "LenExe": {
       "name": "Len.EXE",
-      "description": "Obtén 1 de {{Amount}} cartas <c=cardtrait>temp. con desc.</c> de <c=ffe569>Len</c>."
+      "description": "Obtén 1 <c=status>platanera</c>. Obtén 1 de {{Amount}} cartas <c=cardtrait>desc, temp</c> de <c=ffe569>Len</c>."
     },
     "FanLetter": {
       "name": "Fan Letter"
