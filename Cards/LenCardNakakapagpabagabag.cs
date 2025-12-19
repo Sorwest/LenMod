@@ -55,17 +55,12 @@ public class LenCardNakakapagpabagabag : Card, IRegisterable
                         isThrow = true
                     }
                     ).AsCardAction,
-            ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(
-                ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(
-                    ModEntry.Instance.KokoroApi.ActionCosts.MakeStatusResource(BananaManager.BananaStatus.Status),
-                    amount: 1),
-                new AStatus()
-                {
-                    status = Status.overdrive,
-                    statusAmount = 1,
-                    targetPlayer = true
-                }
-            ).AsCardAction
+            new AStatus()
+            {
+                status = Status.overdrive,
+                statusAmount = 1,
+                targetPlayer = true
+            }
         ];
     }
 }
