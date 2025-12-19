@@ -165,6 +165,7 @@ public class ModEntry : SimpleMod
         "BananaTreat",
         "BananaTree",
         "ButterflyField",
+        "ButterflyMidrow",
         "EatBanana",
         "EatBananaCost",
         "GainBananaLoseAll",

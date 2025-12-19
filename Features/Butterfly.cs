@@ -9,7 +9,7 @@ internal sealed class Butterfly : StuffBase
     internal static List<Spr> animationButterfly = [.. Enumerable.Range(1, 6).Select(i => ModEntry.Instance.Sprites[$"Butterfly_{i}"].Sprite)];
     public override Spr? GetIcon()
     {
-        return ModEntry.Instance.Sprites["ButterflyField"].Sprite;
+        return ModEntry.Instance.Sprites["ButterflyMidrow"].Sprite;
     }
     public override double GetWiggleAmount()
     {
@@ -22,8 +22,8 @@ internal sealed class Butterfly : StuffBase
     }
     public override void Render(G g, Vec v)
     {
-        DrawWithHilight(g, ModEntry.Instance.Sprites["Butterfly"].Sprite, v + GetOffset(g), false, false);
-        DrawWithHilight(g, animationButterfly.GetModulo((int)(g.state.time * 3.14 + (double)(x * 10))), v + GetOffset(g), false, false);
+        DrawWithHilight(g, ModEntry.Instance.Sprites["Butterfly"].Sprite, v + GetOffset(g), targetPlayer, targetPlayer);
+        DrawWithHilight(g, animationButterfly.GetModulo((int)(g.state.time * 3.14 + (double)(x * 10))), v + GetOffset(g), targetPlayer, targetPlayer);
     }
     public override List<Tooltip> GetTooltips()
     {
@@ -31,7 +31,7 @@ internal sealed class Butterfly : StuffBase
         {
             new GlossaryTooltip($"midrow.{ModEntry.Instance.Package.Manifest.UniqueName}::Butterfly")
             {
-                Icon = ModEntry.Instance.Sprites["ButterflyField"].Sprite,
+                Icon = ModEntry.Instance.Sprites["ButterflyMidrow"].Sprite,
                 TitleColor = Colors.midrow,
                 Title = ModEntry.Instance.Localizations.Localize(["midrow", "Butterfly", "name"]),
                 Description = ModEntry.Instance.Localizations.Localize(["midrow", "Butterfly", "description"]),

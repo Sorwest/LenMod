@@ -39,12 +39,12 @@ public class AButterflyField : CardAction
 
         return new List<Tooltip>
         {
-            new GlossaryTooltip($"midrow.{ModEntry.Instance.Package.Manifest.UniqueName}::Butterfly")
+            new GlossaryTooltip($"action.{ModEntry.Instance.Package.Manifest.UniqueName}::ButterflyField")
             {
                 Icon = ModEntry.Instance.Sprites["ButterflyField"].Sprite,
-                TitleColor = Colors.midrow,
-                Title = ModEntry.Instance.Localizations.Localize(["midrow", "Butterfly", "name"]),
-                Description = ModEntry.Instance.Localizations.Localize(["midrow", "Butterfly", "description"]),
+                TitleColor = Colors.action,
+                Title = ModEntry.Instance.Localizations.Localize(["action", "ButterflyField", "name"]),
+                Description = ModEntry.Instance.Localizations.Localize(["action", "ButterflyField", "description"]),
             }
         };
     }

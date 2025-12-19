@@ -53,6 +53,17 @@ internal sealed class MikuAI : AI, IRegisterable
     {
         combat.bg = new BGCrystalNebula();
     }
+    public override FightModifier? GetModifier(State s, Combat c)
+    {
+        if (s.rngAi.Next() < 75)
+        {
+            return new MAsteroidField { asteroidFillChance = s.GetHarderElites() ? 0.75 : 0.3};
+        }
+        else
+        {
+            return new MMinefield() { mineFillChance = s.GetHarderElites() ? 0.4 : 0.1 };
+        }
+    }
     public override Ship BuildShipForSelf(State state)
     {
         character = new()
@@ -61,7 +72,7 @@ internal sealed class MikuAI : AI, IRegisterable
         };
         bool hard = state.GetHarderElites();
         int hp = hard ? 20 : 15;
-        int shield = hard ? 7 : 3;
+        int shield = hard ? 10 : 5;
         return new Ship()
         {
             x = 4,
@@ -119,13 +130,29 @@ internal sealed class MikuAI : AI, IRegisterable
     }
     public override EnemyDecision PickNextIntent(State state, Combat combat, Ship ownShip)
     {
+        bool hard = state.GetHarderElites();
+        MissileType m1 = MissileType.normal;
+        int b1 = 1;
+        int d1 = 1;
+        int p1 = 1;
+        if (hard)
+        {
+            m1 = MissileType.heavy;
+            b1 = 2;
+            d1 = 2;
+        }
+        if (aiCounter > 9)
+        {
+            m1 = hard ? MissileType.seeker : MissileType.heavy;
+            p1 = 2;
+        }
         if (aiCounter >= 39)
             return MoveSet(
                 aiCounter++,
                 () => new EnemyDecision
                 {
 
-                    actions = AIHelpers.MoveToAimAt(state, ownShip, state.ship, 1, 99, movesFast: true, attackWeakPoints: true, avoidAsteroids: true, avoidMines: true),
+                    actions = AIHelpers.MoveToAimAt(state, ownShip, state.ship, 1, 99, movesFast: true, attackWeakPoints: hard, avoidAsteroids: hard, avoidMines: hard),
                     intents =
                 [
                     new IntentAttack
@@ -137,6 +164,10 @@ internal sealed class MikuAI : AI, IRegisterable
                     {
                         damage = aiCounter,
                         fromX = 1
+                    },
+                    new IntentButterfly
+                    {
+                        fromX = 2
                     },
                     new IntentAttack
                     {
@@ -160,27 +191,11 @@ internal sealed class MikuAI : AI, IRegisterable
                     }
                 ]
                 });
-        bool hard = state.GetHarderElites();
-        MissileType m1 = MissileType.normal;
-        int b1 = 1;
-        int d1 = 1;
-        int p1 = 1;
-        if (hard)
-        {
-            m1 = MissileType.heavy;
-            b1 = 2;
-            d1 = 2;
-        }
-        if (aiCounter > 9)
-        {
-            m1 = hard ? MissileType.seeker : MissileType.heavy;
-            p1 = 2;
-        }
         return MoveSet(
             aiCounter++,
             () => new EnemyDecision
             {
-                actions = AIHelpers.MoveToAimAt(state, ownShip, state.ship, 0, 5, movesFast: false, attackWeakPoints: false, avoidAsteroids: false, avoidMines: false),
+                actions = AIHelpers.MoveToAimAt(state, ownShip, state.ship, 2, 99, movesFast: false, attackWeakPoints: hard, avoidAsteroids: hard, avoidMines: hard),
                 intents =
                 [
                     new IntentAttack
@@ -196,6 +211,10 @@ internal sealed class MikuAI : AI, IRegisterable
                         status = Status.boost,
                         statusAmount = 1,
                         fromX = 1
+                    },
+                    new IntentButterfly
+                    {
+                        fromX = 2
                     },
                     new IntentAttack
                     {
@@ -231,7 +250,7 @@ internal sealed class MikuAI : AI, IRegisterable
             },
             () => new EnemyDecision
             {
-                actions = AIHelpers.MoveToAimAt(state, ownShip, state.ship, 1, 5, movesFast: false, attackWeakPoints: hard, avoidAsteroids: true, avoidMines: true),
+                actions = AIHelpers.MoveToAimAt(state, ownShip, state.ship, 2, 10, movesFast: false, attackWeakPoints: hard, avoidAsteroids: hard, avoidMines: hard),
                 intents =
                 [
                     hard ? new IntentMissile
@@ -244,11 +263,8 @@ internal sealed class MikuAI : AI, IRegisterable
                         thing = new Asteroid(),
                         fromX = 0
                     },
-                    new IntentStatus
+                    new IntentButterfly
                     {
-                        status = Status.shield,
-                        amount = b1,
-                        targetSelf = true,
                         fromX = 2
                     },
                     new IntentStatus
@@ -286,6 +302,10 @@ internal sealed class MikuAI : AI, IRegisterable
                         statusAmount = 1,
                         fromX = 1
                     },
+                    new IntentButterfly
+                    {
+                        fromX = 2
+                    },
                     new IntentSwapAllPartToEmptyType
                     {
                         keyNormal = ModEntry.Instance.Helper.Content.Ships.RegisteredParts["mikucannon"].UniqueName,
@@ -310,7 +330,7 @@ internal sealed class MikuAI : AI, IRegisterable
             },
             () => new EnemyDecision
             {
-                actions = AIHelpers.MoveToAimAt(state, ownShip, state.ship, 0, 5, movesFast: false, attackWeakPoints: false, avoidAsteroids: false, avoidMines: false),
+                actions = AIHelpers.MoveToAimAt(state, ownShip, state.ship, -2, 5, movesFast: false, attackWeakPoints: hard, avoidAsteroids: true, avoidMines: true),
                 intents =
                 [
                     hard ? new IntentMissile
@@ -329,6 +349,10 @@ internal sealed class MikuAI : AI, IRegisterable
                         status = Status.boost,
                         statusAmount = 1,
                         fromX = 1
+                    },
+                    new IntentButterfly
+                    {
+                        fromX = 2
                     },
                     new IntentMissile
                     {
