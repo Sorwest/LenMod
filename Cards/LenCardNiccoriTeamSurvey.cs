@@ -67,7 +67,7 @@ public class LenCardNiccoriTeamSurvey : Card, IRegisterable
                     targetPlayer = false
                 }
             ).AsCardAction,
-            ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new AGainBanana() { loseAll = true }).AsCardAction
+            ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new AGainBanana() { loseAll = true }).SetShowTooltips(true).AsCardAction
         ];
         return result;
     }

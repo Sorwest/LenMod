@@ -87,23 +87,27 @@ public class LenCardBreaktime : Card, IRegisterable
             result.Add(ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
                     new ABananaAttack()
                     {
-                        damage = GetDmg(state, GetBananaDmg(state))
+                        damage = GetDmg(state, GetBananaDmg(state)),
+                        minimumBanana = 2
                     },
                     new ABananaDamage()
                     {
                         damage = GetDmg(state, GetBananaDmg(state)),
-                        isThrow = true
+                        isThrow = true,
+                        minimumBanana = 2
                     }
                     ).AsCardAction);
             result.Add(ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
                     new ABananaAttack()
                     {
-                        damage = GetDmg(state, GetBananaDmg(state))
+                        damage = GetDmg(state, GetBananaDmg(state)),
+                        minimumBanana = 3
                     },
                     new ABananaDamage()
                     {
                         damage = GetDmg(state, GetBananaDmg(state)),
-                        isThrow = true
+                        isThrow = true,
+                        minimumBanana = 3
                     }
                     ).AsCardAction);
         }
