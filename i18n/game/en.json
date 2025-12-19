@@ -85,7 +85,7 @@
     },
     "Guillotine": {
       "name": "GUILLOTINE",
-      "description": "<c=405a7f>I'll continue watching over you.</c>\nOn pickup, <c=action>thrown</c> <c=status>BANANAS</c>' damage becomes <c=action>piercing</c>."
+      "description": "<c=405a7f>I'll continue watching over you.</c>\n<c=action>Thrown</c> <c=status>BANANAS</c>' are <c=action>piercing</c>."
     },
     "MaidDress": {
       "name": "MAID DRESS",
@@ -179,11 +179,11 @@
     },
     "Encore": {
       "name": "Encore",
-      "descriptionLen": "Add 3x <c=cardtrait>disc, temp</c> <c=ffe569>Banana</c> & <c=ffe569>Fan Letter</c> & <c=ffe569>Close To Grey</c> to draw.",
+      "descriptionLen": "Add 3x <c=cardtrait>disc, temp</c> <c=ffe569>Banana</c> & <c=ffe569>Fan Letter</c> & <c=ffe569>Close To Gray</c> to draw.",
       "descriptionMiku": "<c=hurt>Turn End:</c> Add 1 <c=7ed2d6>Fan Letter</c>, 2 <c=7ed2d6>Set Trend</c> & 3 <c=7ed2d6>World Is Mine</c> to draw."
     },
     "CloseToGray": {
-      "name": "Close to Grey"
+      "name": "Close to Gray"
     },
     "WorldIsMine": {
       "name": "World Is Mine"

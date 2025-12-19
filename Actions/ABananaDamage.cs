@@ -11,6 +11,7 @@ public class ABananaDamage : CardAction
     public bool targetPlayer;
     public bool keepBanana = false;
     public int minimumBanana = 1;
+    public bool isNiccori = false;
     private static int GetBananaDmg(State state)
     {
         int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
@@ -96,7 +97,7 @@ public class ABananaDamage : CardAction
             combat.Queue(new AStatus()
             {
                 status = Status.shield,
-                statusAmount = shield,
+                statusAmount = (isNiccori ? state.ship.Get(BananaManager.BananaStatus.Status) : 1) * shield,
                 targetPlayer = !targetPlayer,
                 timer = 0
             });
@@ -117,7 +118,8 @@ public class ABananaDamage : CardAction
             {
                 damage = damage,
                 piercing = piercing > 0,
-                fast = true
+                fast = true,
+                timer = 0
             });
         }
         else if (!isThrow)
@@ -125,7 +127,8 @@ public class ABananaDamage : CardAction
             combat.Queue(new ABananaHunger()
             {
                 hurtAmount = damage,
-                targetPlayer = targetPlayer
+                targetPlayer = targetPlayer,
+                timer = 0
             });
         }
     }

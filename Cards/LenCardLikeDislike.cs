@@ -1,7 +1,5 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
-using Sorwest.LenMod.Actions;
-using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -31,32 +29,20 @@ public class LenCardLikeDislike : Card, IRegisterable
             flippable = upgrade == Upgrade.B ? true : false
         };
     }
-    private static int GetBananaDmg(State state)
-    {
-        bool normalDisplay = state.route is not Combat || state.ship.Get(BananaManager.BananaStatus.Status) >= 0;
-        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
-        return normalDisplay ? dmg : 0;
-    }
     public override List<CardAction> GetActions(State state, Combat combat)
     {
-        return new()
-        {
+        return
+        [
             new AAttack()
             {
                 damage = GetDmg(state, 0),
                 stunEnemy = true
             },
-            ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
-                    new ABananaAttack()
-                    {
-                        damage = GetDmg(state, GetBananaDmg(state))
-                    },
-                    new ABananaDamage()
-                    {
-                        damage = GetDmg(state, GetBananaDmg(state)),
-                        isThrow = true
-                    }
-                    ).AsCardAction,
+            new AAttack()
+            {
+                damage = GetDmg(state, 1),
+                piercing = true
+            },
             new AMove()
             {
                 dir = 2,
@@ -66,6 +52,6 @@ public class LenCardLikeDislike : Card, IRegisterable
             {
                 damage = GetDmg(state, upgrade == Upgrade.B ? 3 : 2)
             }
-        };
+        ];
     }
 }

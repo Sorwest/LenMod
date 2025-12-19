@@ -64,7 +64,8 @@ public class LenCardNiccoriTeamSurvey : Card, IRegisterable
                 {
                     isThrow = true,
                     damage = GetDmg(state, num * ( amount + GetBananaDmg(state))),
-                    targetPlayer = false
+                    targetPlayer = false,
+                    isNiccori = true
                 }
             ).AsCardAction,
             ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new AGainBanana() { loseAll = true }).SetShowTooltips(true).AsCardAction
