@@ -39,6 +39,16 @@ public class LenCardVampiresPathos : Card, IRegisterable
     {
         List<CardAction> result =
         [
+            ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
+                new ABananaHunger()
+                {
+                    hurtAmount = GetBananaDmg(state),
+                    targetPlayer = true
+                },
+                new ABananaDamage()
+                {
+                    damage = GetBananaDmg(state)
+                }).AsCardAction,
             ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(
                 ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(
                     ModEntry.Instance.KokoroApi.ActionCosts.MakeStatusResource(BananaManager.BananaStatus.Status),
@@ -51,17 +61,6 @@ public class LenCardVampiresPathos : Card, IRegisterable
                     }
                 ).AsCardAction
         ];
-        result.Add(ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
-            new ABananaHunger()
-            {
-                hurtAmount = GetBananaDmg(state),
-                targetPlayer = true
-            },
-            new ABananaDamage()
-            {
-                damage = GetBananaDmg(state)
-            }).AsCardAction
-        );
         if (upgrade == Upgrade.B)
         {
             result.Add(ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(

@@ -18,7 +18,6 @@ public class LenCardBreaktime : Card, IRegisterable
             {
                 deck = ModEntry.Instance.LenDeck.Deck,
                 rarity = Rarity.common,
-                dontOffer = true,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Breaktime", "name"]).Localize
@@ -46,14 +45,12 @@ public class LenCardBreaktime : Card, IRegisterable
                 new ABananaHunger()
                 {
                     hurtAmount = GetBananaDmg(state),
-                    targetPlayer = true,
-                    minimumBanana = 2
+                    targetPlayer = true
                 },
                 new ABananaDamage()
                 {
                     damage = GetBananaDmg(state),
-                    targetPlayer = false,
-                    minimumBanana = 2
+                    targetPlayer = false
                 }
                 ).AsCardAction);
             result.Add(ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
@@ -61,13 +58,13 @@ public class LenCardBreaktime : Card, IRegisterable
                 {
                     hurtAmount = GetBananaDmg(state),
                     targetPlayer = true,
-                    minimumBanana = 2
+                    minimumBanana = 3
                 },
                 new ABananaDamage()
                 {
                     damage = GetBananaDmg(state),
                     targetPlayer = false,
-                    minimumBanana = 2
+                    minimumBanana = 3
                 }
                 ).AsCardAction);
         }
@@ -112,7 +109,7 @@ public class LenCardBreaktime : Card, IRegisterable
         }
         else
         {
-            result.Add(ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
+            result.Insert(1,ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
                 new ABananaHunger()
                 {
                     hurtAmount = GetBananaDmg(state),

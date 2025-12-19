@@ -27,34 +27,48 @@ public class LenCardNiccoriTeamSurvey : Card, IRegisterable
     {
         return new()
         {
-            cost = upgrade == Upgrade.A ? 3 : 4,
-            exhaust = true
+            cost = upgrade == Upgrade.B ? 4 : 2,
+            exhaust = true,
         };
+    }
+    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
+    {
+        return (HashSet<ICardTraitEntry>)(upgrade switch
+        {
+            Upgrade.A => [],
+            _ => [ModEntry.Instance.KokoroApi.Fleeting.Trait]
+        });
+    }
+    private static int GetBananaDmg(State state)
+    {
+        return ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage");
     }
     public override List<CardAction> GetActions(State state, Combat combat)
     {
+        int amount = state.ship.Get(BananaManager.BananaStatus.Status);
+        int num = upgrade == Upgrade.B ? 2 : 1;
         List<CardAction> result =
         [
             new AVariableHint()
             {
                 status = BananaManager.BananaStatus.Status,
             },
-            new AStatus()
-            {
-                xHint = upgrade == Upgrade.B ? 2 : 1,
-                status = MusicNoteManager.MusicNoteStatus.Status,
-                statusAmount = (upgrade == Upgrade.B ? 2 : 1) * state.ship.Get(BananaManager.BananaStatus.Status),
-                targetPlayer = true
-            },
-            new AGainBanana() { loseAll = true }
+            ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
+                new ABananaAttack()
+                {
+                    xHint = num,
+                    damage = GetDmg(state, num * ( amount + GetBananaDmg(state))),
+                    targetPlayer = false
+                },
+                new ABananaDamage()
+                {
+                    isThrow = true,
+                    damage = GetDmg(state, num * ( amount + GetBananaDmg(state))),
+                    targetPlayer = false
+                }
+            ).AsCardAction,
+            ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new AGainBanana() { loseAll = true }).AsCardAction
         ];
-        if (upgrade == Upgrade.B)
-        {
-            result.Add(new AGainBanana()
-            {
-                amount = upgrade == Upgrade.A ? 1 : 2
-            });
-        }
         return result;
     }
 }
