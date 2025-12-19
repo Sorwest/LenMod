@@ -51,7 +51,7 @@ internal class MikuCardMN5 : Card, IRegisterable
             ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(new AAddCard()
             {
                 amount = 3,
-                card = new MikuCardMN5(),
+                card = new MikuCardMN6(),
                 destination = CardDestination.Deck
             }).AsCardAction
         ];

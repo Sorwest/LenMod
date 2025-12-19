@@ -55,12 +55,12 @@ public class LenCardVampiresPathos : Card, IRegisterable
                 {
                     hurtAmount = GetBananaDmg(state),
                     targetPlayer = true,
-                    minimumBanana = 2
+                    minimumBanana = upgrade == Upgrade.B ? 4 : 2
                 },
                 new ABananaDamage()
                 {
                     damage = GetBananaDmg(state),
-                    minimumBanana = 2
+                    minimumBanana = upgrade == Upgrade.B ? 4 : 2
                 }).AsCardAction
         ];
         if (upgrade == Upgrade.B)

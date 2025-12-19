@@ -30,12 +30,12 @@
     },
     "Banana": {
       "name": "Banana",
-      "description": "Len <c=action>eats</c> and <c=action>throws</c> bananas for profit.",
+      "description": "<c=action>Eat</c> and <c=action>throw</c> bananas for profit.",
       "spoof": "spoofBanana"
     },
     "MusicNote": {
       "name": "Music Note",
-      "description": "At start of turn, add a special card to hand. Gain 1 <c=status>note</c> on turn end if <c=hurt>hull</c> at <c=redd>half</c> or less. Reset at max stacks. <c=status>Persists across battles</c>."
+      "description": "At start of turn, add a special card to hand. Gain 1 <c=status>note</c> on turn end if <c=hurt>hull</c> at <c=redd>half</c> or less. Reset at <c=keyword>12</c>. <c=status>Persists across battles</c>."
     },
     "BananaTree": {
       "name": "Banana Tree",
@@ -51,23 +51,19 @@
   "action": {
     "EatBanana": {
       "name": "Eat Banana",
-      "description": "Len <c=action>eats</c> a <c=status>banana</c>, making the enemy so hungry they lose <c=hurt>{{Damage}}</c> <c=hurt>hull</c>.  Requires bananas in most cases."
+      "description": "<c=action>Eat</c> a <c=status>banana</c>, making the enemy so hungry they lose <c=hurt>{{Damage}}</c> <c=hurt>hull</c>."
     },
-    "GainBanana": {
-      "name": {
-        "gain": "Gain Banana",
-        "lose": "Lose Banana",
-        "loseAll": "Lose All Bananas"
-      },
-      "description": {
-        "gain": "Gain <c=boldPink>{{Amount}}</c> <c=status>bananas</c>.",
-        "lose": "Lose <c=boldPink>{{Amount}}</c> <c=status>bananas</c>.",
-        "loseAll": "Lose all <c=status>bananas</c>."
-      }
+    "LoseAll": {
+      "name":  "Lose All Bananas",
+      "description": "Lose all <c=status>bananas</c>."
     },
     "ThrowBanana": {
       "name": "Throw Banana",
-      "description": "Len <c=action>throws</c> a <c=status>banana</c> so fast it deals <c=boldPink>{{Damage}}</c> damage to the enemy. Requires bananas in most cases."
+      "description": "<c=action>Throw</c> a <c=status>banana</c> so fast it deals <c=boldPink>{{Damage}}</c> damage to the enemy."
+    },
+    "ButterflyField": {
+      "name": "Butterfly Field",
+      "description": "Instantly turn every <c=midrow>object in the midrow</c> into <c=midrow>butterflies</c>."
     }
   },
   "artifact": {
@@ -176,18 +172,18 @@
       "name": "Crowd Work"
     },
     "TrendSetter": {
-      "name": "Set Trends"
+      "name": "Set Trend"
     },
     "Vocavoid": {
       "name": "Vocavoid"
     },
     "Encore": {
       "name": "Encore",
-      "descriptionLen": "Add 3x <c=cardtrait>disc, temp</c> <c=ffe569>Banana</c>, <c=ffe569>Fan Letter</c> & <c=ffe569>Close To Gray</c> to draw.",
+      "descriptionLen": "Add 3x <c=cardtrait>disc, temp</c> <c=ffe569>Banana</c> & <c=ffe569>Fan Letter</c> & <c=ffe569>Close To Grey</c> to draw.",
       "descriptionMiku": "<c=hurt>Turn End:</c> Add 1 <c=7ed2d6>Fan Letter</c>, 2 <c=7ed2d6>Set Trend</c> & 3 <c=7ed2d6>World Is Mine</c> to draw."
     },
     "CloseToGray": {
-      "name": "Close to Gray"
+      "name": "Close to Grey"
     },
     "WorldIsMine": {
       "name": "World Is Mine"

@@ -44,12 +44,6 @@ internal class LenCardMN3 : Card, IRegisterable
                 targetPlayer = true,
                 omitFromTooltips = true
             },
-            new AStatus()
-            {
-                status = BananaManager.BananaStatus.Status,
-                statusAmount = 2,
-                targetPlayer = true
-            },
             new ASpawn() { thing = new Missile() { missileType = MissileType.seeker, bubbleShield = true } }
         ];
     }

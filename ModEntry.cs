@@ -167,7 +167,6 @@ public class ModEntry : SimpleMod
         "ButterflyField",
         "EatBanana",
         "EatBananaCost",
-        "GainBananaGain",
         "GainBananaLoseAll",
         "ThrowBanana",
         "ThrowBananaCost",

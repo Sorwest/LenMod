@@ -53,17 +53,9 @@
       "name": "Comer Bananas",
       "description": "Len <c=action>come</c> una <c=status>banana</c>, atacando el estómago del <c=hurt>casco</c> enemigo por <c=hurt>{{Damage}}</c> de daño."
     },
-    "GainBanana": {
-      "name": {
-        "gain": "Gain Banana",
-        "lose": "Lose Banana",
-        "loseAll": "Lose All Bananas"
-      },
-      "description": {
-        "gain": "Ganas <c=boldPink>{{Amount}}</c> <c=status>bananas</c>.",
-        "lose": "Pierdes <c=boldPink>{{Amount}}</c> <c=status>bananas</c>.",
-        "loseAll": "Pierde todas tus <c=status>bananas</c>."
-      }
+    "LoseAll": {
+      "name": "Lose All Bananas",
+      "description": "Pierde todas tus <c=status>bananas</c>."
     },
     "ThrowBanana": {
       "name": "Tirar bananas",
@@ -176,18 +168,18 @@
       "name": "Crowd Work"
     },
     "TrendSetter": {
-      "name": "Set Trends"
+      "name": "Set Trend"
     },
     "Vocavoid": {
       "name": "Vocavoid"
     },
     "Encore": {
       "name": "Encore",
-      "descriptionLen": "Añade 3x <c=cardtrait>desc, temp</c> <c=ffe569>Banana</c>, <c=ffe569>Fan Letter</c> & <c=ffe569>Close To Gray</c> al mazo.",
+      "descriptionLen": "Añade 3x <c=cardtrait>desc, temp</c> <c=ffe569>Banana</c>, <c=ffe569>Fan Letter</c> & <c=ffe569>Close To Grey</c> al mazo.",
       "descriptionMiku": "<c=hurt>Turn End:</c> Añade 1 <c=7ed2d6>Fan Letter</c>, 2 <c=7ed2d6>Set Trend</c> & 3 <c=7ed2d6>World Is Mine</c> al mazo."
     },
     "CloseToGray": {
-      "name": "Close to Gray"
+      "name": "Close to Grey"
     },
     "WorldIsMine": {
       "name": "World Is Mine"
