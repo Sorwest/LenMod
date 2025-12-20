@@ -44,21 +44,22 @@ public class ModEntry : SimpleMod
         typeof(LenCardTelecasterBBoy),
         typeof(LenCardLawEvadingRock),
         typeof(LenCardHolyLanceExplosion),
-        typeof(LenCardFifthPierrot),
     ];
     internal static IReadOnlyList<Type> LenUncommonCardTypes { get; } = [
         typeof(LenCardRemoteControl),
         typeof(LenCardChildishWar),
-        typeof(LenCardBringItOn),
+        //typeof(LenCardBringItOn),
         typeof(LenCardLikeDislike),
         typeof(LenCardBarisolChild),
-        typeof(LenCardNiccoriTeamSurvey)
+        typeof(LenCardNiccoriTeamSurvey),
+        typeof(LenCardGachaGacha)
     ];
     internal static IReadOnlyList<Type> LenRareCardTypes { get; } = [
         typeof(LenCardButterflyOnShoulder),
         typeof(LenCardVampiresPathos),
         typeof(LenCardServantOfEvil),
-        typeof(LenCardParadichlorobenzene),
+        typeof(LenCardFifthPierrot),
+        //typeof(LenCardParadichlorobenzene),
         typeof(LenCardToluthinAntenna)
     ];
     internal static IReadOnlyList<Type> LenEncoreCardTypes { get; } = [
@@ -78,7 +79,7 @@ public class ModEntry : SimpleMod
         typeof(MikuCardMN6)
     ];
     internal static IReadOnlyList<Type> SpecialCardTypes { get; } = [
-        typeof(LenCardEXECard),
+        typeof(LenEXECard),
         typeof(LenCardWishBottle)
     ];
     internal static IReadOnlyList<Type> LenStarterArtifactTypes { get; } = [
@@ -246,6 +247,18 @@ public class ModEntry : SimpleMod
                                     Title = Localizations.Localize(["settings", nameof(ProfileSettings.EnabledSounds), "tooltipTitle"]),
                                     Description = Localizations.Localize(["settings", nameof(ProfileSettings.EnabledSounds), "description"])
                                 }]
+                            ),
+                        api.MakeCheckbox(
+                            () => Localizations.Localize(["settings", nameof(ProfileSettings.EnabledBlood), "title"]),
+                            () => Settings.ProfileBased.Current.EnabledBlood,
+                            (_, _, value) => Settings.ProfileBased.Current.EnabledBlood = value
+                            ).SetTooltips(() => [
+                                new GlossaryTooltip($"settings.{package.Manifest.UniqueName}::{nameof(ProfileSettings.EnabledBlood)}")
+                                {
+                                    TitleColor = Colors.textBold,
+                                    Title = Localizations.Localize(["settings", nameof(ProfileSettings.EnabledBlood), "tooltipTitle"]),
+                                    Description = Localizations.Localize(["settings", nameof(ProfileSettings.EnabledBlood), "description"])
+                                }]
                             )
                         ]).SubscribeToOnMenuClose(_ => helper.Storage.SaveJson(helper.Storage.GetMainStorageFile("json"), Settings))
                 );
@@ -332,8 +345,8 @@ public class ModEntry : SimpleMod
             {
                 cards = [
                     new LenCardBanana(),
-                    new LenCardBananaDance(),
-                    new LenCardFunkyNightTown()
+                    new LenCardBreaktime(),
+                    new LenCardBananaDance()
                 ],
                 artifacts = [
                     new LenArtifactBananaStash(),
@@ -415,8 +428,8 @@ public class ModEntry : SimpleMod
                 starterDeck: new StarterDeck
                 {
                     cards = [
-                        new LenCardPlusBoy() { upgrade = Upgrade.B },
-                        new LenCardTelecasterBBoy() { upgrade = Upgrade.A },
+                        new LenCardBananaDance(),
+                        new LenCardNakakapagpabagabag()
                     ],
                     artifacts = [
                         new LenArtifactBananaStash(),
