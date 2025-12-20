@@ -46,7 +46,12 @@ internal class LenCardMN6 : Card, IRegisterable
         [
             ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ARandomSoundDummyAction()
             {
-                sounds = [BoundlessSound1,BoundlessSound2,BoundlessSound3]
+                sounds = new Dictionary<IModSoundEntry, double>
+                {
+                    [BoundlessSound1] = 0.4,
+                    [BoundlessSound2] = 0.3,
+                    [BoundlessSound3] = 0.3
+                }
             }).AsCardAction,
             new AAttack()
             {

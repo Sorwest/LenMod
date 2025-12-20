@@ -41,8 +41,11 @@ public class LenCardRemoteControl : Card, IRegisterable
         {
             ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ARandomSoundDummyAction()
             {
-                sounds = [RemoteControlSound, TetorisSound],
-                weight = 8
+                sounds = new Dictionary<IModSoundEntry, double>
+                {
+                    [RemoteControlSound] = 0.9,
+                    [TetorisSound] = 0.1
+                }
             }).AsCardAction,
             new AAttack()
             {
