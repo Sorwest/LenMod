@@ -1,5 +1,6 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
+using Sorwest.LenMod.Cards;
 using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
@@ -27,15 +28,13 @@ public class LenArtifactGlassBottle : Artifact, IRegisterable
         => [
             ..StatusMeta.GetTooltips(BananaManager.BananaStatus.Status, 1)
         ];
-    public override string Name() => "GLASS BOTTLE";
     public override void OnCombatStart(State state, Combat combat)
     {
-        combat.Queue(new AStatus()
+        combat.Queue(new AAddCard()
         {
-            status = BananaManager.BananaStatus.Status,
-            statusAmount = 3,
-            targetPlayer = true,
-            timer = 0
+            card = new LenCardBanana() { temporaryOverride = true },
+            destination = CardDestination.Hand,
+            amount = 1
         });
         Pulse();
     }

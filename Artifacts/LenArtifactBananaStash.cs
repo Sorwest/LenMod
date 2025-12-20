@@ -60,6 +60,7 @@ public class LenArtifactBananaStash : Artifact, IRegisterable
             ModEntry.Instance.Helper.ModData.SetModData(state, "BananaStored", counter);
             state.ship.Set(BananaManager.BananaStatus.Status, counter);
             counter = 0;
+            Pulse();
         }
     }
     public override void OnCombatEnd(State state)

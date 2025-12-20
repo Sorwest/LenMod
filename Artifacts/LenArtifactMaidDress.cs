@@ -29,7 +29,10 @@ public class LenArtifactMaidDress : Artifact, IRegisterable
         if (!(MG.inst.g?.state is not { } state || state.IsOutsideRun()))
         {
             dmg += ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage");
-            icon = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaPiercing") > 0 ? ModEntry.Instance.Sprites["ThrowBananaPiercing"].Sprite : icon;
+            if (ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaPiercing") > 0)
+            {
+                icon = ModEntry.Instance.Sprites["ThrowBananaPiercing"].Sprite;
+            }
         }
         return
         [

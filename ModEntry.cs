@@ -138,6 +138,11 @@ public class ModEntry : SimpleMod
     internal IList<string> CardBGs { get; } = [
         "SimpleBackground"
         ];
+    internal IList<string> CardBorders { get; } = [
+        "BorderLen",
+        "BorderMiku",
+        "BorderWish"
+        ];
     internal IList<string> Enemies { get; } = [
         "miku",
         "mikuchassis",
@@ -250,13 +255,18 @@ public class ModEntry : SimpleMod
             if (file.Exists)
                 Sprites.Add(key: $"{bg}", value: helper.Content.Sprites.RegisterSprite(file));
         }
+        foreach (string border in CardBorders)
+        {
+            file = package.PackageRoot.GetRelativeFile($"assets/cardborder/{border}.png");
+            if (file.Exists)
+                Sprites.Add(key: $"{border}", value: helper.Content.Sprites.RegisterSprite(file));
+        }
         foreach (string enemy in Enemies)
         {
             file = package.PackageRoot.GetRelativeFile($"assets/enemies/{enemy}.png");
             if (file.Exists)
                 Sprites.Add(key: $"{enemy}", value: helper.Content.Sprites.RegisterSprite(file));
         }
-
         foreach (string artifact in ArtifactSprites)
         {
             file = package.PackageRoot.GetRelativeFile($"assets/artifacts/{artifact}.png");
@@ -265,7 +275,6 @@ public class ModEntry : SimpleMod
             if (file.Exists)
                 Sprites.Add(key: $"{artifact}", value: helper.Content.Sprites.RegisterSprite(file));
         }
-
         foreach (string icon in IconSprites)
         {
             file = package.PackageRoot.GetRelativeFile($"assets/icons/{icon}.png");
@@ -274,7 +283,6 @@ public class ModEntry : SimpleMod
             if (file.Exists)
                 Sprites.Add(key: $"{icon}", value: helper.Content.Sprites.RegisterSprite(file));
         }
-
         foreach (string midrow in MidrowSprites)
         {
             file = package.PackageRoot.GetRelativeFile($"assets/drones/{midrow}.png");
@@ -295,7 +303,7 @@ public class ModEntry : SimpleMod
         {
             Definition = new() { color = LenColor, titleColor = BlackTitle },
             DefaultCardArt = Sprites["SimpleBackground"].Sprite,
-            BorderSprite = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/cardBorder/BorderLen.png")).Sprite,
+            BorderSprite = Sprites["BorderLen"].Sprite,
             Name = AnyLocalizations.Bind(["character", "len", "name"]).Localize,
         });
 
@@ -376,7 +384,7 @@ public class ModEntry : SimpleMod
         {
             Definition = new() { color = new Color("7ed2d6"), titleColor = BlackTitle },
             DefaultCardArt = Sprites["SimpleBackground"].Sprite,
-            BorderSprite = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/cardBorder/BorderMiku.png")).Sprite,
+            BorderSprite = Sprites["BorderMiku"].Sprite,
             Name = AnyLocalizations.Bind(["enemy", "miku", "name"]).Localize,
         });
         MikuNPC = helper.Content.Characters.V2.RegisterNonPlayableCharacter("Miku", new()

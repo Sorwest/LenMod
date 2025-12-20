@@ -26,12 +26,19 @@ public class LenArtifactBrioche : Artifact, IRegisterable
     public override List<Tooltip>? GetExtraTooltips()
     {
         int dmg = 1;
+        Spr icon = ModEntry.Instance.Sprites["ThrowBanana"].Sprite;
         if (!(MG.inst.g?.state is not { } state || state.IsOutsideRun()))
+        {
             dmg += ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage");
+            if (ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaPiercing") > 0)
+            {
+                icon = ModEntry.Instance.Sprites["ThrowBananaPiercing"].Sprite;
+            }
+        }
         return [
             new GlossaryTooltip($"action.{GetType().Namespace!}::AThrowBanana")
             {
-                Icon = ModEntry.Instance.Sprites["ThrowBanana"].Sprite,
+                Icon = icon,
                 TitleColor = Colors.action,
                 Title = ModEntry.Instance.Localizations.Localize(["action", "ThrowBanana", "name"]),
                 Description = ModEntry.Instance.Localizations.Localize(["action", "ThrowBanana", "description"], new { Damage = dmg }),

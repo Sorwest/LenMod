@@ -32,10 +32,11 @@ internal sealed class BananaTreatManager : IRegisterable, IKokoroApi.IV2.IStatus
         {
             if (args.Timing != IKokoroApi.IV2.IStatusLogicApi.StatusTurnTriggerTiming.TurnStart)
                 return false;
+            var artifact = args.State.EnumerateAllArtifacts().OfType<LenArtifactBananaSnack>().FirstOrDefault();
             if (args.Status == BananaManager.BananaStatus.Status
                 && args.Ship.Get(args.Status) > 0
                 && args.Combat.turn == 1
-                && args.State.EnumerateAllArtifacts().OfType<LenArtifactBananaSnack>().FirstOrDefault() is not null)
+                && artifact is not null)
             {
                 args.Combat.Queue(new AStatus()
                 {
@@ -56,6 +57,7 @@ internal sealed class BananaTreatManager : IRegisterable, IKokoroApi.IV2.IStatus
                 {
                     targetPlayer = !args.Ship.isPlayerShip
                 });
+                artifact.Pulse();
                 return false;
             }
             if (args.Status != BananaTreatStatus.Status)

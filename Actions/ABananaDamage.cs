@@ -1,6 +1,8 @@
 ﻿using Nickel;
+using Sorwest.LenMod.Artifacts;
 using Sorwest.LenMod.Features;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Sorwest.LenMod.Actions;
 
@@ -91,7 +93,7 @@ public class ABananaDamage : CardAction
         if (state.ship.Get(BananaManager.BananaStatus.Status) < minimumBanana && !keepBanana)
             return;
         int shield = GetBananaShield(state);
-        int piercing = GetBananaPiercing(state);
+        bool piercing = GetBananaPiercing(state) > 0;
         if (shield > 0)
         {
             combat.Queue(new AStatus()
@@ -101,6 +103,7 @@ public class ABananaDamage : CardAction
                 targetPlayer = !targetPlayer,
                 timer = 0
             });
+            state.EnumerateAllArtifacts().OfType<LenArtifactMaidDress>().FirstOrDefault()?.Pulse();
         }
         if (!keepBanana && (!isThrow || DoWeHaveCannonsThough(state)))
         {
@@ -117,10 +120,12 @@ public class ABananaDamage : CardAction
             combat.Queue(new ABananaAttack()
             {
                 damage = damage,
-                piercing = piercing > 0,
+                piercing = piercing,
                 fast = true,
                 timer = 0
             });
+            if (piercing)
+                state.EnumerateAllArtifacts().OfType<LenArtifactGuillotine>().FirstOrDefault()?.Pulse();
         }
         else if (!isThrow)
         {
@@ -131,6 +136,7 @@ public class ABananaDamage : CardAction
                 timer = 0
             });
         }
+        state.EnumerateAllArtifacts().OfType<LenArtifactBrioche>().FirstOrDefault()?.Pulse();
     }
 }
 public class ABananaAttack : AAttack

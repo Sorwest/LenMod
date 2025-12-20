@@ -27,7 +27,6 @@ public class LenArtifactTwinPower : Artifact, IRegisterable
         => [
             ..StatusMeta.GetTooltips(Status.overdrive, 2)
         ];
-    public override string Name() => "BRIOCHE";
     public override void OnReceiveArtifact(State state)
     {
         state.ship.baseEnergy += 1;
@@ -46,6 +45,7 @@ public class LenArtifactTwinPower : Artifact, IRegisterable
                 statusAmount = 2,
                 targetPlayer = false
             });
+            Pulse();
         }
     }
 }
