@@ -25,14 +25,12 @@ public class LenArtifactGlassBottle : Artifact, IRegisterable
         });
     }
     public override List<Tooltip>? GetExtraTooltips()
-        => [
-            ..StatusMeta.GetTooltips(BananaManager.BananaStatus.Status, 1)
-        ];
+        => [new TTCard { card = new LenCardWishBottle() }];
     public override void OnCombatStart(State state, Combat combat)
     {
         combat.Queue(new AAddCard()
         {
-            card = new LenCardBanana() { temporaryOverride = true },
+            card = new LenCardWishBottle() { temporaryOverride = true },
             destination = CardDestination.Hand,
             amount = 1
         });

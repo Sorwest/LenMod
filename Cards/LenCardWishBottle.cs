@@ -7,7 +7,6 @@ using Nanoray.Shrike.Harmony;
 using Newtonsoft.Json;
 using Nickel;
 using Sorwest.LenMod.Actions;
-using Sorwest.LenMod.Features;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +15,12 @@ using System.Reflection.Emit;
 
 namespace Sorwest.LenMod.Cards;
 
+//triad copied from: Dracula by Shockah
+
 public class LenCardWishBottle : Card, IRegisterable
 {
     private static List<ISpriteEntry> TriadArt = null!;
     private static List<ISpriteEntry> TriadIcon = null!;
-    private static List<Card> FlippableCards = [];
 
     [JsonProperty]
     public int FlipIndex { get; private set; }
@@ -44,12 +44,11 @@ public class LenCardWishBottle : Card, IRegisterable
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "WishBottle", "name"]).Localize
         });
-
         TriadArt = Enumerable.Range(0, 3)
-            .Select(i => helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile($"assets/Cards/WishTriad{i}.png")))
+            .Select(i => helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile($"assets/cardbg/WishTriad{i}.png")))
             .ToList();
         TriadIcon = Enumerable.Range(0, 3)
-            .Select(i => helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile($"assets/Icons/Triad{i}.png")))
+            .Select(i => helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile($"assets/icons/Triad{i}.png")))
             .ToList();
 
         ModEntry.Instance.Harmony.Patch(
@@ -154,13 +153,13 @@ public class LenCardWishBottle : Card, IRegisterable
     }
 
     private static bool Card_Render_Transpiler_ReplaceFlipped(bool flipped, Card card)
-        => !FlippableCards.Contains(card) && flipped;
+        => card is not LenCardWishBottle && flipped;
 
     private static void Card_GetAllTooltips_Postfix(Card __instance, bool showCardTraits, ref IEnumerable<Tooltip> __result)
     {
         if (!showCardTraits)
             return;
-        if (!FlippableCards.Contains(__instance))
+        if (__instance is not LenCardWishBottle)
             return;
 
         __result = __result

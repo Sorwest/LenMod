@@ -77,6 +77,10 @@ public class ModEntry : SimpleMod
         typeof(MikuCardMN5),
         typeof(MikuCardMN6)
     ];
+    internal static IReadOnlyList<Type> SpecialCardTypes { get; } = [
+        typeof(LenCardEXECard),
+        typeof(LenCardWishBottle)
+    ];
     internal static IReadOnlyList<Type> LenStarterArtifactTypes { get; } = [
         typeof(LenArtifactBananaStash),
         typeof(LenArtifactGuillotine)
@@ -96,7 +100,7 @@ public class ModEntry : SimpleMod
             .. LenUncommonCardTypes,
             .. LenRareCardTypes,
             .. LenEncoreCardTypes,
-            typeof(LenCardEXECard),
+            .. SpecialCardTypes,
             .. MikuEncoreCardTypes
         ];
     internal static IEnumerable<Type> AllArtifacts
