@@ -1,7 +1,6 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
 using Sorwest.LenMod.Cards;
-using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -25,7 +24,7 @@ public class LenArtifactGlassBottle : Artifact, IRegisterable
         });
     }
     public override List<Tooltip>? GetExtraTooltips()
-        => [new TTCard { card = new LenCardWishBottle() }];
+        => [ new TTCard { card = new LenCardWishBottle() }];
     public override void OnCombatStart(State state, Combat combat)
     {
         combat.Queue(new AAddCard()

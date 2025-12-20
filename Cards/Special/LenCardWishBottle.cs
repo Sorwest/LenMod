@@ -7,6 +7,7 @@ using Nanoray.Shrike.Harmony;
 using Newtonsoft.Json;
 using Nickel;
 using Sorwest.LenMod.Actions;
+using Sorwest.LenMod.ExternalAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,12 @@ using System.Reflection.Emit;
 
 namespace Sorwest.LenMod.Cards;
 
-//triad copied from: Dracula by Shockah
+//triad copied from: Dracula by Shockah (Dec 2, 2024. Commit 5498214)
 
 public class LenCardWishBottle : Card, IRegisterable
 {
     private static List<ISpriteEntry> TriadArt = null!;
+    private static List<ISpriteEntry> CleanArt = null!;
     private static List<ISpriteEntry> TriadIcon = null!;
 
     [JsonProperty]
@@ -27,9 +29,6 @@ public class LenCardWishBottle : Card, IRegisterable
 
     [JsonProperty]
     private bool LastFlipped { get; set; }
-
-    public float ActionSpacingScaling
-        => 1.5f;
 
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -45,7 +44,10 @@ public class LenCardWishBottle : Card, IRegisterable
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "WishBottle", "name"]).Localize
         });
         TriadArt = Enumerable.Range(0, 3)
-            .Select(i => helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile($"assets/cardbg/WishTriad{i}.png")))
+            .Select(i => helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile($"assets/cardbg/TriadWish{i}.png")))
+            .ToList();
+        CleanArt = Enumerable.Range(0, 3)
+            .Select(i => helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile($"assets/cardbg/TriadClean{i}.png")))
             .ToList();
         TriadIcon = Enumerable.Range(0, 3)
             .Select(i => helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile($"assets/icons/Triad{i}.png")))
@@ -59,27 +61,19 @@ public class LenCardWishBottle : Card, IRegisterable
             original: AccessTools.DeclaredMethod(typeof(Card), nameof(GetAllTooltips)),
             postfix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(Card_GetAllTooltips_Postfix))
         );
+
+        ModEntry.Instance.KokoroApi.CardRendering.RegisterHook(new Hook());
     }
     public override CardData GetData(State state)
     {
         return new()
         {
-            art = TriadArt[FlipIndex % 3].Sprite,
+            art = (ModEntry.Instance.Settings.ProfileBased.Current.EnabledBlood ? TriadArt : CleanArt)[FlipIndex % 3].Sprite,
             cost = 0,
             floppable = true,
             exhaust = true,
-            artOverlay = ModEntry.Instance.Sprites["BorderWish"].Sprite
+            artOverlay = ModEntry.Instance.Settings.ProfileBased.Current.EnabledBlood ? ModEntry.Instance.Sprites["BorderWish"].Sprite : null
         };
-    }
-    public Matrix ModifyNonTextCardRenderMatrix(G g, IReadOnlyList<CardAction> actions)
-    {
-        if (upgrade == Upgrade.B)
-            return Matrix.CreateScale(1.5f);
-        return Matrix.Identity;
-    }
-    public Matrix ModifyCardActionRenderMatrix(G g, IReadOnlyList<CardAction> actions, CardAction action, int actionWidth)
-    {
-        return Matrix.CreateScale(1f / 1.5f);
     }
     public override void ExtraRender(G g, Vec v)
     {
@@ -87,7 +81,7 @@ public class LenCardWishBottle : Card, IRegisterable
         if (LastFlipped != flipped)
         {
             LastFlipped = flipped;
-            FlipIndex = (FlipIndex + 1) % (upgrade == Upgrade.B ? 3 : 4);
+            FlipIndex = (FlipIndex + 1) % 3;
         }
     }
     public override List<CardAction> GetActions(State s, Combat c)
@@ -180,10 +174,29 @@ public class LenCardWishBottle : Card, IRegisterable
                     Icon = TriadIcon[0].Sprite,
                     TitleColor = Colors.cardtrait,
                     Title = ModEntry.Instance.Localizations.Localize(["cardTrait","triad","name"]),
-                    Description = ModEntry.Instance.Localizations.Localize(["cardTrait","triad","name",
+                    Description = ModEntry.Instance.Localizations.Localize(["cardTrait","triad","description",
                         PlatformIcons.GetPlatform() == Platform.MouseKeyboard ? "m&k" : "controller"],
                     new { Button = buttonText })
                 };
             });
+    }
+    private sealed class Hook : IKokoroApi.IV2.ICardRenderingApi.IHook
+    {
+        public Matrix ModifyCardActionRenderMatrix(IKokoroApi.IV2.ICardRenderingApi.IHook.IModifyCardActionRenderMatrixArgs args)
+        {
+            if (args.Card is not LenCardWishBottle)
+                return Matrix.Identity;
+
+            var spacing = 12 * args.G.mg.PIX_SCALE;
+            var halfYCenterOffset = 16 * args.G.mg.PIX_SCALE;
+            var index = args.Actions.ToList().IndexOf(args.Action);
+            var recenterY = -(int)((index - args.Actions.Count / 2.0 + 0.5) * spacing);
+            return index switch
+            {
+                0 => Matrix.CreateTranslation(0, recenterY - halfYCenterOffset - 3, 0),
+                2 => Matrix.CreateTranslation(0, recenterY + halfYCenterOffset + 1, 0),
+                _ => Matrix.Identity
+            };
+        }
     }
 }

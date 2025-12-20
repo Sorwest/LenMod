@@ -23,7 +23,7 @@ public class LenArtifactBrioche : Artifact, IRegisterable
             Description = ModEntry.Instance.AnyLocalizations.Bind(["artifact", "Brioche", "description"]).Localize
         });
     }
-    public override List<Tooltip>? GetExtraTooltips()
+    /*public override List<Tooltip>? GetExtraTooltips()
     {
         int dmg = 1;
         Spr icon = ModEntry.Instance.Sprites["ThrowBanana"].Sprite;
@@ -51,7 +51,7 @@ public class LenArtifactBrioche : Artifact, IRegisterable
                 Description = ModEntry.Instance.Localizations.Localize(["action", "EatBanana", "description"], new { Damage = dmg }),
             }
             ];
-    }
+    }*/
     public override void OnReceiveArtifact(State state)
     {
         ModEntry.Instance.Helper.ModData.SetModData(state, "BananaDamage", 1);

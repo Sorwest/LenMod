@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
 
-public class LenCardEXECard : Card, IRegisterable
+public class LenEXECard : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {

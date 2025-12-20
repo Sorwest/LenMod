@@ -30,7 +30,6 @@ internal class LenCardMN1 : Card, IRegisterable
         {
             cost = 0,
             retain = upgrade != Upgrade.None,
-            singleUse = true,
             temporary = true
         };
     }
@@ -55,6 +54,10 @@ internal class LenCardMN1 : Card, IRegisterable
                     isThrow = true
                 }
             ).AsCardAction,
+            new ADrawCard()
+            {
+                count = 1
+            }
         ];
     }
 }

@@ -7,6 +7,7 @@ namespace Sorwest.LenMod.Artifacts;
 
 public class LenArtifactMaidDress : Artifact, IRegisterable
 {
+    public int dressShield = 1;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Artifacts.RegisterArtifact("MaidDress", new()
@@ -36,7 +37,7 @@ public class LenArtifactMaidDress : Artifact, IRegisterable
         }
         return
         [
-            ..StatusMeta.GetTooltips(Status.shield, 2),
+            ..StatusMeta.GetTooltips(Status.shield, dressShield),
             new GlossaryTooltip($"action.{GetType().Namespace!}::AThrowBanana")
             {
                 Icon = icon,
@@ -56,7 +57,7 @@ public class LenArtifactMaidDress : Artifact, IRegisterable
 
     public override void OnReceiveArtifact(State state)
     {
-        ModEntry.Instance.Helper.ModData.SetModData(state, "BananaShield", 2);
+        ModEntry.Instance.Helper.ModData.SetModData(state, "BananaShield", dressShield);
     }
     public override void OnRemoveArtifact(State state)
     {

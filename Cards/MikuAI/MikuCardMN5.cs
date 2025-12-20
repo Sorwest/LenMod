@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
 
-internal class MikuCardMN5 : Card, IRegisterable
+internal class MikuCardMN5 : Card, IRegisterable, IHasCustomCardTraits
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -31,6 +31,8 @@ internal class MikuCardMN5 : Card, IRegisterable
             description = ModEntry.Instance.Localizations.Localize(["card", "Encore", "descriptionMiku"])
         };
     }
+    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
+        => (HashSet<ICardTraitEntry>)[ModEntry.Instance.KokoroApi.Fleeting.Trait];
 
     public override List<CardAction> GetActions(State state, Combat combat)
     {
@@ -44,13 +46,13 @@ internal class MikuCardMN5 : Card, IRegisterable
             }).AsCardAction,
             ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(new AAddCard()
             {
-                amount = 2,
+                amount = 1,
                 card = new MikuCardMN3(),
                 destination = CardDestination.Deck
             }).AsCardAction,
             ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(new AAddCard()
             {
-                amount = 3,
+                amount = 2,
                 card = new MikuCardMN6(),
                 destination = CardDestination.Deck
             }).AsCardAction

@@ -44,7 +44,7 @@ internal class LenCardMN4 : Card, IRegisterable
             new AStatus()
             {
                 status = ModEntry.Instance.LenCharacter.MissingStatus.Status,
-                statusAmount = 1,
+                statusAmount = upgrade == Upgrade.B ? 2 : 1,
                 targetPlayer = true
             }
         ];

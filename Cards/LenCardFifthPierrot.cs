@@ -17,7 +17,7 @@ public class LenCardFifthPierrot : Card, IRegisterable
             Meta = new()
             {
                 deck = ModEntry.Instance.LenDeck.Deck,
-                rarity = Rarity.common,
+                rarity = Rarity.rare,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "FifthPierrot", "name"]).Localize
@@ -30,7 +30,8 @@ public class LenCardFifthPierrot : Card, IRegisterable
         return new()
         {
             cost = 1,
-            exhaust = upgrade == Upgrade.B ? false : true
+            exhaust = true,
+            buoyant = upgrade == Upgrade.B
         };
     }
     public override List<CardAction> GetActions(State state, Combat combat)

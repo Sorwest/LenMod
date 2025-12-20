@@ -21,6 +21,11 @@
       "title": "Enable Intrusive SFX",
       "tooltipTitle": "Enable SFX",
       "description": "Various cards trigger SFX-based music which may be annoying for some."
+    },
+    "EnabledBlood": {
+      "title": "Enable Intrusive SFX",
+      "tooltipTitle": "Enable SFX",
+      "description": "Various cards trigger SFX-based music which may be annoying for some."
     }
   },
   "status": {
@@ -96,7 +101,7 @@
     },
     "GlassBottle": {
       "name": "GLASS BOTTLE",
-      "description": "At start of combat, gain a <c=card>Wish on a Bottle</c>."
+      "description": "At start of combat, gain a <c=card>Wish in a Bottle</c>."
     },
     "Guillotine": {
       "name": "GUILLOTINE",
@@ -157,6 +162,9 @@
     "Paradichlorobenzene": {
       "name": "Paradichlorobenzene"
     },
+    "GachaGacha": {
+      "name": "Gacha Gacha Bomb"
+    },
     "PlusBoy": {
       "name": "Plus Boy"
     },
@@ -195,13 +203,16 @@
     "Encore": {
       "name": "Encore",
       "descriptionLen": "Add 3x <c=cardtrait>disc, temp</c> <c=ffe569>Banana</c> & <c=ffe569>Fan Letter</c> & <c=ffe569>Close To Gray</c> to draw.",
-      "descriptionMiku": "<c=hurt>Turn End:</c> Add 1 <c=7ed2d6>Fan Letter</c>, 2 <c=7ed2d6>Set Trend</c> & 3 <c=7ed2d6>World Is Mine</c> to draw."
+      "descriptionMiku": "<c=hurt>Turn End:</c> Add 1 <c=7ed2d6>Fan Letter</c>, 1 <c=7ed2d6>Set Trend</c> & 2 <c=7ed2d6>World Is Mine</c> to draw."
     },
     "CloseToGray": {
       "name": "Close to Gray"
     },
     "WorldIsMine": {
       "name": "World Is Mine"
+    },
+    "WishBottle": {
+      "name": "Wish in a Bottle"
     }
   }
 }

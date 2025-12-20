@@ -92,33 +92,68 @@ public class MusicNoteManager : IRegisterable
             bool isMiku = args.Ship.ai?.GetType() == typeof(MikuAI);
             if (note == 12)
             {
-                args.Combat.Queue(new AStatus() { status = MusicNoteStatus.Status, mode = AStatusMode.Set, statusAmount = 0, targetPlayer = args.Ship.isPlayerShip });
                 if (isMiku)
+                {
                     card = new MikuCardMN5();
+                }
+
+                args.Combat.Queue(new AStatus() { status = MusicNoteStatus.Status, mode = AStatusMode.Set, statusAmount = 0, targetPlayer = args.Ship.isPlayerShip });
             }
             else if (note > 9)
             {
-                card = new LenCardMN4 { upgrade = (Upgrade)notemod };
                 if (isMiku)
+                {
                     card = new MikuCardMN4();
+                }
+                else if (note == 11)
+                {
+                    double chance = args.State.rngActions.Next();
+                    if (chance < 50)
+                    {
+                        card = new LenCardMN4 { upgrade = Upgrade.A };
+                    }
+                    else
+                    {
+                        card = new LenCardMN4 { upgrade = Upgrade.B };
+                    }
+                }
+                else
+                {
+                    card = new LenCardMN4 { upgrade = (Upgrade)notemod };
+                }
             }
             else if (note > 6)
             {
-                card = new LenCardMN3 { upgrade = (Upgrade)notemod };
                 if (isMiku)
+                {
                     card = new MikuCardMN3();
+                }
+                else
+                {
+                    card = new LenCardMN3 { upgrade = (Upgrade)notemod };
+                }
             }
             else if (note > 3)
             {
-                card = new LenCardMN2 { upgrade = (Upgrade)notemod };
                 if (isMiku)
+                {
                     card = new MikuCardMN2();
+                }
+                else
+                {
+                    card = new LenCardMN2 { upgrade = (Upgrade)notemod };
+                }
             }
             else
             {
-                card = new LenCardMN1 { upgrade = (Upgrade)notemod };
                 if (isMiku)
+                {
                     card = new MikuCardMN1();
+                }
+                else
+                {
+                    card = new LenCardMN1 { upgrade = (Upgrade)notemod };
+                }
             }
             args.Combat.Queue(new AAddCard() { amount = 1, card = card, destination = CardDestination.Hand });
             args.Ship.PulseStatus(args.Status);

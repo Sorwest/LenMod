@@ -121,8 +121,7 @@ public class ABananaDamage : CardAction
             {
                 damage = damage,
                 piercing = piercing,
-                fast = true,
-                timer = 0
+                fast = true
             });
             if (piercing)
                 state.EnumerateAllArtifacts().OfType<LenArtifactGuillotine>().FirstOrDefault()?.Pulse();
@@ -132,11 +131,9 @@ public class ABananaDamage : CardAction
             combat.Queue(new ABananaHunger()
             {
                 hurtAmount = damage,
-                targetPlayer = targetPlayer,
-                timer = 0
+                targetPlayer = targetPlayer
             });
         }
-        state.EnumerateAllArtifacts().OfType<LenArtifactBrioche>().FirstOrDefault()?.Pulse();
     }
 }
 public class ABananaAttack : AAttack
@@ -163,6 +160,12 @@ public class ABananaAttack : AAttack
         else
             color = Colors.attackFail;
         return new Icon(GetIconSprite(state), damage, color, false);
+    }
+    public override void Begin(G g, State state, Combat combat)
+    {
+        timer = 0;
+        base.Begin(g, state, combat);
+        state.EnumerateAllArtifacts().OfType<LenArtifactBrioche>().FirstOrDefault()?.Pulse();
     }
     public override List<Tooltip> GetTooltips(State state)
     {
@@ -212,6 +215,12 @@ public class ABananaHunger : AHurt
     public override Icon? GetIcon(State state)
     {
         return new Icon(GetIconSprite(state), hurtAmount, Colors.redd, false);
+    }
+    public override void Begin(G g, State state, Combat combat)
+    {
+        timer = 0;
+        base.Begin(g, state, combat);
+        state.EnumerateAllArtifacts().OfType<LenArtifactBrioche>().FirstOrDefault()?.Pulse();
     }
     public override List<Tooltip> GetTooltips(State state)
     {

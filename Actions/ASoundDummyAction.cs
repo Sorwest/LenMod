@@ -28,6 +28,7 @@ public class ARandomSoundDummyAction : CardAction
         {
             if (choice <= (num + weight))
             {
+                timer = 0;
                 sound?.CreateInstance();
                 return;
             }

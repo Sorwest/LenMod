@@ -92,7 +92,7 @@
     },
     "GlassBottle": {
       "name": "BOTELLA A LA DERIVA",
-      "description": "Añade a tu mano <c=card>Wish on a Bottle</c> en el primer turno."
+      "description": "Añade a tu mano <c=card>Wish in a Bottle</c> en el primer turno."
     },
     "Guillotine": {
       "name": "GUILLOTINA",
@@ -153,6 +153,9 @@
     "Paradichlorobenzene": {
       "name": "Paradichlorobenzene"
     },
+    "GachaGacha": {
+      "name": "Gacha Gacha Bomb"
+    },
     "PlusBoy": {
       "name": "Plus Boy"
     },
@@ -198,6 +201,9 @@
     },
     "WorldIsMine": {
       "name": "World Is Mine"
+    },
+    "WishBottle": {
+      "name": "Wish in a Bottle"
     }
   }
 }

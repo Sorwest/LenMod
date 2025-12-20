@@ -49,12 +49,12 @@ public class LenCardRemoteControl : Card, IRegisterable
             }).AsCardAction,
             new AAttack()
             {
-                damage = GetDmg(state, 0),
+                damage = GetDmg(state, upgrade == Upgrade.B ? 1 : 0),
                 moveEnemy = 1
             },
             new AAttack()
             {
-                damage = GetDmg(state, upgrade == Upgrade.None ? 2 : 3),
+                damage = GetDmg(state, 2),
                 moveEnemy = -1
             },
             new AAttack()

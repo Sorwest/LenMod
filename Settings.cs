@@ -48,4 +48,6 @@ internal sealed class ProfileSettings
     public bool EnabledMikuAI = true;
     [JsonProperty]
     public bool EnabledSounds = true;
+    [JsonProperty]
+    public bool EnabledBlood = true;
 }
