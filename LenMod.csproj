@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<RootNamespace>Sorwest.LenMod</RootNamespace>
-		<Version>2.1.0</Version>
+		<Version>3.0.0-prerelease</Version>
 		<IsNickelMod>True</IsNickelMod>
 		<TargetFramework>net8.0</TargetFramework>
 		<ModZipPath>$(MSBuildProjectDirectory)\.release\$(MSBuildProjectName)-$(Version).zip</ModZipPath>
