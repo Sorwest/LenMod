@@ -27,12 +27,9 @@ internal class MikuCardMN5 : Card, IRegisterable
         {
             cost = 39,
             temporary = true,
+            exhaust = true,
             description = ModEntry.Instance.Localizations.Localize(["card", "Encore", "descriptionMiku"])
         };
-    }
-    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
-    {
-        return (HashSet<ICardTraitEntry>)ModEntry.Instance.KokoroApi.Fleeting.Trait;
     }
 
     public override List<CardAction> GetActions(State state, Combat combat)
