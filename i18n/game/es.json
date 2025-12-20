@@ -62,6 +62,21 @@
       "description": "Len <c=action>tira</c> una <c=status>banana</c> increíblemente rápido, atacando por <=boldPink>{{Damage}}</c> de daño al enemigo."
     }
   },
+  "cardTrait": {
+    "triad": {
+      "name": "Triad Card",
+      "description": {
+        "m&k": [
+          "This card has three separate sets of actions.",
+          "In combat, <c=keyword>right click or ctrl-click</c> this card to switch between them."
+        ],
+        "controller": [
+          "This card has three separate sets of actions.",
+          "In combat, press {{Button}} on this card to switch between them."
+        ]
+      }
+    }
+  },
   "artifact": {
     "BananaStash": {
       "name": "BANANA STASH",
@@ -73,15 +88,15 @@
     },
     "Brioche": {
       "name": "BRIOCHE",
-      "description": "Al obtenerse, el daño causado por <c=status>BANANAS</c> incrementa por 1 de forma permanente."
+      "description": "El daño causado por <c=status>BANANAS</c> incrementa por 1."
     },
     "GlassBottle": {
       "name": "BOTELLA A LA DERIVA",
-      "description": "Ganas 3 <c=status>BANANAS</c> en el primer turno."
+      "description": "Añade a tu mano <c=card>Wish on a Bottle</c> en el primer turno."
     },
     "Guillotine": {
       "name": "GUILLOTINA",
-      "description": "Al obtenerse, el daño causado por <c=action>tirar</c> <c=status>BANANAS</c> se vuelve <c=action>perforante</c>."
+      "description": "<c=status>BANANAS</c> <c=action>tiradas</c> son <c=action>perforantes</c>."
     },
     "MaidDress": {
       "name": "VESTIDO DE WAIFU",

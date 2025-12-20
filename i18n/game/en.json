@@ -35,11 +35,11 @@
     },
     "MusicNote": {
       "name": "Music Note",
-      "description": "At start of turn, add a special card to hand. Gain 1 <c=status>note</c> on turn end if <c=hurt>hull</c> at <c=redd>half</c> or less. Reset at <c=keyword>12</c>. <c=status>Persists across battles</c>."
+      "description": "At start of turn, add a special card to hand. Gain 1 <c=status>note</c> on turn end if <c=hurt>hull</c> at or below <c=redd>half</c>. Reset at <c=keyword>12</c>. <c=status>Persists across battles</c>."
     },
     "BananaTree": {
       "name": "Banana Tree",
-      "description":  "At start of turn, gain 2 <c=status>bananas</c> per tree."
+      "description": "At start of turn, gain 2 <c=status>bananas</c> per tree."
     }
   },
   "midrow": {
@@ -54,7 +54,7 @@
       "description": "<c=action>Eat</c> a <c=status>banana</c>, making the enemy so hungry they lose <c=hurt>{{Damage}}</c> <c=hurt>hull</c>."
     },
     "LoseAll": {
-      "name":  "Lose All Bananas",
+      "name": "Lose All Bananas",
       "description": "Lose all <c=status>bananas</c>."
     },
     "ThrowBanana": {
@@ -64,6 +64,21 @@
     "ButterflyField": {
       "name": "Butterfly Field",
       "description": "Instantly turn every <c=midrow>object in the midrow</c> into <c=midrow>butterflies</c>."
+    }
+  },
+  "cardTrait": {
+    "triad": {
+      "name": "Triad Card",
+      "description": {
+        "m&k": [
+          "This card has three separate sets of actions.",
+          "In combat, <c=keyword>right click or ctrl-click</c> this card to switch between them."
+        ],
+        "controller": [
+          "This card has three separate sets of actions.",
+          "In combat, press {{Button}} on this card to switch between them."
+        ]
+      }
     }
   },
   "artifact": {
@@ -77,19 +92,19 @@
     },
     "Brioche": {
       "name": "BRIOCHE",
-      "description": "<c=405a7f>Her favorite.</c>\nOn pickup, <c=status>BANANA</c> damage is increased by 1."
+      "description": "<c=status>BANANA</c> actions deal 1 extra damage."
     },
     "GlassBottle": {
       "name": "GLASS BOTTLE",
-      "description": "<c=405a7f>Who's wish was inside it?</c>\nAt start of combat, gain 3 <c=status>BANANAS</c>."
+      "description": "At start of combat, gain a <c=card>Wish on a Bottle</c>."
     },
     "Guillotine": {
       "name": "GUILLOTINE",
-      "description": "<c=405a7f>I'll continue watching over you.</c>\n<c=action>Thrown</c> <c=status>BANANAS</c>' are <c=action>piercing</c>."
+      "description": "<c=action>Thrown</c> <c=status>BANANAS</c> are <c=action>piercing</c>."
     },
     "MaidDress": {
       "name": "MAID DRESS",
-      "description": "<c=status>BANANAS</c> now give you 2 <c=status>SHIELD</c> before <c=action>eating</c> or <c=action>throwing</c> them."
+      "description": "All <c=status>BANANAS</c> give you 2 <c=status>SHIELD</c> before <c=action>eating</c> or <c=action>throwing</c> them."
     },
     "TwinPower": {
       "name": "TWIN POWER",
