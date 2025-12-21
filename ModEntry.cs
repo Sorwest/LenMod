@@ -48,7 +48,7 @@ public class ModEntry : SimpleMod
     internal static IReadOnlyList<Type> LenUncommonCardTypes { get; } = [
         typeof(LenCardRemoteControl),
         typeof(LenCardChildishWar),
-        //typeof(LenCardBringItOn),
+        typeof(LenCardBringItOn),
         typeof(LenCardLikeDislike),
         typeof(LenCardBarisolChild),
         typeof(LenCardNiccoriTeamSurvey),
@@ -179,6 +179,8 @@ public class ModEntry : SimpleMod
         "EatBanana",
         "EatBananaCost",
         "GainBananaLoseAll",
+        "RinMidrow",
+        "RinMidrowMK2",
         "ThrowBanana",
         "ThrowBananaCost",
         "ThrowBananaPiercing",
@@ -186,7 +188,11 @@ public class ModEntry : SimpleMod
         "MusicNote"
         ];
     internal IList<string> MidrowSprites { get; } = [
-        "Butterfly"
+        "Butterfly",
+        "RinBack",
+        "RinBackMK2",
+        "RinFront",
+        "RinFrontMK2"
         ];
     internal Dictionary<string, ISpriteEntry> Sprites { get; } = [];
 
@@ -312,6 +318,8 @@ public class ModEntry : SimpleMod
                 file = package.PackageRoot.GetRelativeFile($"assets/drones/{midrow}_{i}.png");
                 if (file.Exists)
                     Sprites.Add(key: $"{midrow}_{i}", value: helper.Content.Sprites.RegisterSprite(file));
+                else
+                    break;
             }
         }
 

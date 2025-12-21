@@ -51,6 +51,10 @@
     "Butterfly": {
       "name": "Butterfly",
       "description": "Rock-based lifeform. When destroyed, the attacker gains 1 <c=status>NOTE</c>."
+    },
+    "Rin": {
+      "name": "Rin{{upgrade}}",
+      "description": "Shoots a <c=damage>{{Damage}}</c> damage shot once per turn."
     }
   },
   "action": {

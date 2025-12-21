@@ -1,6 +1,7 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
 using Sorwest.LenMod.Actions;
+using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -29,74 +30,38 @@ public class LenCardBringItOn : Card, IRegisterable
     {
         return new()
         {
-            cost = 2,
-            buoyant = upgrade == Upgrade.A ? true : false,
-            exhaust = upgrade == Upgrade.B ? true : false
+            cost = upgrade == Upgrade.A ? 1 : 2,
+            exhaust = true
         };
     }
     public override List<CardAction> GetActions(State state, Combat combat)
     {
-        List<CardAction> result = new();
-        switch (upgrade)
+        List<CardAction> result =
+        [
+            ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(
+                new ASoundDummyAction()
+                {
+                    sound = BringitSound
+                }
+            ).AsCardAction,
+            new ASpawn()
+            {
+                thing = new RinMidrow() { upgraded = upgrade == Upgrade.B },
+                offset = -5
+            },
+            new ASpawn()
+            {
+                thing = new RinMidrow() { upgraded = upgrade == Upgrade.B },
+                offset = 5
+            }
+        ];
+        if (upgrade == Upgrade.B)
         {
-            case Upgrade.None:
-                result = [
-                    new AStatus()
-                    {
-                        status = Status.shield,
-                        statusAmount = 2,
-                        targetPlayer = true
-                    },
-                    new AStatus()
-                    {
-                        status = Status.tempPayback,
-                        statusAmount = 1,
-                        targetPlayer = true
-                    },
-                    new AEndTurn()
-                ];
-                break;
-            case Upgrade.A:
-                result =
-                [
-                    new AStatus()
-                    {
-                        status = Status.shield,
-                        statusAmount = 4,
-                        targetPlayer = true
-                    },
-                    new AStatus()
-                    {
-                        status = Status.tempPayback,
-                        statusAmount = 1,
-                        targetPlayer = true
-                    },
-                    new AEndTurn()
-                ];
-                break;
-            case Upgrade.B:
-                result =
-                [
-                    new AStatus()
-                    {
-                        status = Status.tempPayback,
-                        statusAmount = 1,
-                        targetPlayer = true
-                    },
-                    new AStatus()
-                    {
-                        status = Status.payback,
-                        statusAmount = 1,
-                        targetPlayer = true
-                    },
-                    new AEndTurn()
-                ];
-                break;
+            result.Add(new ASpawn()
+            {
+                thing = new RinMidrow() { targetPlayer = true, upgraded = true, bubbleShield = true }
+            });
         }
-        result.Insert(0, ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ASoundDummyAction()
-        {
-            sound = BringitSound
-        }).AsCardAction);
         return result;
     }
 }
