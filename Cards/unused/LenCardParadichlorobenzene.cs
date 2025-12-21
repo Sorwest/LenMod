@@ -10,7 +10,7 @@ namespace Sorwest.LenMod.Cards;
 
 public class LenCardParadichlorobenzene : Card, IRegisterable, IHasCustomCardTraits
 {
-    public static IModSoundEntry BenzeneSound { get; set; } = null!;
+    //public static IModSoundEntry BenzeneSound { get; set; } = null!;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard("Paradichlorobenzene", new()
@@ -25,8 +25,7 @@ public class LenCardParadichlorobenzene : Card, IRegisterable, IHasCustomCardTra
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Paradichlorobenzene", "name"]).Localize
         });
-        BenzeneSound = ModEntry.Instance.Helper.Content.Audio.RegisterSound(
-            ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/benzene.mp3"));
+        //BenzeneSound = ModEntry.Instance.Helper.Content.Audio.RegisterSound(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/benzene.mp3"));
     }
     public override CardData GetData(State state)
     {
@@ -48,10 +47,7 @@ public class LenCardParadichlorobenzene : Card, IRegisterable, IHasCustomCardTra
     {
         List<CardAction> result = new()
         {
-            ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ASoundDummyAction()
-            {
-                sound = BenzeneSound
-            }).AsCardAction,
+            //ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ASoundDummyAction() { sound = BenzeneSound }).AsCardAction,
             ModEntry.Instance.KokoroApi.Conditional.MakeAction(
                 ModEntry.Instance.KokoroApi.Conditional.HasStatus(BananaManager.BananaStatus.Status),
                 new AStatus()

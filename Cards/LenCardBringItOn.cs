@@ -9,7 +9,7 @@ namespace Sorwest.LenMod.Cards;
 
 public class LenCardBringItOn : Card, IRegisterable
 {
-    public static IModSoundEntry BringitSound { get; set; } = null!;
+    //public static IModSoundEntry BringitSound { get; set; } = null!;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard("BringItOn", new()
@@ -23,8 +23,7 @@ public class LenCardBringItOn : Card, IRegisterable
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "BringItOn", "name"]).Localize
         });
-        BringitSound = ModEntry.Instance.Helper.Content.Audio.RegisterSound(
-            ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/bringiton.mp3"));
+        //BringitSound = ModEntry.Instance.Helper.Content.Audio.RegisterSound(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/bringiton.mp3"));
     }
     public override CardData GetData(State state)
     {
@@ -38,12 +37,7 @@ public class LenCardBringItOn : Card, IRegisterable
     {
         List<CardAction> result =
         [
-            ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(
-                new ASoundDummyAction()
-                {
-                    sound = BringitSound
-                }
-            ).AsCardAction,
+            //ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ASoundDummyAction() { sound = BringitSound } ).AsCardAction,
             new ASpawn()
             {
                 thing = new RinMidrow() { upgraded = upgrade == Upgrade.B },

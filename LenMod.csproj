@@ -20,6 +20,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<None Remove="$(MSBuildProjectDirectory)\.release\**" />
+		<None Remove="$(MSBuildProjectDirectory)\assets\sound\**" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Nickel.ModBuildConfig" Version="2.1.0" />

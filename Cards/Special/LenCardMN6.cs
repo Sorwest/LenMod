@@ -8,9 +8,10 @@ namespace Sorwest.LenMod.Cards;
 
 internal class LenCardMN6 : Card, IRegisterable
 {
-    public static IModSoundEntry BoundlessSound1 { get; set; } = null!;
+    /*public static IModSoundEntry BoundlessSound1 { get; set; } = null!;
     public static IModSoundEntry BoundlessSound2 { get; set; } = null!;
     public static IModSoundEntry BoundlessSound3 { get; set; } = null!;
+    */
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard("LenCardMN6", new()
@@ -25,12 +26,13 @@ internal class LenCardMN6 : Card, IRegisterable
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "CloseToGray", "name"]).Localize
         });
-        BoundlessSound1 = ModEntry.Instance.Helper.Content.Audio.RegisterSound(
+        /*BoundlessSound1 = ModEntry.Instance.Helper.Content.Audio.RegisterSound(
             ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/boundless1.mp3"));
         BoundlessSound2 = ModEntry.Instance.Helper.Content.Audio.RegisterSound(
             ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/boundless2.mp3"));
         BoundlessSound3 = ModEntry.Instance.Helper.Content.Audio.RegisterSound(
             ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/boundless3.mp3"));
+        */
     }
     public override CardData GetData(State state)
     {
@@ -44,7 +46,7 @@ internal class LenCardMN6 : Card, IRegisterable
     {
         return
         [
-            ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ARandomSoundDummyAction()
+            /*ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ARandomSoundDummyAction()
             {
                 sounds = new Dictionary<IModSoundEntry, double>
                 {
@@ -53,6 +55,7 @@ internal class LenCardMN6 : Card, IRegisterable
                     [BoundlessSound3] = 0.3
                 }
             }).AsCardAction,
+            */
             new AAttack()
             {
                 damage = GetDmg(state, upgrade == Upgrade.None ? 1 : 2),

@@ -8,7 +8,7 @@ namespace Sorwest.LenMod.Cards;
 
 public class LenCardTelecasterBBoy : Card, IRegisterable
 {
-    public static IModSoundEntry TelecasterSound { get; set; } = null!;
+    //public static IModSoundEntry TelecasterSound { get; set; } = null!;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard("TelecasterBBoy", new()
@@ -22,8 +22,7 @@ public class LenCardTelecasterBBoy : Card, IRegisterable
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "TelecasterBBoy", "name"]).Localize
         });
-        TelecasterSound = ModEntry.Instance.Helper.Content.Audio.RegisterSound(
-            ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/telecaster.mp3"));
+        //TelecasterSound = ModEntry.Instance.Helper.Content.Audio.RegisterSound(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/telecaster.mp3"));
     }
     public override CardData GetData(State state)
     {
@@ -38,10 +37,7 @@ public class LenCardTelecasterBBoy : Card, IRegisterable
     {
         return new()
         {
-            ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ASoundDummyAction()
-            {
-                sound = TelecasterSound
-            }).AsCardAction,
+            //ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ASoundDummyAction() { sound = TelecasterSound }).AsCardAction,
             new AStatus()
             {
                 status = Status.droneShift,

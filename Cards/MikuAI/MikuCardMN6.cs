@@ -24,12 +24,10 @@ internal class MikuCardMN6 : Card, IRegisterable
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "WorldIsMine", "name"]).Localize
         });
-        /*WorldIsMine1 = ModEntry.Instance.Helper.Content.Audio.RegisterSound(
-            ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/worldismine1.mp3"));
-        WorldIsMine2 = ModEntry.Instance.Helper.Content.Audio.RegisterSound(
-            ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/worldismine2.mp3"));
-        WorldIsMine3 = ModEntry.Instance.Helper.Content.Audio.RegisterSound(
-            ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/worldismine3.mp3"));*/
+        /*WorldIsMine1 = ModEntry.Instance.Helper.Content.Audio.RegisterSound(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/worldismine1.mp3"));
+        WorldIsMine2 = ModEntry.Instance.Helper.Content.Audio.RegisterSound(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/worldismine2.mp3"));
+        WorldIsMine3 = ModEntry.Instance.Helper.Content.Audio.RegisterSound(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/worldismine3.mp3"));
+        */
     }
     public override CardData GetData(State state)
     {

@@ -8,7 +8,7 @@ namespace Sorwest.LenMod.Cards;
 
 public class LenCardFifthPierrot : Card, IRegisterable
 {
-    public static IModSoundEntry PierrotSound { get; set; } = null!;
+    //public static IModSoundEntry PierrotSound { get; set; } = null!;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard("FifthPierrot", new()
@@ -22,8 +22,7 @@ public class LenCardFifthPierrot : Card, IRegisterable
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "FifthPierrot", "name"]).Localize
         });
-        PierrotSound = ModEntry.Instance.Helper.Content.Audio.RegisterSound(
-            ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/pierrot.mp3"));
+        //PierrotSound = ModEntry.Instance.Helper.Content.Audio.RegisterSound(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/pierrot.mp3"));
     }
     public override CardData GetData(State state)
     {
@@ -37,10 +36,7 @@ public class LenCardFifthPierrot : Card, IRegisterable
     public override List<CardAction> GetActions(State state, Combat combat)
     {
         List<CardAction> result = [
-            ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ASoundDummyAction()
-            {
-                sound = PierrotSound
-            }).AsCardAction,
+            //ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ASoundDummyAction() { sound = PierrotSound }).AsCardAction,
             new AStatus()
             {
                 status = Status.powerdrive,

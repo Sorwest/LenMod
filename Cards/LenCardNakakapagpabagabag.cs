@@ -8,7 +8,7 @@ namespace Sorwest.LenMod.Cards;
 
 public class LenCardNakakapagpabagabag : Card, IRegisterable
 {
-    public static IModSoundEntry NakakapagSound { get; set; } = null!;
+    //public static IModSoundEntry NakakapagSound { get; set; } = null!;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard("Nakakapagpabagabag", new()
@@ -22,8 +22,7 @@ public class LenCardNakakapagpabagabag : Card, IRegisterable
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Nakakapagpabagabag", "name"]).Localize
         });
-        NakakapagSound = ModEntry.Instance.Helper.Content.Audio.RegisterSound(
-            ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/nakakapag.mp3"));
+        //NakakapagSound = ModEntry.Instance.Helper.Content.Audio.RegisterSound(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/nakakapag.mp3"));
 
     }
     public override CardData GetData(State state)
@@ -44,6 +43,7 @@ public class LenCardNakakapagpabagabag : Card, IRegisterable
     {
         return
         [
+            //ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ASoundDummyAction() { sound = NakakapagSound }).AsCardAction,
             ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
                     new ABananaAttack()
                     {

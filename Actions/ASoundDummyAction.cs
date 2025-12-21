@@ -9,6 +9,8 @@ public class ASoundDummyAction : CardAction
     public IModSoundEntry? sound;
     public override void Begin(G g, State state, Combat combat)
     {
+        if (sound == null)
+            return;
         if (!ModEntry.Instance.Settings.ProfileBased.Current.EnabledSounds)
             return;
         timer = 0;

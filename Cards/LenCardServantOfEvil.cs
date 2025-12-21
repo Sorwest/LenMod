@@ -8,7 +8,7 @@ namespace Sorwest.LenMod.Cards;
 
 public class LenCardServantOfEvil : Card, IRegisterable
 {
-    public static IModSoundEntry ServantSound { get; set; } = null!;
+    //public static IModSoundEntry ServantSound { get; set; } = null!;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard("ServantOfEvil", new()
@@ -22,8 +22,7 @@ public class LenCardServantOfEvil : Card, IRegisterable
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ServantOfEvil", "name"]).Localize
         });
-        ServantSound = ModEntry.Instance.Helper.Content.Audio.RegisterSound(
-            ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/servant.mp3"));
+        //ServantSound = ModEntry.Instance.Helper.Content.Audio.RegisterSound(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/servant.mp3"));
     }
     public override CardData GetData(State state)
     {
@@ -38,16 +37,13 @@ public class LenCardServantOfEvil : Card, IRegisterable
     {
         return new()
         {
-            ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ASoundDummyAction()
-            {
-                sound = ServantSound,
-                dialogueSelector = ".card_servantofevil_played"
-            }).AsCardAction,
+            //ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ASoundDummyAction() { sound = ServantSound, dialogueSelector = ".card_servantofevil_played" }).AsCardAction,
             new AStatus()
             {
                 status = Status.serenity,
                 statusAmount = upgrade == Upgrade.A ? 2 : 1,
-                targetPlayer = true
+                targetPlayer = true,
+                dialogueSelector = ".card_servantofevil_played"
             },
             new AStatus()
             {
