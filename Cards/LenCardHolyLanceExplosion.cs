@@ -1,8 +1,10 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
 using Sorwest.LenMod.Actions;
+using Sorwest.LenMod.Artifacts;
 using Sorwest.LenMod.Features;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
@@ -34,13 +36,9 @@ public class LenCardHolyLanceExplosion : Card, IRegisterable
             buoyant = upgrade == Upgrade.B
         };
     }
-    private static int GetBananaDmg(State state)
-    {
-        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
-        return state.route is not Combat ? dmg : state.ship.Get(BananaManager.BananaStatus.Status) > 0 ? dmg : 0;
-    }
     public override List<CardAction> GetActions(State state, Combat combat)
     {
+        bool brioche = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") > 0;
         List<CardAction> result =
         [
             new AAttack()
@@ -58,8 +56,8 @@ public class LenCardHolyLanceExplosion : Card, IRegisterable
                 {
                     thing = new Missile()
                     {
-                        missileType = MissileType.heavy,
-                        skin = "sword"
+                        missileType = brioche ? MissileType.heavy : MissileType.normal,
+                        skin = brioche ? "sword" : null
                     }
                 }).AsCardAction
         ];
@@ -70,6 +68,10 @@ public class LenCardHolyLanceExplosion : Card, IRegisterable
                     sound = HolyLanceSound
                 }).AsCardAction
             );
+        if (brioche)
+        {
+            state.EnumerateAllArtifacts().OfType<LenArtifactMaidDress>().FirstOrDefault()?.Pulse();
+        }
         return result;
     }
 }

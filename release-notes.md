@@ -1,7 +1,7 @@
 # Release notes
 
-## 3.0.0
-Released 21 December 2025
+## 3.0.0-prerelease
+Prerelease 21 December 2025
 
 #### Cards
 * **change**: Banana: 1/0/1e banana 2/3/2, draw 1/1/2 -> 1e draw 1/1/3 if banana \<= 4/7/4, banana 1. Removed exhaust
@@ -9,7 +9,7 @@ Released 21 December 2025
 * **new**: Banana Dance: 1/0/1e evade 1/1/2 if banana \<= 4, banana 1
 * **change**: Breaktime: Throw 2/3/2 for 1 -> Throw, Eat / Throw, Throw, Throw / Eat, Eat, Eat
 * **nerf**: Fifth Pierrot is now rare and exhausts
-* **change**: Holy Lance Explosion: droneshift 1. Smash 1 for heavy missile. exhaust/exhaust/- -> Removed exhaust. Pierce 1/1/2, Banana cost 1: heavy missile
+* **change**: Holy Lance Explosion: droneshift 1. Smash 1 for heavy missile. exhaust/exhaust/- -> Removed exhaust. Pierce 1/1/2, Banana cost 1: normal missile (brioche turns it heavy)
 * **change**: Law Evading Rock B: 0e Spawn asteroid. recycle -> 1e Spawn asteroid -3, Spawn asteroid -2, Spawn asteroid -1
 * **buff**: Nakakapag: Smash 1 for overdrive 1 -> Throw 1, Overdrive 1
 * **change**: Plus Boy: 2e banana 6/9/4. single use/single use/-. -> 1/1/0e banana 3/3/- music note -/-/1. exhaust/-/exhaust
