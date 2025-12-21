@@ -1,12 +1,14 @@
-﻿using Nickel;
+﻿using Nanoray.PluginManager;
+using Nickel;
+using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Artifacts;
 
-public class LenArtifactBananaStash : Artifact, IModdedArtifact
+public class LenArtifactBananaStash : Artifact, IRegisterable
 {
-    public static void Register(IModHelper helper)
+    public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Artifacts.RegisterArtifact("BananaStash", new()
         {
@@ -22,73 +24,53 @@ public class LenArtifactBananaStash : Artifact, IModdedArtifact
             Description = ModEntry.Instance.AnyLocalizations.Bind(["artifact", "BananaStash", "description"]).Localize
         });
     }
-    public override string Name() => "BANANA STASH";
-    public int counter;
+    public int counter = 3;
     public bool stillHasBananas = true;
-    public int enemyDamage;
-    public int shieldNumber;
-    public override int? GetDisplayNumber(State s)
+    public override List<Tooltip>? GetExtraTooltips()
+    {
+        return [
+            ..StatusMeta.GetTooltips(BananaManager.BananaStatus.Status, 1)
+        ];
+    }
+    public override int? GetDisplayNumber(State state)
     {
         return counter > 0 ? counter : null;
     }
     public override Spr GetSprite()
     {
-        if (counter > 0 || stillHasBananas)
+        if (stillHasBananas && counter > 0)
             return ModEntry.Instance.Sprites["BananaStash"].Sprite;
+        else if (stillHasBananas)
+            return ModEntry.Instance.Sprites["BananaStashOn"].Sprite;
         else
-        {
             return ModEntry.Instance.Sprites["BananaStashOff"].Sprite;
-        }
     }
     public override void OnReceiveArtifact(State state)
     {
-        if (counter == 0)
-            counter += 6;
-        if (enemyDamage == 0)
-            enemyDamage += 1;
+        counter = 3;
     }
     public override void OnRemoveArtifact(State state)
     {
-        counter = 0;
-        enemyDamage -= 1;
+        ModEntry.Instance.Helper.ModData.RemoveModData(state, "BananaStored");
     }
     public override void OnCombatStart(State state, Combat combat)
     {
         if (counter > 0)
         {
-            combat.QueueImmediate(new AStatus()
-            {
-                status = ModEntry.Instance.BananaStatus.Status,
-                statusAmount = counter,
-                targetPlayer = true,
-                timer = 0
-            });
+            ModEntry.Instance.Helper.ModData.SetModData(state, "BananaStored", counter);
+            state.ship.Set(BananaManager.BananaStatus.Status, counter);
             counter = 0;
-            stillHasBananas = true;
+            Pulse();
         }
     }
     public override void OnCombatEnd(State state)
     {
-        if (state.ship.Get(ModEntry.Instance.BananaStatus.Status) > 0)
-            counter = state.ship.Get(ModEntry.Instance.BananaStatus.Status);
+        int amount = state.ship.Get(BananaManager.BananaStatus.Status);
+        counter = amount;
+        stillHasBananas = amount > 0;
+        if (amount > 0)
+            ModEntry.Instance.Helper.ModData.SetModData(state, "BananaStored", amount);
         else
-            stillHasBananas = false;
-    }
-    public override List<Tooltip>? GetExtraTooltips()
-    {
-        List<Tooltip> tooltips = new List<Tooltip>();
-        var str = "";
-        if (shieldNumber > 0)
-        {
-            str = ModEntry.Instance.Localizations.Localize(["action", "EatBanana", "maidDress"], new { Amount = shieldNumber });
-        }
-        tooltips.Add(new CustomTTGlossary(
-            CustomTTGlossary.GlossaryType.action,
-            () => ModEntry.Instance.Sprites["EatBanana"].Sprite,
-            () => ModEntry.Instance.Localizations.Localize(["action", "EatBanana", "name"]),
-            () => ModEntry.Instance.Localizations.Localize(["action", "EatBanana", "description"], new { Damage = enemyDamage > 0 ? enemyDamage : 1, MaidDress = str }),
-            key: $"{ModEntry.Instance.Package.Manifest.UniqueName}::EatBanana"
-        ));
-        return tooltips;
+            ModEntry.Instance.Helper.ModData.RemoveModData(state, "BananaStored");
     }
 }

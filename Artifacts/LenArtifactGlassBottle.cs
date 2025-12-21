@@ -1,12 +1,14 @@
-﻿using Nickel;
-using System.Linq;
+﻿using Nanoray.PluginManager;
+using Nickel;
+using Sorwest.LenMod.Cards;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Artifacts;
 
-public class LenArtifactGlassBottle : Artifact, IModdedArtifact
+public class LenArtifactGlassBottle : Artifact, IRegisterable
 {
-    public static void Register(IModHelper helper)
+    public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Artifacts.RegisterArtifact("GlassBottle", new()
         {
@@ -21,19 +23,16 @@ public class LenArtifactGlassBottle : Artifact, IModdedArtifact
             Description = ModEntry.Instance.AnyLocalizations.Bind(["artifact", "GlassBottle", "description"]).Localize
         });
     }
-    public override string Name() => "GLASS BOTTLE";
+    public override List<Tooltip>? GetExtraTooltips()
+        => [ new TTCard { card = new LenCardWishBottle() }];
     public override void OnCombatStart(State state, Combat combat)
     {
-        var artifactBananaStash = state.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
-        if (artifactBananaStash == null)
+        combat.Queue(new AAddCard()
         {
-            state.artifacts.Add(new LenArtifactBananaStash());
-            artifactBananaStash = state.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
-        }
-        if (artifactBananaStash != null)
-        {
-            artifactBananaStash.counter += 3;
-            Pulse();
-        }
+            card = new LenCardWishBottle() { temporaryOverride = true },
+            destination = CardDestination.Hand,
+            amount = 1
+        });
+        Pulse();
     }
 }

@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
-public class LenCardChildishWar : Card, IModdedCard
+
+public class LenCardChildishWar : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -20,18 +21,17 @@ public class LenCardChildishWar : Card, IModdedCard
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ChildishWar", "name"]).Localize
         });
     }
-    public override string Name() => "Childish War";
     public override CardData GetData(State state)
     {
         return new()
         {
-            cost = upgrade == Upgrade.None ? 3 : (upgrade == Upgrade.A ? 2 : 0)
+            cost = upgrade == Upgrade.None ? 3 : (upgrade == Upgrade.A ? 2 : 0),
+            exhaust = upgrade == Upgrade.B
         };
     }
-    public override List<CardAction> GetActions(State s, Combat c)
+    public override List<CardAction> GetActions(State state, Combat combat)
     {
-        return new()
-        {
+        List<CardAction> result = [
             new AStatus()
             {
                 status = Status.payback,
@@ -44,16 +44,18 @@ public class LenCardChildishWar : Card, IModdedCard
                 statusAmount = 1,
                 targetPlayer = false
             },
-            new AStatus()
-            {
-                status = Status.tempShield,
-                statusAmount = upgrade == Upgrade.B ? 4 : 10,
-                targetPlayer = true
-            },
             new AAttack()
             {
-                damage = GetDmg(s, upgrade == Upgrade.B ? 3 : 2)
+                damage = GetDmg(state, upgrade == Upgrade.B ? 0 : 1)
             }
-        };
+        ];
+        if (upgrade != Upgrade.B)
+            result.Insert(2, new AStatus()
+            {
+                status = Status.tempShield,
+                statusAmount = 6,
+                targetPlayer = true
+            });
+        return result;
     }
 }

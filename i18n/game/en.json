@@ -1,0 +1,222 @@
+﻿{
+  "character": {
+    "len": {
+      "name": "Len",
+      "description": "A singer from another Sekai. Uses his love of bananas to do a <c=keyword>little bit of everything</c>."
+    }
+  },
+  "enemy": {
+    "miku": {
+      "name": "Miku",
+      "title": "Green girl"
+    }
+  },
+  "settings": {
+    "EnabledMikuAI": {
+      "title": "Enable Act I Elite: MIKU",
+      "tooltipTitle": "Enable MIKU",
+      "description": "Whether to add this enemy to the pool or not."
+    },
+    "EnabledSounds": {
+      "title": "Enable Intrusive SFX",
+      "tooltipTitle": "Enable SFX",
+      "description": "Various cards trigger SFX-based music which may be annoying for some."
+    },
+    "EnabledBlood": {
+      "title": "Enable Art Overlay",
+      "tooltipTitle": "Enable Art Overlay",
+      "description": "This setting affects: Wish in a Bottle special border art."
+    }
+  },
+  "status": {
+    "BananaTreat": {
+      "name": "Banana Treat",
+      "description": "At start of turn, <c=action>eat</c> <=boldPink>{0}</c> <c=status>bananas</c> without reducing the stash."
+    },
+    "Banana": {
+      "name": "Banana",
+      "description": "<c=action>Eat</c> and <c=action>throw</c> bananas for profit.",
+      "spoof": "spoofBanana"
+    },
+    "MusicNote": {
+      "name": "Music Note",
+      "description": "At start of turn, add a special card to hand. Gain 1 <c=status>note</c> on turn end if <c=hurt>hull</c> at or below <c=redd>half</c>. Reset at <c=keyword>12</c>. <c=status>Persists across battles</c>."
+    },
+    "BananaTree": {
+      "name": "Banana Tree",
+      "description": "At start of turn, gain 2 <c=status>bananas</c> per tree."
+    }
+  },
+  "midrow": {
+    "Butterfly": {
+      "name": "Butterfly",
+      "description": "Rock-based lifeform. When destroyed, the attacker gains 1 <c=status>NOTE</c>."
+    },
+    "Rin": {
+      "name": "Rin{{upgrade}}",
+      "description": "Shoots a <c=damage>{{Damage}}</c> damage shot once per turn."
+    }
+  },
+  "action": {
+    "EatBanana": {
+      "name": "Eat Banana",
+      "description": "<c=action>Eat</c> a <c=status>banana</c>, making the enemy so hungry they lose <c=hurt>{{Damage}}</c> <c=hurt>hull</c>."
+    },
+    "LoseAll": {
+      "name": "Lose All Bananas",
+      "description": "Lose all <c=status>bananas</c>."
+    },
+    "ThrowBanana": {
+      "name": "Throw Banana",
+      "description": "<c=action>Throw</c> a <c=status>banana</c> so fast it deals <c=boldPink>{{Damage}}</c> damage to the enemy."
+    },
+    "ButterflyField": {
+      "name": "Butterfly Field",
+      "description": "Instantly turn every <c=midrow>object in the midrow</c> into <c=midrow>butterflies</c>."
+    }
+  },
+  "cardTrait": {
+    "triad": {
+      "name": "Triad Card",
+      "description": {
+        "m&k": [
+          "This card has three separate sets of actions.",
+          "In combat, <c=keyword>right click or ctrl-click</c> this card to switch between them."
+        ],
+        "controller": [
+          "This card has three separate sets of actions.",
+          "In combat, press {{Button}} on this card to switch between them."
+        ]
+      }
+    }
+  },
+  "artifact": {
+    "BananaStash": {
+      "name": "BANANA STASH",
+      "description": "<c=status>BANANAS</c> persist across battles."
+    },
+    "BananaSnack": {
+      "name": "BANANA SNACK",
+      "description": "At start of combat, lose 1 <c=status>BANANA</c> to gain 1 <c=status>BANANA TREAT</c>."
+    },
+    "Brioche": {
+      "name": "BRIOCHE",
+      "description": "<c=status>BANANA</c> actions deal 1 extra damage."
+    },
+    "GlassBottle": {
+      "name": "GLASS BOTTLE",
+      "description": "At start of combat, gain a <c=card>Wish in a Bottle</c>."
+    },
+    "Guillotine": {
+      "name": "GUILLOTINE",
+      "description": "<c=action>Thrown</c> <c=status>BANANAS</c> are <c=action>piercing</c>."
+    },
+    "MaidDress": {
+      "name": "MAID DRESS",
+      "description": "All <c=status>BANANAS</c> give you 2 <c=status>SHIELD</c> before <c=action>eating</c> or <c=action>throwing</c> them."
+    },
+    "TwinPower": {
+      "name": "TWIN POWER",
+      "description": "Gain 1 extra <c=energy>ENERGY</c> every turn. <c=downside>On even turns, enemy ship gains 2</c> <c=status>overdrive</c>."
+    }
+  },
+  "card": {
+    "Banana": {
+      "name": "Banana"
+    },
+    "BananaDance": {
+      "name": "Banana Dance"
+    },
+    "BarisolsChild": {
+      "name": "Barisol's Child"
+    },
+    "Breaktime": {
+      "name": "Breaktime"
+    },
+    "BringItOn": {
+      "name": "Bring It On"
+    },
+    "ButterflyOnShoulder": {
+      "name": "Butterfly On Shoulder"
+    },
+    "ChildishWar": {
+      "name": "Childish War"
+    },
+    "FifthPierrot": {
+      "name": "Fifth Pierrot"
+    },
+    "FunkyNightTown": {
+      "name": "Funky Night Town"
+    },
+    "HolyLanceExplosion": {
+      "name": "Holy Lance Explosion"
+    },
+    "LawEvadingRock": {
+      "name": "LawEvading Rock"
+    },
+    "LikeDislike": {
+      "name": "Like Dislike"
+    },
+    "Nakakapagpabagabag": {
+      "name": "Nakakapagpabagabag"
+    },
+    "NiccoriTeamSurvey": {
+      "name": "Niccori Team Survey"
+    },
+    "Paradichlorobenzene": {
+      "name": "Paradichlorobenzene"
+    },
+    "GachaGacha": {
+      "name": "Gacha Gacha Bomb"
+    },
+    "PlusBoy": {
+      "name": "Plus Boy"
+    },
+    "RemoteControl": {
+      "name": "Remote Control"
+    },
+    "ServantOfEvil": {
+      "name": "Servant of Evil"
+    },
+    "TelecasterBBoy": {
+      "name": "Telecaster B-Boy"
+    },
+    "ToluthinAntenna": {
+      "name": "Toluthin Antenna",
+      "description": "Gain 1 <c=status>note</c>. Add 1 of {{Amount}} <c=cardtrait>discount, temp</c> cards to your hand."
+    },
+    "VampiresPathoS": {
+      "name": "Vampire's PathoS"
+    },
+    "LenExe": {
+      "name": "Len.EXE",
+      "description": "Gain 1 <c=status>banana tree</c>. Add 1 of {{Amount}} <c=cardtrait>disc, temp</c> <c=ffe569>Len</c> cards to your hand."
+    },
+    "FanLetter": {
+      "name": "Fan Letter"
+    },
+    "CrowdWork": {
+      "name": "Crowd Work"
+    },
+    "TrendSetter": {
+      "name": "Set Trend"
+    },
+    "Vocavoid": {
+      "name": "Vocavoid"
+    },
+    "Encore": {
+      "name": "Encore",
+      "descriptionLen": "Add 3x <c=cardtrait>disc, temp</c> <c=ffe569>Banana</c> & <c=ffe569>Fan Letter</c> & <c=ffe569>Close To Gray</c> to draw.",
+      "descriptionMiku": "<c=hurt>Turn End:</c> Add 1 <c=7ed2d6>Fan Letter</c>, 1 <c=7ed2d6>Set Trend</c> & 2 <c=7ed2d6>World Is Mine</c> to draw."
+    },
+    "CloseToGray": {
+      "name": "Close to Gray"
+    },
+    "WorldIsMine": {
+      "name": "World Is Mine"
+    },
+    "WishBottle": {
+      "name": "Wish in a Bottle"
+    }
+  }
+}

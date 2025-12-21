@@ -1,0 +1,56 @@
+﻿using FSPRO;
+using Nickel;
+using Sorwest.LenMod.Features;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Sorwest.LenMod.Actions;
+
+public class AButterflyField : CardAction
+{
+    public override void Begin(G g, State s, Combat c)
+    {
+        foreach (StuffBase item in c.stuff.Values.ToList())
+        {
+            c.stuff.Remove(item.x);
+            Butterfly newStuff = new()
+            {
+                x = item.x,
+                xLerped = item.xLerped,
+                bubbleShield = item.bubbleShield,
+                targetPlayer = item.targetPlayer,
+                age = item.age
+            };
+            c.stuff[item.x] = newStuff;
+        }
+
+        Audio.Play(Event.Status_PowerUp);
+    }
+
+    public override List<Tooltip> GetTooltips(State s)
+    {
+        if (s.route is Combat combat)
+        {
+            foreach (StuffBase value in combat.stuff.Values)
+            {
+                value.hilight = 2;
+            }
+        }
+
+        return new List<Tooltip>
+        {
+            new GlossaryTooltip($"action.{ModEntry.Instance.Package.Manifest.UniqueName}::ButterflyField")
+            {
+                Icon = ModEntry.Instance.Sprites["ButterflyField"].Sprite,
+                TitleColor = Colors.action,
+                Title = ModEntry.Instance.Localizations.Localize(["action", "ButterflyField", "name"]),
+                Description = ModEntry.Instance.Localizations.Localize(["action", "ButterflyField", "description"]),
+            }
+        };
+    }
+
+    public override Icon? GetIcon(State s)
+    {
+        return new Icon(ModEntry.Instance.Sprites["ButterflyField"].Sprite, null, Colors.textMain);
+    }
+}

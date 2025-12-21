@@ -1,12 +1,13 @@
-﻿using Nickel;
+﻿using Nanoray.PluginManager;
+using Nickel;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Artifacts;
 
-public class LenArtifactTwinPower : Artifact, IModdedArtifact
+public class LenArtifactTwinPower : Artifact, IRegisterable
 {
-    public static void Register(IModHelper helper)
+    public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Artifacts.RegisterArtifact("TwinPower", new()
         {
@@ -22,7 +23,10 @@ public class LenArtifactTwinPower : Artifact, IModdedArtifact
             Description = ModEntry.Instance.AnyLocalizations.Bind(["artifact", "TwinPower", "description"]).Localize
         });
     }
-    public override string Name() => "BRIOCHE";
+    public override List<Tooltip>? GetExtraTooltips()
+        => [
+            ..StatusMeta.GetTooltips(Status.overdrive, 2)
+        ];
     public override void OnReceiveArtifact(State state)
     {
         state.ship.baseEnergy += 1;
@@ -35,18 +39,13 @@ public class LenArtifactTwinPower : Artifact, IModdedArtifact
     {
         if (combat.turn % 2 == 0)
         {
-            AStatus aStatus1 = new AStatus();
-            aStatus1.status = Status.overdrive;
-            aStatus1.statusAmount = 2;
-            aStatus1.targetPlayer = false;
-            combat.QueueImmediate(aStatus1);
+            combat.QueueImmediate(new AStatus()
+            {
+                status = Status.overdrive,
+                statusAmount = 2,
+                targetPlayer = false
+            });
+            Pulse();
         }
-    }
-    public override List<Tooltip>? GetExtraTooltips()
-    {
-        return new()
-        {
-            new TTGlossary("status.overdrive", 2),
-        };
     }
 }

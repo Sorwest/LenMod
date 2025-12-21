@@ -1,13 +1,14 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
 using Sorwest.LenMod.Actions;
+using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
-
 namespace Sorwest.LenMod.Cards;
 
-public class LenCardNakakapagpabagabag : Card, IModdedCard
+public class LenCardNakakapagpabagabag : Card, IRegisterable
 {
+    //public static IModSoundEntry NakakapagSound { get; set; } = null!;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard("Nakakapagpabagabag", new()
@@ -21,36 +22,45 @@ public class LenCardNakakapagpabagabag : Card, IModdedCard
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Nakakapagpabagabag", "name"]).Localize
         });
+        //NakakapagSound = ModEntry.Instance.Helper.Content.Audio.RegisterSound(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/sound/nakakapag.mp3"));
+
     }
-    public override string Name() => "Nakakapagpabagabag";
     public override CardData GetData(State state)
     {
         return new()
         {
             cost = upgrade == Upgrade.A ? 0 : 1,
-            buoyant = upgrade == Upgrade.B ? true : false,
-            description = ModEntry.Instance.Localizations.Localize(["card", "Nakakapagpabagabag", "description"])
+            buoyant = upgrade == Upgrade.B
         };
     }
-    public override List<CardAction> GetActions(State s, Combat c)
+    private static int GetBananaDmg(State state)
     {
-        List<CardAction> result = new();
-        if (s.ship.Get(ModEntry.Instance.BananaStatus.Status) > 0 || s.route is not Combat)
-        {
-            result = new()
+        bool normalDisplay = state.route is not Combat || state.ship.Get(BananaManager.BananaStatus.Status) >= 0;
+        int dmg = ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage") + 1;
+        return normalDisplay ? dmg : 0;
+    }
+    public override List<CardAction> GetActions(State state, Combat combat)
+    {
+        return
+        [
+            //ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new ASoundDummyAction() { sound = NakakapagSound }).AsCardAction,
+            ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
+                    new ABananaAttack()
+                    {
+                        damage = GetDmg(state, GetBananaDmg(state))
+                    },
+                    new ABananaDamage()
+                    {
+                        damage = GetDmg(state, GetBananaDmg(state)),
+                        isThrow = true
+                    }
+                    ).AsCardAction,
+            new AStatus()
             {
-                new ASmashBanana()
-                {
-                    amount = -1
-                },
-                new AStatus()
-                {
-                    status = Status.overdrive,
-                    statusAmount = 1,
-                    targetPlayer = true
-                }
-            };
-        }
-        return result;
+                status = Status.overdrive,
+                statusAmount = 1,
+                targetPlayer = true
+            }
+        ];
     }
 }

@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
 
-public class LenCardFunkyNightTown : Card, IModdedCard
+public class LenCardFunkyNightTown : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -21,7 +21,6 @@ public class LenCardFunkyNightTown : Card, IModdedCard
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "FunkyNightTown", "name"]).Localize
         });
     }
-    public override string Name() => "Funky Night Town";
     public override CardData GetData(State state)
     {
         return new()
@@ -29,7 +28,7 @@ public class LenCardFunkyNightTown : Card, IModdedCard
             cost = upgrade == Upgrade.B ? 1 : 2
         };
     }
-    public override List<CardAction> GetActions(State s, Combat c)
+    public override List<CardAction> GetActions(State state, Combat combat)
     {
         return new()
         {
@@ -53,7 +52,7 @@ public class LenCardFunkyNightTown : Card, IModdedCard
             },
             new AAttack()
             {
-                damage = GetDmg(s, upgrade == Upgrade.A ? 2 : 1)
+                damage = GetDmg(state, upgrade == Upgrade.A ? 2 : upgrade == Upgrade.B ? 0 : 1)
             }
         };
     }

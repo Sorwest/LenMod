@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
-public class LenCardBarisolChild : Card, IModdedCard
+
+public class LenCardBarisolChild : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -20,7 +21,6 @@ public class LenCardBarisolChild : Card, IModdedCard
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "BarisolsChild", "name"]).Localize
         });
     }
-    public override string Name() => "Barisol's Child";
     public override CardData GetData(State state)
     {
         return new()
@@ -30,7 +30,7 @@ public class LenCardBarisolChild : Card, IModdedCard
             buoyant = upgrade == Upgrade.B ? true : false
         };
     }
-    public override List<CardAction> GetActions(State s, Combat c)
+    public override List<CardAction> GetActions(State state, Combat combat)
     {
         return new()
         {

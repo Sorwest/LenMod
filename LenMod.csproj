@@ -1,11 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<RootNamespace>Sorwest.LenMod</RootNamespace>
-		<Version>2.0.0</Version>
+		<Version>3.0.0-prerelease</Version>
 		<IsNickelMod>True</IsNickelMod>
-		<IncludedModProjectPaths>assets;i18n</IncludedModProjectPaths>
 		<TargetFramework>net8.0</TargetFramework>
 		<ModZipPath>$(MSBuildProjectDirectory)\.release\$(MSBuildProjectName)-$(Version).zip</ModZipPath>
+	</PropertyGroup>
+	<ItemGroup>
+		<ModFiles Include="i18n/**" />
+		<ModFiles Include="assets/**" />
+	</ItemGroup>
+	<!-- General setup -->
+	<PropertyGroup>
 		<LangVersion>12.0</LangVersion>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>enable</Nullable>
@@ -13,11 +19,12 @@
 		<CheckEolTargetFramework>false</CheckEolTargetFramework>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Nickel.ModBuildConfig" Version="0.4.0" />
-		<PackageReference Include="MakeTypesPublic" Version="1.0.3" PrivateAssets="All" ExcludeAssets="runtime" />
-		<PackageReference Include="EnumByNameSourceGenerator" Version="1.1.1" PrivateAssets="All" ExcludeAssets="runtime" />
+		<None Remove="$(MSBuildProjectDirectory)\.release\**" />
+		<None Remove="$(MSBuildProjectDirectory)\assets\sound\**" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="assets\misc\" />
+		<PackageReference Include="Nickel.ModBuildConfig" Version="2.1.0" />
+		<PackageReference Include="EnumByNameSourceGenerator" Version="1.1.2" PrivateAssets="All" ExcludeAssets="runtime" />
 	</ItemGroup>
+	<Import Project="Configuration.props.user" Condition="Exists('Configuration.props.user')" />
 </Project>

@@ -1,92 +1,77 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Sorwest.LenMod.Artifacts;
-using System.Linq;
+﻿using HarmonyLib;
+using Nanoray.PluginManager;
+using Nickel;
+using System.Reflection;
 
-namespace Sorwest.LenMod;
-internal sealed class BananaManager : IStatusLogicHook
+namespace Sorwest.LenMod.Features;
+
+internal sealed class BananaManager : IRegisterable
 {
-    public static ModEntry Instance => ModEntry.Instance;
-    public BananaManager()
+    internal static IStatusEntry BananaStatus { get; private set; } = null!;
+    internal static IStatusEntry ThrowBananaStatus { get; private set; } = null!;
+    internal static IStatusEntry ThrowBananaPiercingStatus { get; private set; } = null!;
+    internal static IStatusEntry EatBananaStatus { get; private set; } = null!;
+    public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
-        Instance.KokoroApi.RegisterStatusLogicHook(this, 0);
-    }
-    public void OnStatusTurnTrigger(State state, Combat combat, StatusTurnTriggerTiming timing, Ship ship, Status status, int oldAmount, int newAmount)
-    {
-        if (status != Instance.BananaStatus.Status)
-            return;
-        if (timing != StatusTurnTriggerTiming.TurnStart)
-            return;
-        if (oldAmount <= 0)
-            return;
-        if (ship.Get(Instance.MusicNoteStatus.Status) > 0)
-            return;
-        combat.Queue(new ABananaDamage()
+        BananaStatus = helper.Content.Statuses.RegisterStatus("BananaStatus", new()
         {
-            type = BananaType.AHurt,
-            targetPlayer = !ship.isPlayerShip
+            Definition = new()
+            {
+                icon = ModEntry.Instance.Sprites["Banana"].Sprite,
+                color = ModEntry.LenColor,
+                border = new Color("bdbd3c"),
+                isGood = true
+            },
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["status", "Banana", "name"]).Localize,
+            Description = ModEntry.Instance.AnyLocalizations.Bind(["status", "Banana", "description"]).Localize
+        });
+
+        ModEntry.Instance.Harmony.Patch(
+            original: AccessTools.DeclaredMethod(typeof(State), nameof(State.PopulateRun)),
+            postfix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(State_PopulateRun_Postfix))
+        );
+
+
+        // SPOOF STATUSES
+        EatBananaStatus = helper.Content.Statuses.RegisterStatus("EatBananaStatus", new()
+        {
+            Definition = new()
+            {
+                icon = ModEntry.Instance.Sprites["EatBanana"].Sprite,
+                color = ModEntry.LenColor,
+                isGood = true
+            },
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["status", "Banana", "spoof"]).Localize,
+            Description = ModEntry.Instance.AnyLocalizations.Bind(["status", "Banana", "description"]).Localize
+        });
+        ThrowBananaStatus = helper.Content.Statuses.RegisterStatus("ThrowBananaStatus", new()
+        {
+            Definition = new()
+            {
+                icon = ModEntry.Instance.Sprites["ThrowBanana"].Sprite,
+                color = ModEntry.LenColor,
+                isGood = true
+            },
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["status", "Banana", "spoof"]).Localize,
+            Description = ModEntry.Instance.AnyLocalizations.Bind(["status", "Banana", "description"]).Localize
+        });
+        ThrowBananaPiercingStatus = helper.Content.Statuses.RegisterStatus("ThrowBananaPiercingStatus", new()
+        {
+            Definition = new()
+            {
+                icon = ModEntry.Instance.Sprites["ThrowBananaPiercing"].Sprite,
+                color = ModEntry.LenColor,
+                isGood = true
+            },
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["status", "Banana", "spoof"]).Localize,
+            Description = ModEntry.Instance.AnyLocalizations.Bind(["status", "Banana", "description"]).Localize
         });
     }
-    public bool HandleStatusTurnAutoStep(State state, Combat combat, StatusTurnTriggerTiming timing, Ship ship, Status status, ref int amount, ref StatusTurnAutoStepSetStrategy setStrategy)
+    private static void State_PopulateRun_Postfix(State __instance)
     {
-        if (status != Instance.BananaStatus.Status)
-            return false;
-        if (timing != StatusTurnTriggerTiming.TurnStart)
-            return false;
-        if (amount > 0)
-            amount--;
-        return false;
-    }
-}
-[JsonConverter(typeof(StringEnumConverter))]
-public enum BananaType
-{
-    AHurt,
-    AAttack
-}
-public class ABananaDamage : CardAction
-{
-    public BananaType type;
-    public int? dmg;
-    public bool fast;
-    public bool targetPlayer;
-    public override void Begin(G g, State s, Combat c)
-    {
-        Ship source = targetPlayer ? c.otherShip : s.ship;
-        var artifact = s.EnumerateAllArtifacts().OfType<LenArtifactBananaStash>().FirstOrDefault();
-        int damage = 1 + (dmg is not null ? (int)dmg : 0);
-        int shield = 0;
-        if (artifact is not null && !targetPlayer)
-        {
-            damage = artifact.enemyDamage;
-            shield = artifact.shieldNumber;
-        }
-        if (shield > 0)
-        {
-            c.Queue(new AStatus()
-            {
-                status = Status.shield,
-                statusAmount = shield,
-                targetPlayer = !targetPlayer
-            });
-        }
-        if (type == BananaType.AAttack)
-        {
-            c.Queue(new AAttack()
-            {
-                damage = damage,
-                piercing = targetPlayer,
-                fast = fast
-            });
-        }
-        else
-        {
-            c.Queue(new AHurt()
-            {
-                hurtAmount = damage,
-                targetPlayer = targetPlayer
-            });
-        }
-
+        ModEntry.Instance.Helper.ModData.RemoveModData(__instance, "BananaStored");
+        ModEntry.Instance.Helper.ModData.RemoveModData(__instance, "BananaDamage");
+        ModEntry.Instance.Helper.ModData.RemoveModData(__instance, "BananaShield");
+        ModEntry.Instance.Helper.ModData.RemoveModData(__instance, "BananaPiercing");
     }
 }

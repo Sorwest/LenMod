@@ -1,4 +1,4 @@
-﻿namespace Sorwest.LenMod;
+﻿namespace Sorwest.LenMod.ExternalAPI;
 
 public interface IMoreDifficultiesApi
 {

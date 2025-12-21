@@ -1,12 +1,13 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
 using Sorwest.LenMod.Actions;
+using Sorwest.LenMod.Features;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace Sorwest.LenMod.Cards;
 
-public class LenCardNiccoriTeamSurvey : Card, IModdedCard
+public class LenCardNiccoriTeamSurvey : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -22,48 +23,53 @@ public class LenCardNiccoriTeamSurvey : Card, IModdedCard
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "NiccoriTeamSurvey", "name"]).Localize
         });
     }
-    public override string Name() => "Niccori Team Survey";
     public override CardData GetData(State state)
     {
         return new()
         {
-            cost = upgrade == Upgrade.A ? 2 : 3,
-            exhaust = upgrade == Upgrade.B ? false : true,
-            description = ModEntry.Instance.Localizations.Localize(["card", "NiccoriTeamSurvey", "description", upgrade.ToString()], new { Amount = upgrade == Upgrade.A ? 1 : 2 })
+            cost = upgrade == Upgrade.B ? 4 : 2,
+            exhaust = true,
         };
     }
-    public override List<CardAction> GetActions(State s, Combat c)
+    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
     {
-        List<CardAction> result = new();
-        if (s.ship.Get(ModEntry.Instance.BananaStatus.Status) > 0 || s.route is not Combat)
+        return (HashSet<ICardTraitEntry>)(upgrade switch
         {
-            int internalCounter = s.ship.Get(ModEntry.Instance.BananaStatus.Status);
-            result.Add(new AThrowBanana()
+            Upgrade.A => [],
+            _ => [ModEntry.Instance.KokoroApi.Fleeting.Trait]
+        });
+    }
+    private static int GetBananaDmg(State state)
+    {
+        return ModEntry.Instance.Helper.ModData.GetModDataOrDefault<int>(state, "BananaDamage");
+    }
+    public override List<CardAction> GetActions(State state, Combat combat)
+    {
+        int amount = state.ship.Get(BananaManager.BananaStatus.Status);
+        int num = upgrade == Upgrade.B ? 2 : 1;
+        List<CardAction> result =
+        [
+            new AVariableHint()
             {
-                loseAll = true
-            });
-            do
-            {
-                if (internalCounter <= 0)
-                    break;
-                result.Add(new ABananaDamage()
+                status = BananaManager.BananaStatus.Status,
+            },
+            ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
+                new ABananaAttack()
                 {
-                    type = BananaType.AAttack,
-                    dmg = GetDmg(s, 0),
+                    xHint = num,
+                    damage = GetDmg(state, num * ( amount + GetBananaDmg(state))),
+                    targetPlayer = false
+                },
+                new ABananaDamage()
+                {
+                    isThrow = true,
+                    damage = GetDmg(state, num * ( amount + GetBananaDmg(state))),
                     targetPlayer = false,
-                    fast = true
-                });
-                internalCounter--;
-            }
-            while (internalCounter > 0);
-        }
-        if (upgrade != Upgrade.None)
-        {
-            result.Add(new AGainBanana()
-            {
-                amount = upgrade == Upgrade.A ? 1 : 2
-            });
-        }
+                    isNiccori = true
+                }
+            ).AsCardAction,
+            ModEntry.Instance.KokoroApi.HiddenActions.MakeAction(new AGainBanana() { loseAll = true }).SetShowTooltips(true).AsCardAction
+        ];
         return result;
     }
 }
