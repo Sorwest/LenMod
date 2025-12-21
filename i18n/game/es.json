@@ -21,6 +21,11 @@
       "title": "Activar SFX intrusivos",
       "tooltipTitle": "Activar SFX",
       "description": "Decide si quieres que suenen Sonidos al jugar una variedad de cartas."
+    },
+    "EnabledBlood": {
+      "title": "Enable Art Overlay",
+      "tooltipTitle": "Enable Art Overlay",
+      "description": "This setting affects: Wish in a Bottle special border art."
     }
   },
   "status": {
@@ -46,6 +51,10 @@
     "Butterfly": {
       "name": "Mariposa",
       "description": "Cuando es destruída, la nave atacante obtiene 1 <c=status>NOTA</c>."
+    },
+    "Rin": {
+      "name": "Rin{{upgrade}}",
+      "description": "Shoots a <c=damage>{{Damage}}</c> damage shot once per turn."
     }
   },
   "action": {
@@ -60,6 +69,10 @@
     "ThrowBanana": {
       "name": "Tirar bananas",
       "description": "Len <c=action>tira</c> una <c=status>banana</c> increíblemente rápido, atacando por <=boldPink>{{Damage}}</c> de daño al enemigo."
+    },
+    "ButterflyField": {
+      "name": "Butterfly Field",
+      "description": "Instantly turn every <c=midrow>object in the midrow</c> into <c=midrow>butterflies</c>."
     }
   },
   "cardTrait": {

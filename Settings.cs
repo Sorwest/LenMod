@@ -45,9 +45,9 @@ internal sealed class Settings
 internal sealed class ProfileSettings
 {
     [JsonProperty]
-    public bool EnabledMikuAI = true;
+    public bool EnabledMikuAI = false;
     [JsonProperty]
-    public bool EnabledSounds = true;
+    public bool EnabledSounds = false;
     [JsonProperty]
     public bool EnabledBlood = true;
 }

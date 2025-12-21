@@ -23,9 +23,9 @@
       "description": "Various cards trigger SFX-based music which may be annoying for some."
     },
     "EnabledBlood": {
-      "title": "Enable Intrusive SFX",
-      "tooltipTitle": "Enable SFX",
-      "description": "Various cards trigger SFX-based music which may be annoying for some."
+      "title": "Enable Art Overlay",
+      "tooltipTitle": "Enable Art Overlay",
+      "description": "This setting affects: Wish in a Bottle special border art."
     }
   },
   "status": {
