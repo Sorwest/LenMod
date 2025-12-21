@@ -18,17 +18,16 @@ public class LenCardGachaGacha : Card, IRegisterable
             {
                 deck = ModEntry.Instance.LenDeck.Deck,
                 rarity = Rarity.uncommon,
-                dontOffer = true,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "LenCardGachaGacha", "name"]).Localize
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "GachaGacha", "name"]).Localize
         });
     }
     public override CardData GetData(State state)
     {
         return new()
         {
-            cost = 2
+            cost = upgrade == Upgrade.A ? 1 : 2
         };
     }
     public override List<CardAction> GetActions(State state, Combat combat)
@@ -47,7 +46,7 @@ public class LenCardGachaGacha : Card, IRegisterable
                 ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(
                     ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(
                         ModEntry.Instance.KokoroApi.ActionCosts.MakeStatusResource(BananaManager.BananaStatus.Status),
-                        amount: upgrade == Upgrade.A ? 1 : 2
+                        amount: 2
                     ),
                     ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
                         new AAttack()

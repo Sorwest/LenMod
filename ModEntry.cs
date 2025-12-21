@@ -59,7 +59,6 @@ public class ModEntry : SimpleMod
         typeof(LenCardVampiresPathos),
         typeof(LenCardServantOfEvil),
         typeof(LenCardFifthPierrot),
-        //typeof(LenCardParadichlorobenzene),
         typeof(LenCardToluthinAntenna)
     ];
     internal static IReadOnlyList<Type> LenEncoreCardTypes { get; } = [
